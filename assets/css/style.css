@@ -5,12 +5,12 @@
    ========================================================= */
 
 /* ---------- GATE — fenêtre "site en construction" ----------
-   Demande explicite de l'utilisateur (2026-08-21) : NE PAS SUPPRIMER
-   avant le 21 septembre 2026. On travaille en public jusqu'à l'ouverture ;
-   ce voile masque le site aux visiteurs pendant ce temps.
-   Pour désactiver le jour J : supprimer ce bloc + le bloc .gate dans le
-   <body> de index.html et sejour/index.html + les <meta name="robots"
-   content="noindex"> ajoutés dans les deux <head>. */
+   Demande explicite de l'utilisateur (2026-08-21, date reportée le
+   2026-09-15) : NE PAS SUPPRIMER avant le 1er octobre 2026. On travaille
+   en public jusqu'à l'ouverture ; ce voile masque le site aux visiteurs
+   pendant ce temps (le SEO n'est pas bloqué : pas de noindex).
+   Pour désactiver le jour J : supprimer ce bloc + le bloc .gate + le
+   script de contournement dans le <body> des 20 pages du site. */
 html:not(.gate-bypass) { overflow: hidden; }
 .gate {
     position: fixed;

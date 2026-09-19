@@ -3,6 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- NOINDEX · à retirer le 1er octobre 2026, en même temps que le voile.
+     Tant que la fenêtre d'attente est posée, on empêche Google
+     d'enregistrer « Nous préparons quelque chose » comme contenu
+     de la page. Le robots.txt reste permissif : sans cela Google
+     ne pourrait pas charger la page et ne lirait jamais cette consigne. -->
+<meta name="robots" content="noindex, follow">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">

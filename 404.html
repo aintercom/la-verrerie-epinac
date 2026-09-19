@@ -1,81 +1,171 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#1C1C1C">
-    <meta name="robots" content="noindex">
-
-    <title>Page introuvable · Domaine de la Verrerie</title>
-    <meta name="description" content="Cette page n'existe pas ou plus. Retrouvez le Domaine de la Verrerie et ses expériences depuis l'accueil.">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-
-    <link rel="preload" as="image" href="https://enjoylife.b-cdn.net/Verrerie/bibliotheque.jpg" fetchpriority="high">
-    <link rel="icon" href="assets/logo/logo_verrerie_v12.webp" type="image/webp">
-    <link rel="stylesheet" href="assets/css/style.css">
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#455239">
+<title>Page introuvable · Domaine de la Verrerie</title>
+<meta name="description" content="Cette page n'existe pas ou a été déplacée. Revenez à l'accueil du Domaine de la Verrerie, chambres d'hôtes à Épinac, en Bourgogne du Sud.">
+<link rel="canonical" href="https://domainedelaverrerie.fr/404.html">
+<meta property="og:type" content="website"><meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Domaine de la Verrerie">
+<meta property="og:title" content="Page introuvable · Domaine de la Verrerie"><meta property="og:description" content="Cette page n'existe pas ou a été déplacée. Revenez à l'accueil du Domaine de la Verrerie, chambres d'hôtes à Épinac, en Bourgogne du Sud.">
+<meta property="og:url" content="https://domainedelaverrerie.fr/404.html">
+<meta property="og:image" content="https://domainedelaverrerie.fr/assets/img/partage.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Domaine de la Verrerie, Épinac, Bourgogne">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://enjoylife.b-cdn.net" crossorigin>
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/figtree-400-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/spectral-400-latin.woff2">
+<link rel="stylesheet" href="/assets/css/polices.css">
+<link rel="stylesheet" href="/assets/css/verrerie.css">
+<script>
+(function () {
+    var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:';
+    var passe = new URLSearchParams(location.search).get('preview') === 'verrerie2026';
+    if (passe) { try { sessionStorage.setItem('vr_preview','1'); } catch (e) {} }
+    var garde = false;
+    try { garde = sessionStorage.getItem('vr_preview') === '1'; } catch (e) {}
+    document.documentElement.classList.add(local || passe || garde ? 'voile-leve' : 'voile-pose');
+})();
+</script>
 </head>
 <body>
+<div class="progression" aria-hidden="true"><span></span></div>
+<!-- VOILE — à retirer le jour de l'ouverture publique -->
+<div class="voile">
+    <div class="voile-dedans">
+        <p class="marque"><img src="/assets/logo/mot-blanc.png" alt="Domaine de la Verrerie" width="600" height="174"></p>
+        <p class="quand">Ouverture le 1er octobre 2026</p>
+        <p class="voile-annonce">Nous préparons quelque chose.</p>
+        <p>La maison fait peau neuve avant l'ouverture de ses deux premières chambres d'hôtes, à Épinac, en Bourgogne du Sud.</p>
+        <a class="btn" href="mailto:contact@domainedelaverrerie.fr">Nous écrire</a>
+    </div>
+</div>
 
-    <!-- TOPBAR -->
-    <header class="topbar">
-        <a href="/" class="topbar-mark">Domaine de la Verrerie</a>
-        <div class="topbar-end">
-            <a href="/#contact" class="topbar-cta">Nous écrire</a>
+<a class="saut" href="#contenu">Aller au contenu</a>
+
+<header class="entete">
+    <div class="entete-inner">
+        <a class="marque" href="/"><img class="embleme" src="/assets/logo/embleme.png" alt="" aria-hidden="true" width="273" height="127"><span class="lettrage"><img class="noir" src="/assets/logo/lettrage-noir.png" alt="Domaine de la Verrerie" width="404" height="122"><img class="blanc" src="/assets/logo/lettrage-blanc.png" alt="" aria-hidden="true" width="404" height="122"></span></a>
+        <nav aria-label="Navigation principale">
+            <a href="/#chambres">Les chambres</a>
+            <a href="/#maison">La maison</a>
+            <a href="/#parc">Le parc</a>
+            <a href="/#autour">La région</a>
+            <a href="/#infos">Infos pratiques</a>
+        </nav>
+        <a class="btn" href="/#reserver">Réserver</a>
+    </div>
+</header>
+
+<main id="contenu">
+<section class="perdu">
+    <div class="cadre">
+        <p class="surtitre" style="justify-content:center">Erreur 404</p>
+        <h1>Cette page n'existe pas</h1>
+        <p class="chapo">Le lien est peut-être ancien, ou la page a été déplacée pendant la refonte du site.</p>
+        <a class="btn" href="/">Revenir à l'accueil</a>
+    </div>
+</section>
+
+<section class="section section--doux">
+    <div class="cadre">
+        <h2 style="text-align:center">Vous cherchiez peut-être</h2>
+        <div class="cartes">
+            <a class="carte" href="/#chambres"><h3>Les chambres</h3><p>Nos deux chambres d'hôtes, leurs équipements et leurs tarifs.</p></a>
+            <a class="carte" href="/#infos"><h3>Infos pratiques</h3><p>Capacité, horaires, accès, contact.</p></a>
+            <a class="carte" href="/aux-alentours/"><h3>La région</h3><p>Ce qu'il y a à faire autour d'Épinac.</p></a>
+            <a class="carte" href="/#reserver"><h3>Réserver</h3><p>Nous écrire pour réserver une nuit.</p></a>
         </div>
-    </header>
+    </div>
+</section>
+</main>
 
-    <main id="main">
-
-    <!-- HERO 404 -->
-    <section class="hero hero-page">
-        <div class="hero-bg" style="background-image: url('https://enjoylife.b-cdn.net/Verrerie/bibliotheque.jpg');"></div>
-        <div class="hero-overlay"></div>
-
-        <div class="hero-mark">
-            <span class="eyebrow">Erreur 404</span>
-            <h1>Cette page<br><em>s'est égarée</em></h1>
-            <span class="place">Elle n'existe plus, ou n'a jamais existé</span>
-        </div>
-    </section>
-
-    <!-- MESSAGE & LIENS -->
-    <section class="intro shell" id="intro" style="text-align:center;">
-        <span class="eyebrow">Retrouver son chemin</span>
-        <h2>Peut-être cherchiez-vous <em>l'une de ces pages</em>&nbsp;?</h2>
-        <p style="max-width: 56ch; margin: var(--s-4) auto 0; color: var(--ink-soft); font-size: var(--t-18);">L'adresse demandée n'a rien donné, mais le Domaine, lui, n'a pas bougé.</p>
-    </section>
-
-    <section class="shell" style="padding: var(--s-6) var(--gutter) var(--s-9); display:flex; flex-wrap:wrap; gap: var(--s-4); justify-content:center;">
-        <a href="/" class="btn">Retour à l'accueil</a>
-        <a href="/sejour/" class="btn">Le Séjour</a>
-    </section>
-
-    </main>
-
-    <footer class="colophon">
-        <div class="shell">
-            <div class="colo-mark-wrap">
-                <span class="colo-mark">Domaine de la Verrerie</span>
-                <p>Demeure historique des Maîtres Verriers. Chambres d'hôtes, mariages et séminaires en Bourgogne du Sud.</p>
+<footer class="pied">
+    <div class="cadre">
+        <div class="pied-grille">
+            <div>
+                <p class="marque"><img src="/assets/logo/mot-blanc.png" alt="Domaine de la Verrerie" width="600" height="174"></p>
+                <p style="margin-top:10px;font-size:.9375rem">8 rue Jean Bouveri<br>71360 Épinac<br>Bourgogne du Sud</p>
             </div>
-            <div class="colo-col">
-                <h3 class="colo-h">Écrire</h3>
-                <ul class="colo-list">
-                    <li>71360 Épinac, France</li>
+            <div>
+                <h3 class="titre-pied">Le domaine</h3>
+                <ul>
+                    <li><a href="/#chambres">Les chambres</a></li>
+                    <li><a href="/#infos">Infos pratiques</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="titre-pied">La région</h3>
+                <ul>
+                    <li><a href="/aux-alentours/">Aux alentours</a></li>
+                    <li><a href="/aux-alentours/le-feu/">Patrimoine industriel</a></li>
+                    <li><a href="/carnet/">Le carnet</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="titre-pied">Nous contacter</h3>
+                <ul>
                     <li><a href="tel:+33783349554">+33 (0)7 83 34 95 54</a></li>
                     <li><a href="mailto:contact@domainedelaverrerie.fr">contact@domainedelaverrerie.fr</a></li>
                 </ul>
             </div>
         </div>
-        <div class="colo-bottom">
-            <span>© MMXXVI · Domaine de la Verrerie</span>
+        <div class="pied-bas">
+            <span>© Domaine de la Verrerie <span id="annee">2026</span></span>
+            <button type="button" id="ouvrir-legal">Mentions légales</button>
         </div>
-    </footer>
+    </div>
+</footer>
+<div class="legal" id="legal" hidden role="dialog" aria-modal="true" aria-labelledby="legal-titre">
+    <div class="legal-panneau">
+        <button class="legal-fermer" type="button" id="fermer-legal">Fermer</button>
+        <h2 id="legal-titre">Mentions légales</h2>
+        <h3>Éditeur du site</h3>
+        <p><strong>Domaine de la Verrerie</strong><br>Frédérique Fraud, entrepreneur individuel (EI)<br>
+        8 rue Jean Bouveri, 71360 Épinac, France<br>RCS Chalon-sur-Saône 109 596 411<br>
+Téléphone : <a href="tel:+33783349554">+33 (0)7 83 34 95 54</a><br>
+        Email : <a href="mailto:contact@domainedelaverrerie.fr">contact@domainedelaverrerie.fr</a></p>
+        <h3>Directrice de la publication</h3><p>Frédérique Fraud</p>
+        <h3>Hébergement</h3>
+        <p>Code source déposé sur <strong>GitHub, Inc.</strong>, 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA.<br>
+        Nom de domaine enregistré chez <strong>Infomaniak Network SA</strong>, Rue Eugène-Marziano 25, 1227 Genève, Suisse.</p>
+        <h3>Crédits</h3><p>Photographies : Domaine de la Verrerie.<br>Fond de carte : contours administratifs IGN, sous Licence ouverte.</p>
+        <h3>Données personnelles</h3>
+        <p>Ce site ne dépose aucun cookie, n'utilise aucun outil de mesure d'audience et ne suit pas ses visiteurs. Les polices de caractères sont hébergées sur le domaine : aucune requête n'est faite vers un service tiers au chargement des pages.</p>
+        <p>Les informations transmises via le formulaire servent uniquement à répondre à votre demande. Vous disposez d'un droit d'accès, de rectification et de suppression en écrivant à contact@domainedelaverrerie.fr.</p>
+        <h3>Propriété intellectuelle</h3>
+        <p>L'ensemble des contenus présents sur ce site est la propriété du Domaine de la Verrerie, sauf mention contraire. Toute reproduction ou exploitation, totale ou partielle, est interdite sans autorisation écrite préalable.</p>
+    </div>
+</div>
 
+<script>
+(function () {
+    var f = document.getElementById('legal'),
+        o = document.getElementById('ouvrir-legal'),
+        c = document.getElementById('fermer-legal'), rendu = null;
+    o.addEventListener('click', function () {
+        rendu = document.activeElement; f.hidden = false;
+        document.body.style.overflow = 'hidden'; c.focus();
+    });
+    function ferme() { f.hidden = true; document.body.style.overflow = ''; if (rendu) { rendu.focus(); } }
+    c.addEventListener('click', ferme);
+    f.addEventListener('click', function (e) { if (e.target === f) { ferme(); } });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !f.hidden) { ferme(); } });
+})();
+</script>
+<script src="/assets/js/reserver.js" defer></script>
+<script src="/assets/js/entete.js" defer></script>
+<script src="/assets/js/menu.js" defer></script>
+<script>document.getElementById("annee").textContent=Math.max(2026, new Date().getFullYear());</script>
+<script src="/assets/js/direct.js" defer></script>
 </body>
 </html>

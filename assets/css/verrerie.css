@@ -1,0 +1,1036 @@
+/* ==========================================================================
+   DOMAINE DE LA VERRERIE — feuille de style
+   --------------------------------------------------------------------------
+   Objectif : qu'on comprenne en trois secondes ce que c'est, ou c'est, ce
+   qu'on peut reserver et combien. Clair, chaleureux, lisible a tout age.
+   Les rappels de la verrerie sont dans les details — le vert bouteille,
+   l'ambre des fenetres allumees, un filet de meneau entre les sections,
+   les noms des chambres — jamais dans la structure.
+   ========================================================================== */
+
+:root {
+    /* ── Palette du domaine ──────────────────────────────────────────────
+       60 % lin · 30 % vert forêt · 10 % ocre doré · < 5 % taupe          */
+    --lin:        #F8F4EE;   /* fond dominant — pierre claire, linge     */
+    --lin-2:      #F1EBE1;   /* sections alternées                        */
+    --vert:       #455239;   /* olive relevé sur l'aquarelle du logo      */
+    --vert-clair: #5A6B4C;   /* survols sur fond vert                     */
+    --terre:      #94562C;   /* la terre cuite du toit, dans la peinture
+                                comme sur la vraie maison. Seul accent
+                                utilisable EN TEXTE (5,3:1 sur le lin)    */
+    --anthracite: #4A4A4A;   /* paragraphes                               */
+    --taupe:      #7F786D;   /* bordures et filets — jamais en petit texte */
+    --taupe-texte:#655E53;   /* taupe assombri, lisible en petit (5,8:1)  */
+    --ocre:       #F4C85F;   /* ocre doré — FOND de bouton uniquement     */
+    --ocre-fonce: #E0B036;   /* survol du bouton                          */
+
+    /* alias conservés pour ne rien casser dans la feuille */
+    --papier: var(--lin);
+    --papier-2: var(--lin-2);
+    --bouteille: var(--vert);
+    --bouteille-clair: var(--vert-clair);
+    --encre: var(--anthracite);
+    --encre-doux: var(--taupe-texte);
+    --ambre: var(--vert);
+    --ambre-clair: var(--ocre);
+    --filet: rgba(127, 120, 109, .34);
+
+    --titre: 'Spectral', Georgia, serif;
+    --texte: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    --marge: clamp(20px, 5vw, 56px);
+    --large: 1200px;
+    --rayon: 10px;
+    --rayon-btn: 999px;
+    --rayon-champ: 9px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+    margin: 0;
+    background: var(--papier);
+    color: var(--encre);
+    font-family: var(--texte);
+    font-size: 1.0625rem;      /* confortable a tout age */
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+}
+@media (min-width: 900px) { body { font-size: 1.125rem; } }
+
+img { max-width: 100%; display: block; height: auto; }
+a { color: inherit; }
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
+sup { font-size: .62em; }
+
+h1, h2, h3 { font-family: var(--titre); font-weight: 400; line-height: 1.15;
+             letter-spacing: -.01em; margin: 0; text-wrap: balance; color: var(--vert); }
+/* Sur fond sombre, le vert des titres deviendrait invisible : il faut le
+   reprendre explicitement, l'héritage ne suffit pas face à une règle directe. */
+.section--fonce h1, .section--fonce h2, .section--fonce h3,
+.page-titre h1, .page-titre h2, .page-titre h3,
+.pied h1, .pied h2, .pied h3, .voile h1, .voile h2,
+.tiroir-tete h2 { color: var(--lin); }
+/* le panneau de confirmation est sur fond clair, pas sombre */
+.tiroir-merci h3 { color: var(--vert); }
+h1 { font-size: clamp(2.25rem, 5.5vw, 4rem); line-height: 1.06; }
+h2 { font-size: clamp(1.75rem, 3.4vw, 2.625rem); }
+h3 { font-size: clamp(1.25rem, 2.2vw, 1.625rem); }
+
+::selection { background: var(--bouteille); color: var(--papier); }
+:focus-visible { outline: 3px solid var(--vert); outline-offset: 3px; }
+
+.saut { position: absolute; left: -9999px; background: var(--bouteille); color: #fff;
+        padding: 14px 24px; z-index: 300; border-radius: var(--rayon-btn); }
+.saut:focus { left: 14px; top: 14px; }
+
+.cadre { max-width: var(--large); margin: 0 auto; padding-inline: var(--marge); }
+.section { padding-block: clamp(56px, 8vw, 104px); }
+.section--fonce { background: var(--bouteille); color: #F4F2EC; }
+.section--doux  { background: var(--papier-2); }
+
+/* Le surtitre : un libellé, écrit comme du texte. Ni capitales espacées,
+   ni filet, ni italique serif — trois réflexes qu'on a écartés tour à tour. */
+.surtitre {
+    font-family: var(--texte); font-style: normal; font-weight: 500;
+    font-size: 1rem; letter-spacing: 0; text-transform: none;
+    color: var(--terre); margin: 0 0 8px;
+}
+.section--fonce .surtitre, .page-titre .surtitre { color: var(--ocre); }
+
+.chapo { font-size: 1.1875rem; line-height: 1.6; color: var(--encre-doux); max-width: 62ch; margin-top: 16px; }
+.section--fonce .chapo { color: rgba(244,242,236,.82); }
+
+/* ---------- Boutons ---------- */
+
+.btn {
+    display: inline-block; text-decoration: none; cursor: pointer;
+    font-family: var(--texte); font-size: 1rem; font-weight: 500;
+    line-height: 1.3;
+    padding: 13px 30px; border: 1px solid transparent; border-radius: var(--rayon-btn);
+    background: var(--ocre); color: var(--vert); transition: background-color .18s ease;
+}
+.btn:hover { background: var(--ocre-fonce); color: var(--vert); }
+.btn--ligne { background: transparent; color: inherit; border-color: currentColor; }
+.btn--ligne:hover { background: var(--encre); color: var(--papier); border-color: var(--encre); }
+.section--fonce .btn--ligne:hover { background: var(--lin); color: var(--vert); border-color: var(--lin); }
+
+.lien-fleche { text-decoration: none; font-weight: 500; color: var(--terre); border-bottom: 1px solid var(--terre); padding-bottom: 2px; }
+.lien-fleche::after { content: ' →'; }
+.lien-fleche:hover { color: var(--vert); border-bottom-color: var(--vert); }
+.section--fonce .lien-fleche { color: var(--ocre); border-bottom-color: var(--ocre); }
+
+/* ==========================================================================
+   EN-TÊTE
+   ========================================================================== */
+
+/* L'en-tête flotte au-dessus du bandeau sombre en haut de page, puis
+   reprend son fond clair dès qu'on descend. Les deux logos sont présents
+   et se croisent en fondu : aucun chargement au moment de la bascule. */
+:root { --h-entete: 64px; }
+@media (max-width: 600px) { :root { --h-entete: 56px; } }
+
+.entete {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+    background: rgba(251, 249, 244, .96);
+    border-bottom: 1px solid var(--filet);
+}
+/* La transition n'est armée qu'après le premier rendu. Sans cela, l'en-tête
+   naît opaque puis s'efface en 0,28 s : on voit la barre crème clignoter à
+   chaque chargement de page, et surtout au clic sur le logo. */
+html.pret .entete { transition: background-color .28s ease, border-color .28s ease; }
+/* état haut de page : transparent, lettrage blanc */
+.entete--flottante {
+    background: transparent;
+    border-bottom-color: transparent;
+}
+
+/* les pages sans bandeau sombre gardent l'en-tête pleine et dégagent la place */
+.page-claire main { padding-top: var(--h-entete); }
+.entete-inner { max-width: var(--large); margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; padding: 17px var(--marge); }
+.marque { font-family: var(--titre); font-size: 1.25rem; text-decoration: none; white-space: nowrap; }
+.marque b { font-weight: 400; color: var(--vert); }
+.entete nav { display: flex; gap: clamp(14px, 2vw, 28px); align-items: center; }
+.entete nav a { text-decoration: none; font-size: 1rem; font-weight: 500; color: var(--encre-doux); }
+.entete nav a:hover { color: var(--vert); }
+
+/* menu sur fond transparent : blanc plein. Déclaré après la règle du menu
+   normal et avec la classe doublée, sinon la couleur sombre l'emporte. */
+.entete.entete--flottante nav a { color: #fff; font-weight: 600; }
+.entete.entete--flottante nav a:hover { color: var(--ocre); }
+.entete .btn { padding: 11px 22px; font-size: .9375rem; }
+@media (max-width: 860px) { .entete nav { display: none; } }
+@media (max-width: 420px) { .entete .btn { padding: 12px 17px; font-size: .9375rem; } }
+
+/* ==========================================================================
+   HERO — on dit tout de suite ce que c'est et où c'est
+   ========================================================================== */
+
+.hero { position: relative; background: var(--bouteille); }
+.hero-photo { position: absolute; inset: 0; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+.hero-voile { position: absolute; inset: 0;
+    background:
+        /* bandeau haut : garantit la lisibilité du logo et du menu en blanc,
+           quelle que soit la luminosité de la photo derrière */
+        linear-gradient(to bottom, rgba(12,26,19,.74) 0,
+                                   rgba(12,26,19,.44) calc(var(--h-entete) * .85),
+                                   rgba(12,26,19,0) calc(var(--h-entete) + 64px)),
+        linear-gradient(to right, rgba(12,26,19,.88) 0%, rgba(12,26,19,.66) 46%, rgba(12,26,19,.22) 100%); }
+.hero-inner { position: relative; max-width: var(--large); margin: 0 auto;
+    padding: calc(var(--h-entete) + clamp(34px, 6vw, 80px)) var(--marge) clamp(48px, 7vw, 92px);
+    color: #fff; }
+.hero h1 { color: #fff; max-width: 15ch; }
+.hero .lieu {
+    font-family: var(--texte); font-style: normal; font-weight: 500;
+    font-size: 1rem; letter-spacing: 0; text-transform: none;
+    color: var(--ocre); margin: 0 0 12px;
+    display: inline-flex; align-items: center; gap: 9px;
+}
+/* un carré plein de la taille d'une ponctuation : un repère, pas un filet */
+.hero .lieu::before {
+    content: ''; width: 7px; height: 7px; background: currentColor; flex: none;
+}
+.hero .accroche { font-size: clamp(1.125rem, 1.9vw, 1.375rem); line-height: 1.55;
+    color: rgba(255,255,255,.9); max-width: 46ch; margin-top: 18px; }
+.hero-actions { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }
+.hero-actions .btn--ligne { color: #fff; border-color: rgba(255,255,255,.65); }
+.hero-actions .btn--ligne:hover { background: #fff; color: var(--bouteille); border-color: #fff; }
+@media (max-width: 760px) {
+    .hero-voile { background: linear-gradient(to top,
+        rgba(12,26,19,.42) 0%,      /* bas : on laisse respirer le jardin */
+        rgba(12,26,19,.62) 18%,
+        rgba(12,26,19,.80) 42%,     /* bande du texte */
+        rgba(12,26,19,.74) 72%,
+        rgba(12,26,19,.60) 100%); }
+}
+
+/* ---------- Bandeau de réassurance ---------- */
+
+.reassurance { background: var(--papier-2); border-bottom: 1px solid var(--filet); }
+.reassurance ul { max-width: var(--large); margin: 0 auto; padding: 0 var(--marge); list-style: none;
+    display: grid; grid-template-columns: repeat(4, 1fr); }
+.reassurance li { padding: 20px 16px; border-right: 1px solid var(--filet); }
+.reassurance li:first-child { padding-left: 0; }
+.reassurance li:last-child { border-right: none; }
+.reassurance b { display: block; font-family: var(--titre); font-size: 1.375rem; font-weight: 400; line-height: 1.2; }
+.reassurance span { font-size: .9375rem; color: var(--encre-doux); }
+@media (max-width: 760px) {
+    .reassurance ul { grid-template-columns: 1fr 1fr; }
+    .reassurance li { padding: 14px 12px; border-bottom: 1px solid var(--filet); }
+    .reassurance li:nth-child(2n) { border-right: none; }
+    .reassurance li:nth-child(n+3) { border-bottom: none; }
+    .reassurance li:nth-child(3) { padding-left: 0; }
+}
+
+/* ==========================================================================
+   DEUX COLONNES texte + photo
+   ========================================================================== */
+
+.duo-photo { display: grid; gap: clamp(28px, 4vw, 56px); align-items: center; }
+@media (min-width: 900px) { .duo-photo { grid-template-columns: 1fr 1fr; } }
+.duo-photo img { border-radius: var(--rayon); }
+
+/* ==========================================================================
+   LES CHAMBRES — le produit
+   ========================================================================== */
+
+.chambres { display: grid; gap: clamp(24px, 3vw, 36px); margin-top: clamp(32px, 4vw, 48px); }
+@media (min-width: 820px) { .chambres { grid-template-columns: 1fr 1fr; } }
+
+.chambre { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--rayon); overflow: hidden;
+           display: flex; flex-direction: column; }
+.section--doux .chambre { background: #fff; }
+.chambre-image { aspect-ratio: 3 / 2; background: var(--bouteille); position: relative; }
+.chambre-image img { width: 100%; height: 100%; object-fit: cover; }
+/* a defaut de photo : un aplat de la matiere dont la chambre porte le nom */
+.chambre-image--verre  { background: var(--bouteille); }
+.chambre-image--silice { background: #D7D2C4; }
+.chambre-image p { position: absolute; inset: auto 16px 16px; margin: 0;
+    font-size: .875rem; color: rgba(255,255,255,.88); }
+/* 4,24:1 auparavant, sous le seuil de 4,5 exigé à cette taille */
+.chambre-image--silice p { color: #4A443B; }
+.chambre-corps { padding: clamp(20px, 2.6vw, 30px); display: flex; flex-direction: column; flex: 1; }
+.chambre-corps h3 { margin-bottom: 10px; }
+.chambre-corps p { color: var(--encre-doux); }
+.equip { list-style: none; margin: 16px 0 0; padding: 16px 0 0; border-top: 1px solid var(--filet);
+         display: flex; flex-wrap: wrap; gap: 8px 10px; }
+.equip li { font-size: .9375rem; background: var(--papier-2); border-radius: var(--rayon-btn); padding: 6px 14px; }
+.section--doux .equip li { background: var(--papier-2); }
+.chambre-prix { margin-top: auto; padding-top: 18px; display: flex; align-items: baseline;
+                justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.chambre-prix strong { font-family: var(--titre); font-size: 1.25rem; font-weight: 400; }
+
+/* ==========================================================================
+   GALERIE
+   ========================================================================== */
+
+/* ---------- Galerie du parc, en tirages ----------
+   Les photos gardent leur format d'origine : un recadrage carré coupait
+   aussi bien les paysages que les portraits. La mise en colonnes laisse
+   chacune respirer, et le montage sur fond clair les détache du fond
+   comme des tirages posés. */
+/* Pellicule horizontale : empilées, huit photos repoussaient la suite de
+   la page de près de deux mille pixels. En bande, elles gardent une hauteur
+   constante, se parcourent au doigt sur téléphone et à la molette ou aux
+   flèches ailleurs. Chaque tirage s'aligne en butée quand on relâche. */
+.galerie-piste { position: relative; }
+.galerie-piste:focus-visible { outline: 2px solid var(--terre); outline-offset: 6px; border-radius: var(--rayon); }
+
+.galerie {
+    display: flex; gap: clamp(12px, 1.4vw, 20px);
+    overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scroll-behavior: smooth;
+    padding-bottom: 14px;
+    scrollbar-width: thin; scrollbar-color: var(--taupe) transparent;
+}
+.galerie::-webkit-scrollbar { height: 8px; }
+.galerie::-webkit-scrollbar-track { background: var(--filet); border-radius: 999px; }
+.galerie::-webkit-scrollbar-thumb { background: var(--taupe); border-radius: 999px; }
+.galerie::-webkit-scrollbar-thumb:hover { background: var(--taupe-texte); }
+
+.galerie figure { flex: 0 0 auto; scroll-snap-align: start; }
+.galerie img { height: clamp(240px, 34svh, 400px); width: auto; max-width: none; }
+
+@media (prefers-reduced-motion: reduce) { .galerie { scroll-behavior: auto; } }
+
+/* Photo d'ouverture : pleine largeur, comme la face d'une carte postale. */
+.galerie-une { margin: clamp(30px, 4vw, 52px) 0 clamp(14px, 1.8vw, 26px);
+    background: #fff; padding: clamp(9px, 1vw, 14px);
+    border: 1px solid var(--filet); border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(60,50,35,.05), 0 6px 18px rgba(60,50,35,.06); }
+.galerie-une img { display: block; width: 100%; height: auto;
+    max-height: 62svh; object-fit: cover; object-position: 50% 58%; border-radius: 2px; }
+.galerie-une figcaption { font-family: var(--titre); font-size: 1rem; font-style: italic;
+    color: var(--taupe-texte); margin-top: clamp(9px, 1vw, 13px); padding-inline: 2px; }
+.galerie { margin-top: 0; }
+
+.galerie figure {
+    margin: 0;
+    background: #fff; padding: clamp(9px, 1vw, 14px);
+    border: 1px solid var(--filet); border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(60, 50, 35, .05), 0 6px 18px rgba(60, 50, 35, .06);
+}
+.section--doux .galerie figure { background: #fff; }
+.galerie img { display: block; border-radius: 2px; }
+.galerie figcaption {
+    font-family: var(--titre); font-size: .9375rem; font-style: italic;
+    color: var(--taupe-texte); margin-top: clamp(9px, 1vw, 13px);
+    padding-inline: 2px;
+}
+
+/* ==========================================================================
+   AUTOUR
+   ========================================================================== */
+
+.autour { list-style: none; margin: clamp(28px, 4vw, 44px) 0 0; padding: 0;
+          display: grid; gap: 0; }
+.autour li { display: grid; grid-template-columns: 7.5rem 1fr; gap: 18px; align-items: baseline;
+             padding: 15px 0; border-top: 1px solid rgba(244,242,236,.18); }
+.autour li:last-child { border-bottom: 1px solid rgba(244,242,236,.18); }
+.autour .duree { font-weight: 600; font-size: .9375rem; color: var(--ambre-clair); }
+.autour .nom { font-family: var(--titre); font-size: 1.25rem; }
+.autour .quoi { display: block; font-size: .9375rem; color: rgba(244,242,236,.66); font-family: var(--texte); }
+@media (max-width: 560px) { .autour li { grid-template-columns: 1fr; gap: 2px; } }
+
+/* ==========================================================================
+   INFOS PRATIQUES
+   ========================================================================== */
+
+.pratique-grille { display: grid; gap: clamp(24px, 3vw, 40px); margin-top: clamp(28px, 4vw, 44px); }
+@media (min-width: 820px) { .pratique-grille { grid-template-columns: 1fr 1fr; } }
+.bloc-info { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--rayon); padding: clamp(20px, 2.6vw, 28px); }
+.section--doux .bloc-info { background: #fff; }
+.bloc-info h3 { font-size: 1.1875rem; margin-bottom: 12px; }
+/* Colonne d'étiquettes de largeur fixe : sans cela chaque bloc dimensionne
+   la sienne sur son plus long mot et les valeurs ne s'alignent pas d'un
+   bloc à l'autre. */
+.bloc-info dl { margin: 0; display: grid; grid-template-columns: 8.5rem 1fr; gap: 0 18px; }
+@media (max-width: 420px) { .bloc-info dl { grid-template-columns: 7rem 1fr; } }
+.aconf-note { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--filet);
+              font-size: .875rem; color: var(--taupe-texte); }
+.bloc-info dt { padding: 7px 0; color: var(--encre-doux); font-size: .9375rem; border-top: 1px solid var(--filet); }
+.bloc-info dd { padding: 7px 0; margin: 0; border-top: 1px solid var(--filet); font-size: .9375rem; }
+.bloc-info dl > dt:first-of-type, .bloc-info dl > dt:first-of-type + dd { border-top: none; }
+.aconf { color: var(--terre); font-style: italic; }
+
+/* ==========================================================================
+   RÉSERVER
+   ========================================================================== */
+
+.reserver-grille { display: grid; gap: clamp(28px, 4vw, 56px); margin-top: clamp(28px, 4vw, 40px); }
+@media (min-width: 900px) { .reserver-grille { grid-template-columns: .85fr 1.15fr; } }
+.contact-liste { list-style: none; margin: 20px 0 0; padding: 0; }
+.contact-liste li { padding: 11px 0; border-top: 1px solid rgba(244,242,236,.18); }
+.contact-liste span { display: block; font-family: var(--texte); font-weight: 500;
+    font-size: .9375rem; color: rgba(248,244,238,.62); margin-bottom: 2px; }
+.contact-liste a { text-decoration: none; border-bottom: 1px solid rgba(244,242,236,.35); overflow-wrap: anywhere; }
+
+.formulaire { background: var(--papier); border-radius: var(--rayon); padding: clamp(22px, 3vw, 34px); color: var(--encre); }
+.champ { margin-bottom: 16px; }
+.champ label { display: block; font-size: .9375rem; font-weight: 600; margin-bottom: 5px; }
+.champ input, .champ select, .champ textarea {
+    width: 100%; font-family: var(--texte); font-size: 1.0625rem; color: var(--encre);
+    background: #fff; border: 1px solid var(--filet); border-radius: var(--rayon-champ);
+    padding: 12px 15px; -webkit-appearance: none; appearance: none;
+}
+.champ select { background-image: none; }
+.champ textarea { resize: vertical; min-height: 96px; }
+.champ input:focus, .champ select:focus, .champ textarea:focus {
+    outline: none; border-color: var(--vert); box-shadow: 0 0 0 3px rgba(61,85,62,.18);
+}
+.duo-champ { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 520px) { .duo-champ { grid-template-columns: 1fr; gap: 0; } }
+.formulaire .btn { width: 100%; }
+@media (min-width: 620px) { .formulaire .btn { width: auto; } }
+.mention { font-size: .875rem; color: var(--encre-doux); margin-top: 12px; }
+
+/* ==========================================================================
+   PIED
+   ========================================================================== */
+
+.pied { background: #2E3F2F; color: rgba(248,244,238,.82); padding-block: 48px 30px; font-size: 1rem; }
+.pied a { color: inherit; text-decoration: none; }
+.pied a:hover { color: var(--ocre); }
+/* La colonne de contact est plus large que les autres : l'adresse e-mail
+   doit tenir sur une seule ligne, c'est un mot de 29 caractères. */
+.pied-grille { display: grid; grid-template-columns: 1.05fr .8fr .8fr 1.35fr; gap: 30px; }
+@media (max-width: 899px) { .pied-grille { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .pied-grille { grid-template-columns: 1fr; gap: 26px; } }
+.pied li a[href^="mailto"] { white-space: nowrap; overflow-wrap: normal; }
+.pied-grille > * { min-width: 0; }
+.pied ul { list-style: none; margin: 0; padding: 0; }
+.pied li { padding-block: 4px; }
+.pied li a { overflow-wrap: anywhere; }
+.pied li { font-size: .9375rem; }
+.pied-bas { margin-top: 34px; padding-top: 18px; border-top: 1px solid rgba(244,242,236,.16);
+    display: flex; flex-wrap: wrap; gap: 8px 22px; justify-content: space-between; font-size: .875rem; }
+.pied-bas button { background: none; border: none; padding: 0; cursor: pointer; font: inherit;
+    color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Barre de réservation mobile ---------- */
+
+.barre { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; display: none;
+    align-items: center; justify-content: space-between; gap: 12px;
+    background: #fff; border-top: 1px solid var(--filet);
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); }
+.barre b { font-family: var(--titre); font-size: 1.0625rem; font-weight: 400; }
+.barre span { display: block; font-size: .8125rem; color: var(--encre-doux); }
+@media (max-width: 860px) { .barre { display: flex; } body { padding-bottom: 70px; } }
+
+/* ---------- Fenêtre légale ---------- */
+
+.legal[hidden] { display: none !important; }
+.legal { position: fixed; inset: 0; z-index: 200; background: rgba(15,22,17,.82); display: grid; place-items: end center; }
+.legal-panneau { background: var(--papier); width: min(720px, 100%); max-height: 88vh; overflow-y: auto;
+    padding: 20px var(--marge) 48px; border-radius: 16px 16px 0 0; }
+.legal-fermer { position: sticky; top: 0; margin-left: auto; display: block; background: var(--encre);
+    color: #fff; border: none; cursor: pointer; border-radius: var(--rayon-btn);
+    font-family: var(--texte); font-size: .9375rem; font-weight: 600; padding: 9px 22px; }
+.legal h2 { font-size: 1.75rem; margin-block: 16px 10px; }
+.legal h3 { font-family: var(--titre); font-style: italic; font-weight: 400;
+    font-size: 1.0625rem; letter-spacing: 0; text-transform: none;
+    color: var(--encre-doux); margin-block: 22px 4px; }
+.legal p { font-size: .9375rem; }
+.todo { background: rgba(244,200,95,.42); padding: 1px 5px; border-radius: 3px; }
+
+/* ---------- Voile de construction ---------- */
+
+.voile { position: fixed; inset: 0; z-index: 400; background: var(--bouteille); color: #fff;
+    display: grid; align-content: center; padding: var(--marge); overflow-y: auto; text-align: center; }
+html.voile-leve .voile { display: none; }
+html.voile-pose, html.voile-pose body { overflow: hidden; }
+.voile-dedans { max-width: 34rem; margin-inline: auto; }
+.voile h2 { font-size: clamp(2rem, 5.5vw, 3.25rem); color: #fff; margin-bottom: 16px; }
+.voile .quand { font-family: var(--texte); font-weight: 500; font-size: 1rem;
+    color: var(--ocre); margin-bottom: 18px; }
+.voile p { color: rgba(255,255,255,.82); }
+.voile .btn { margin-top: 24px; }
+
+
+/* l'en-tête est collant : les ancres doivent s'arrêter dessous */
+section[id], .hero { scroll-margin-top: 78px; }
+
+/* ---------- Pages annexes : une section, claire et courte ---------- */
+.page-titre { background: var(--bouteille); color: #fff;
+    padding-block: calc(var(--h-entete) + clamp(26px, 4vw, 44px)) clamp(52px, 8vw, 92px); }
+.page-titre h1 { color: #fff; max-width: 18ch; }
+.page-titre .chapo { color: rgba(244,242,236,.85); }
+.page-photo img { width: 100%; height: clamp(220px, 40vh, 420px); object-fit: cover; }
+.pied .titre-pied { font-family: var(--texte); font-weight: 600;
+    font-size: .9375rem; letter-spacing: 0; text-transform: none;
+    color: var(--ocre); margin: 0 0 10px; }
+.voile-annonce { font-family: var(--titre); font-size: clamp(2rem, 5.5vw, 3.25rem);
+    line-height: 1.15; color: #fff; margin-bottom: 16px; }
+
+/* ==========================================================================
+   PAGES DE CONTENU — listes de lieux, articles du carnet, sommaires.
+   Même système que la page d'accueil : mêmes couleurs, mêmes titres,
+   mêmes cartes, mêmes boutons.
+   ========================================================================== */
+
+/* --- Liste de lieux (châteaux, villages, tables, patrimoine…) --- */
+.lieux { list-style: none; margin: clamp(28px, 4vw, 44px) 0 0; padding: 0; display: grid; gap: 0; }
+.lieu-item { display: grid; grid-template-columns: 2.5rem 1fr auto; gap: 8px 20px;
+             padding: 22px 0; border-top: 1px solid var(--filet); align-items: start; }
+.lieu-item:last-child { border-bottom: 1px solid var(--filet); }
+.lieu-num { font-family: var(--titre); font-size: 1.125rem; color: var(--terre); padding-top: 2px; }
+.lieu-corps h3 { margin-bottom: 4px; }
+.lieu-meta { display: block; font-family: var(--titre); font-style: italic;
+             font-size: .9375rem; color: var(--encre-doux); margin-bottom: 8px; }
+.lieu-corps p { color: var(--encre-doux); margin-bottom: 10px; }
+.lieu-corps a { font-weight: 500; color: var(--terre); text-decoration: none; border-bottom: 1px solid var(--terre); }
+.lieu-corps a:hover { border-bottom-color: var(--vert); }
+.lieu-loin { font-family: var(--titre); font-size: 1.25rem; white-space: nowrap; text-align: right; }
+.lieu-loin small { display: block; font-family: var(--texte); font-size: .8125rem; color: var(--encre-doux); }
+@media (max-width: 680px) {
+    .lieu-item { grid-template-columns: 2.2rem 1fr; }
+    .lieu-loin { grid-column: 2; text-align: left; font-size: 1.0625rem; }
+    .lieu-loin small { display: inline; margin-left: 5px; }
+}
+
+/* --- Article du carnet --- */
+.article { max-width: 68ch; margin-inline: auto; }
+.article h2 { margin-top: 2em; margin-bottom: .5em; }
+.article h3 { margin-top: 1.6em; margin-bottom: .4em; }
+.article p { margin-bottom: 1.1em; }
+.article ul, .article ol { margin: 0 0 1.3em; padding-left: 1.3em; }
+.article li { margin-bottom: .45em; }
+.article figure { margin: 2em 0; }
+.article figure img { width: 100%; border-radius: var(--rayon); }
+.article figcaption { font-size: .9375rem; color: var(--encre-doux); margin-top: 8px; }
+.article blockquote { margin: 1.8em 0; padding-left: 20px; border-left: 3px solid var(--terre);
+                      font-family: var(--titre); font-size: 1.25rem; font-style: italic; }
+.article a { color: var(--terre); font-weight: 500; }
+
+/* --- Sommaire : grille de cartes --- */
+.cartes { display: grid; gap: clamp(18px, 2.4vw, 28px); margin-top: clamp(28px, 4vw, 44px);
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.carte { display: block; text-decoration: none; background: var(--papier);
+         border: 1px solid var(--filet); border-radius: var(--rayon); padding: 24px;
+         transition: border-color .18s ease, transform .18s ease; }
+.section--doux .carte { background: #fff; }
+.carte:hover { border-color: var(--terre); transform: translateY(-2px); }
+.carte h3 { margin-bottom: 6px; }
+.carte p { color: var(--encre-doux); font-size: .9375rem; margin: 0; }
+.carte .compte { display: block; font-family: var(--texte); font-weight: 500;
+                 font-size: .875rem; color: var(--terre); margin-bottom: 6px; }
+
+/* --- Page 404 --- */
+.perdu { text-align: center; padding-block: clamp(70px, 12vw, 150px); }
+.perdu h1 { margin-bottom: 14px; }
+.perdu .chapo { margin-inline: auto; }
+.perdu .btn { margin-top: 26px; }
+
+/* ==========================================================================
+   PANNEAU DE RÉSERVATION
+   Un tiroir vertical qui s'ouvre par la droite. La demande part par mail
+   chez Frédérique, qui répond elle-même.
+   ========================================================================== */
+
+.tiroir-fond {
+    position: fixed; inset: 0; z-index: 90;
+    background: rgba(31, 36, 32, .5);
+    opacity: 0; visibility: hidden;
+    transition: opacity .3s ease, visibility .3s ease;
+}
+.tiroir-fond.ouvert { opacity: 1; visibility: visible; }
+
+.tiroir {
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 95;
+    width: min(460px, 100%);
+    background: var(--lin);
+    display: flex; flex-direction: column;
+    transform: translateX(100%);
+    transition: transform .34s cubic-bezier(.22, .61, .36, 1);
+    box-shadow: -10px 0 40px rgba(31, 36, 32, .14);
+}
+.tiroir.ouvert { transform: translateX(0); }
+@media (prefers-reduced-motion: reduce) {
+    .tiroir, .tiroir-fond { transition: none; }
+}
+
+.tiroir-tete {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+    padding: 22px 24px 18px; border-bottom: 1px solid var(--filet);
+    background: var(--vert); color: var(--lin);
+}
+.tiroir-tete h2 { color: var(--lin); font-size: 1.5rem; margin-bottom: 4px; }
+.tiroir-tete p { margin: 0; font-size: .9375rem; color: rgba(248, 244, 238, .8); }
+.tiroir-fermer {
+    flex: none; width: 38px; height: 38px; border-radius: 999px;
+    background: rgba(248, 244, 238, .14); border: none; cursor: pointer;
+    color: var(--lin); font-size: 1.25rem; line-height: 1;
+    display: grid; place-items: center;
+}
+.tiroir-fermer:hover { background: rgba(248, 244, 238, .26); }
+
+.tiroir-corps { flex: 1; overflow-y: auto; padding: 22px 24px 28px; -webkit-overflow-scrolling: touch; }
+.tiroir-corps .champ:last-of-type { margin-bottom: 20px; }
+
+.tiroir-pied {
+    padding: 16px 24px calc(16px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--filet); background: var(--lin-2);
+}
+.tiroir-pied .btn { width: 100%; }
+.tiroir-pied .secours { margin: 12px 0 0; font-size: .875rem; color: var(--taupe-texte); text-align: center; }
+.tiroir-pied .secours a { color: var(--vert); font-weight: 600; }
+
+/* l'accusé de réception remplace le formulaire, sans changer de page */
+.tiroir-merci { display: none; padding: 40px 24px; text-align: center; }
+.tiroir.envoye .tiroir-merci { display: block; }
+.tiroir.envoye form, .tiroir.envoye .tiroir-pied { display: none; }
+.tiroir-merci .coche {
+    width: 56px; height: 56px; border-radius: 999px; background: var(--ocre);
+    color: var(--vert); display: grid; place-items: center; margin: 0 auto 18px;
+    font-size: 1.75rem;
+}
+.tiroir-merci h3 { margin-bottom: 10px; }
+.tiroir-merci p { color: var(--taupe-texte); }
+
+.tiroir .erreur {
+    background: rgba(200, 60, 40, .1); border: 1px solid rgba(200, 60, 40, .35);
+    border-radius: var(--rayon); padding: 12px 14px; margin-bottom: 16px;
+    font-size: .9375rem; color: #8C2F20;
+}
+.tiroir .erreur[hidden] { display: none; }
+.tiroir .obligatoire { color: var(--taupe-texte); font-weight: 400; }
+
+/* ==========================================================================
+   LOGO
+   L'aquarelle de la maison accompagne le lettrage dans l'en-tête ; le
+   lettrage seul suffit au pied de page et sur le voile.
+   ========================================================================== */
+
+.marque { display: inline-flex; align-items: center; gap: 13px; }
+.marque img { display: block; width: auto; }
+
+/* ── Le logo de l'en-tête se compose de deux pièces ────────────────────────
+   L'aquarelle représente la maison ; posée sur une photo de cette même
+   maison, les deux se brouillent. Quand l'en-tête flotte, l'aquarelle
+   s'efface et le lettrage glisse à sa place. Elle revient dès que la barre
+   claire est là pour l'accueillir. */
+.entete .marque .embleme {
+    /* La largeur de départ doit être une valeur chiffrée : « none » n'est pas
+       interpolable, et sans elle l'aquarelle apparaît d'un coup au lieu de
+       laisser le lettrage glisser. */
+    max-width: 92px;
+    transition: opacity .28s ease, max-width .32s cubic-bezier(.22,.61,.36,1),
+                margin-right .32s cubic-bezier(.22,.61,.36,1);
+}
+.entete .lettrage { position: relative; display: block; }
+.entete .lettrage .blanc { position: absolute; left: 0; top: 0; opacity: 0; }
+.entete .lettrage img { transition: opacity .28s ease; }
+
+/* classe doublée : les règles de taille par palier sont déclarées plus bas
+   et l'emporteraient à spécificité égale */
+.entete.entete--flottante .marque .embleme { opacity: 0; max-width: 0; margin-right: -13px; }
+.entete.entete--flottante .lettrage .noir { opacity: 0; }
+.entete.entete--flottante .lettrage .blanc { opacity: 1; }
+
+/* tailles — la largeur maximale suit la hauteur (l'aquarelle est en 2,15:1) */
+.entete .marque .embleme { height: 40px; }
+.entete .lettrage img { height: 34px; }
+@media (max-width: 600px) {
+    .entete .marque .embleme { height: 32px; max-width: 74px; }
+    .entete .lettrage img { height: 27px; }
+}
+@media (max-width: 380px) {
+    .entete .marque .embleme { height: 28px; max-width: 64px; }
+    .entete .lettrage img { height: 24px; }
+}
+
+/* pied de page : le lettrage seul, en blanc */
+.pied .marque img { height: 58px; }
+
+/* voile de construction */
+.voile .marque { display: block; margin: 0 auto 26px; }
+.voile .marque img { height: 76px; margin-inline: auto; }
+@media (max-width: 600px) { .voile .marque img { height: 58px; } }
+
+/* ---------- Sources d'un article ---------- */
+.sources { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--filet); }
+.sources h2 { font-family: var(--texte); font-size: .9375rem; font-weight: 600;
+              color: var(--taupe-texte); margin-bottom: 10px; }
+.sources ul { list-style: none; margin: 0; padding: 0; }
+.sources li { font-size: .9375rem; margin-bottom: 6px; color: var(--taupe-texte); }
+.sources a { color: var(--terre); overflow-wrap: anywhere; }
+.article-meta { font-size: .9375rem; color: var(--taupe-texte); margin-bottom: 26px;
+                padding-bottom: 16px; border-bottom: 1px solid var(--filet); }
+
+
+/* ==========================================================================
+   CIBLES TACTILES
+   Sous 44 px de haut, un lien devient difficile à atteindre au doigt.
+   On élargit par le rembourrage plutôt que par la hauteur, pour ne pas
+   déformer les mises en page.
+   ========================================================================== */
+@media (max-width: 860px) {
+    .lien-fleche { display: inline-block; padding-block: 11px; }
+    .pied li { padding-block: 0; }
+    .pied li a { display: inline-block; padding-block: 12px; }
+    .coordonnees li, .contact-liste li { padding-block: 13px; }
+    .coordonnees a, .contact-liste a { display: inline-block; padding-block: 3px; }
+    .chambre-prix .lien-fleche { padding-block: 13px; }
+    .pied-bas button { padding-block: 12px; }
+    .entete nav a { padding-block: 13px; }
+}
+
+/* ---------- Deux règles devenues inutiles, retirées de la feuille ---------- */
+
+/* ==========================================================================
+   MENU MOBILE
+   Sous 860 px la navigation disparaissait sans rien pour la remplacer :
+   un visiteur au téléphone ne pouvait atteindre ni les chambres ni les
+   infos pratiques autrement qu'en faisant défiler toute la page.
+   ========================================================================== */
+
+.burger {
+    display: none; flex: none;
+    width: 44px; height: 44px; padding: 0;
+    background: none; border: none; cursor: pointer;
+    align-items: center; justify-content: center;
+}
+.burger span {
+    display: block; position: relative;
+    width: 22px; height: 2px; background: var(--vert);
+    transition: background-color .2s ease, transform .25s ease;
+}
+.burger span::before, .burger span::after {
+    content: ''; position: absolute; left: 0; width: 22px; height: 2px;
+    background: var(--vert); transition: transform .25s ease, background-color .2s ease;
+}
+.burger span::before { top: -7px; }
+.burger span::after  { top: 7px; }
+.entete--flottante .burger span,
+.entete--flottante .burger span::before,
+.entete--flottante .burger span::after { background: #fff; }
+
+/* croix quand le panneau est ouvert */
+.burger[aria-expanded="true"] span { background: transparent !important; }
+.burger[aria-expanded="true"] span::before { transform: translateY(7px) rotate(45deg); }
+.burger[aria-expanded="true"] span::after  { transform: translateY(-7px) rotate(-45deg); }
+
+.menu-mobile {
+    position: fixed; left: 0; right: 0; top: var(--h-entete); bottom: 0; z-index: 55;
+    background: var(--lin); padding: 12px var(--marge) 40px;
+    overflow-y: auto;
+    transform: translateY(-8px); opacity: 0; visibility: hidden;
+    transition: opacity .22s ease, transform .22s ease, visibility .22s ease;
+}
+.menu-mobile.ouvert { transform: none; opacity: 1; visibility: visible; }
+.menu-mobile a {
+    display: block; text-decoration: none;
+    font-family: var(--titre); font-size: 1.375rem; color: var(--vert);
+    padding: 15px 0; border-bottom: 1px solid var(--filet);
+}
+.menu-mobile a:last-of-type { border-bottom: none; }
+.menu-mobile .btn { margin-top: 22px; width: 100%; text-align: center; font-family: var(--texte); font-size: 1.0625rem; }
+.menu-mobile .appel {
+    display: block; margin-top: 18px; text-align: center;
+    font-size: 1rem; color: var(--taupe-texte); text-decoration: none; padding: 12px 0;
+}
+
+@media (max-width: 860px) { .burger { display: flex; } }
+@media (min-width: 861px) { .menu-mobile { display: none; } }
+
+/* ==========================================================================
+   QUESTIONS FRÉQUENTES
+   Un dépliant natif : pas de script, ça fonctionne même sans JavaScript,
+   c'est accessible au clavier et lisible par les lecteurs d'écran.
+   ========================================================================== */
+
+.faq { margin-top: clamp(28px, 4vw, 44px); max-width: 860px; }
+.faq details {
+    border-bottom: 1px solid var(--filet);
+}
+.faq details:first-of-type { border-top: 1px solid var(--filet); }
+.faq summary {
+    cursor: pointer; list-style: none;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 20px;
+    padding: 18px 0;
+    font-family: var(--titre); font-size: 1.1875rem; color: var(--vert);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+    content: '+'; flex: none;
+    font-family: var(--texte); font-size: 1.375rem; font-weight: 400;
+    color: var(--terre); line-height: 1; transition: transform .2s ease;
+}
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq summary:hover { color: var(--terre); }
+.faq details > div { padding: 0 0 20px; max-width: 62ch; color: var(--encre-doux); }
+.faq details > div p + p { margin-top: .7em; }
+.faq a { color: var(--terre); font-weight: 500; }
+@media (max-width: 600px) { .faq summary { font-size: 1.0625rem; padding: 16px 0; } }
+
+/* ==========================================================================
+   BARRE DE PROGRESSION
+   Trois pixels d'ocre en haut de l'écran. Animée par transform seul, donc
+   sans recalcul de mise en page à chaque défilement.
+   ========================================================================== */
+
+.progression {
+    position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 70;
+    background: transparent; pointer-events: none;
+}
+.progression span {
+    display: block; height: 100%; background: var(--ocre);
+    transform: scaleX(0); transform-origin: 0 50%;
+}
+@media (prefers-reduced-motion: reduce) { .progression { display: none; } }
+
+/* ==========================================================================
+   L'HEURE À ÉPINAC
+   ========================================================================== */
+
+.pendule {
+    margin-top: clamp(20px, 2.4vw, 30px);
+    display: inline-flex; align-items: center; flex-wrap: wrap; gap: 10px 16px;
+    background: var(--papier); border: 1px solid var(--filet);
+    border-radius: var(--rayon-btn); padding: 11px 22px;
+    font-size: .9375rem;
+}
+.section--doux .pendule { background: #fff; }
+.pendule .point {
+    width: 8px; height: 8px; border-radius: 999px; background: var(--ocre); flex: none;
+}
+.pendule b { font-weight: 600; color: var(--vert); font-variant-numeric: tabular-nums; }
+.pendule .etat { color: var(--terre); font-weight: 500; }
+.pendule .sep { color: var(--taupe); }
+@media (max-width: 520px) { .pendule { border-radius: var(--rayon); padding: 12px 16px; } .pendule .sep { display: none; } }
+
+/* ==========================================================================
+   CARTE
+   Fond OpenStreetMap : aucun cookie, aucun traceur, donc aucune bannière
+   de consentement à prévoir. Chargée seulement quand elle approche.
+   ========================================================================== */
+
+.carte-lieu { margin-top: clamp(28px, 4vw, 40px); }
+.carte-lieu iframe {
+    display: block; width: 100%; height: clamp(300px, 48vh, 460px);
+    border: 1px solid var(--filet); border-radius: var(--rayon);
+    filter: saturate(.82) contrast(.96);
+}
+.carte-actions { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: baseline; }
+.carte-adresse { font-size: 1rem; color: var(--encre-doux); }
+/* La carte de France situe le domaine dans le pays : elle occupe toute la
+   largeur de la grille, le plan à gauche et les indications à droite. */
+.carte-lieu { grid-column: 1 / -1; display: grid; gap: clamp(18px, 3vw, 36px);
+              align-items: center; }
+@media (min-width: 820px) { .carte-lieu { grid-template-columns: minmax(0, 360px) 1fr; } }
+.carte-lieu img.carte-france { display: block; width: 100%; height: auto;
+              max-width: 360px; margin-inline: auto;
+              border: 1px solid var(--filet); border-radius: var(--rayon);
+              background: var(--lin); }
+.carte-texte h3 { font-size: 1.1875rem; margin-bottom: 10px; }
+.carte-texte .carte-adresse { margin: 0 0 18px; color: var(--encre-doux); }
+.carte-texte .carte-actions { display: flex; flex-wrap: wrap; gap: 12px 26px; margin: 0; }
+.carte-credit { margin-top: 10px; font-size: .8125rem; color: var(--taupe-texte); }
+.carte-credit a { color: var(--taupe-texte); }
+
+/* Le burger se tient à droite du bouton Réserver, contre le bord. La marque
+   pousse tout le reste vers la droite ; l'écart entre le bouton et le burger
+   est resserré pour qu'ils se lisent comme un seul groupe. */
+@media (max-width: 860px) {
+    .entete-inner { gap: 8px; }
+    .entete-inner .marque { margin-right: auto; }
+    .entete-inner .burger { display: flex; order: 2; margin-right: -10px; }
+}
+/* La FAQ a quitté le menu : on garde une porte d'entrée en fin d'infos pratiques. */
+.vers-faq { margin-top: 26px; }
+
+
+/* Une photo en portrait dans un article occuperait toute la hauteur de
+   l'écran : on la borne et on la centre, la légende reste sous elle. */
+.article figure.portrait img { display: block; margin-inline: auto;
+    width: auto; max-width: 100%; max-height: min(74vh, 640px); }
+.article figure.portrait figcaption { text-align: center; max-width: 52ch;
+    margin-inline: auto; }
+
+/* Bouton de dépliage de la FAQ : discret, il ne doit pas rivaliser avec
+   les appels à réserver. */
+.faq-plus {
+    display: inline-flex; align-items: center; gap: 9px;
+    margin-top: 22px; padding: 12px 24px;
+    font-family: var(--texte); font-size: .9375rem; font-weight: 500;
+    color: var(--terre); background: none;
+    border: 1px solid var(--taupe); border-radius: var(--rayon-btn);
+    cursor: pointer; transition: background-color .18s ease, border-color .18s ease;
+}
+.faq-plus::after { content: '+'; font-size: 1.125rem; line-height: 1; }
+.faq-plus[aria-expanded="true"]::after { content: '–'; }
+.faq-plus:hover { background: var(--papier); border-color: var(--terre); }
+.faq-plus:focus-visible { outline: 2px solid var(--terre); outline-offset: 3px; }
+
+/* ==========================================================================
+   PREMIER ÉCRAN
+   Le hero et le bandeau de réassurance forment ensemble exactement une
+   hauteur d'écran, quelle que soit la taille. On utilise svh plutôt que vh :
+   sur téléphone, vh compte la barre d'adresse rétractée et provoque un
+   débordement de quelques dizaines de pixels au chargement.
+   Le hero prend la place restante, le bandeau garde sa hauteur propre.
+   ========================================================================== */
+.ouverture { display: flex; flex-direction: column; min-height: 100vh; min-height: 100svh; }
+.ouverture .hero { flex: 1 1 auto; display: flex; }
+.ouverture .hero-inner { margin-block: auto; width: 100%; }
+.ouverture .reassurance { flex: 0 0 auto; }
+
+/* Écran très bas (téléphone couché) : on redonne la main au contenu
+   plutôt que de le comprimer. */
+@media (max-height: 520px) {
+    .ouverture { min-height: 0; }
+    .ouverture .hero-inner { margin-block: 0; }
+}
+
+/* Écrans courts : le contenu du premier écran dépasse la fenêtre. Plutôt
+   que de le laisser déborder, on resserre les respirations et la typo par
+   paliers de hauteur. Les grands écrans ne sont pas touchés : le contenu y
+   est plus petit que la fenêtre et se centre tout seul. */
+@media (max-height: 800px) {
+    .ouverture .hero-inner {
+        padding-top: calc(var(--h-entete) + clamp(14px, 3.4svh, 44px));
+        padding-bottom: clamp(18px, 3.4svh, 44px);
+    }
+    .ouverture .hero .accroche { margin-top: 12px; }
+    .ouverture .hero-actions { margin-top: 20px; }
+    .ouverture .reassurance li { padding-block: 12px; }
+}
+/* Le second palier vaut aussi pour les écrans étroits : à 360 px de large
+   le titre et l'accroche gagnent une ligne chacun, ce qui suffit à faire
+   déborder une fenêtre pourtant pas si courte. */
+@media (max-height: 700px), (max-height: 820px) and (max-width: 400px) {
+    .ouverture .hero h1 { font-size: clamp(1.6rem, 4.6vw, 2.2rem); }
+    .ouverture .hero .accroche { font-size: 1rem; line-height: 1.45; }
+    .ouverture .hero .lieu { font-size: .9375rem; margin-bottom: 8px; }
+    .ouverture .reassurance li { padding-block: 9px; }
+    .ouverture .reassurance b { font-size: 1.1875rem; }
+    .ouverture .reassurance span { font-size: .875rem; }
+}
+
+/* ---------- Commandes de la pellicule ---------- */
+.galerie-fleche {
+    position: absolute; top: calc(50% - 20px); transform: translateY(-50%);
+    width: 44px; height: 44px; padding: 0; z-index: 2;
+    display: none; align-items: center; justify-content: center;
+    font-size: 1.5rem; line-height: 1; color: var(--vert);
+    background: rgba(255,255,255,.94); border: 1px solid var(--filet);
+    border-radius: 999px; cursor: pointer;
+    box-shadow: 0 2px 10px rgba(60,50,35,.14);
+    transition: opacity .18s ease, background-color .18s ease;
+}
+.galerie-piste.a-defiler .galerie-fleche { display: flex; }
+.galerie-fleche--avant { left: -8px; }
+.galerie-fleche--apres { right: -8px; }
+.galerie-fleche:hover:not(:disabled) { background: #fff; }
+.galerie-fleche:disabled { opacity: 0; pointer-events: none; }
+.galerie-fleche:focus-visible { outline: 2px solid var(--terre); outline-offset: 3px; }
+
+/* Voile de bord : signale qu'il reste des photos de ce côté. */
+.galerie-piste::before, .galerie-piste::after {
+    content: ''; position: absolute; top: 0; bottom: 22px; width: 54px;
+    pointer-events: none; opacity: 0; transition: opacity .2s ease; z-index: 1;
+}
+.galerie-piste::before { left: 0; background: linear-gradient(to right, var(--papier-2), transparent); }
+.galerie-piste::after  { right: 0; background: linear-gradient(to left, var(--papier-2), transparent); }
+.section--doux .galerie-piste::before { background: linear-gradient(to right, var(--lin-2, #F1EBE1), transparent); }
+.section--doux .galerie-piste::after  { background: linear-gradient(to left, var(--lin-2, #F1EBE1), transparent); }
+.galerie-piste.bord-gauche::before { opacity: 1; }
+.galerie-piste.bord-droit::after   { opacity: 1; }
+
+/* Sur écran tactile ou étroit, le doigt suffit : pas de flèche qui masque
+   la photo. La règle de largeur double la détection du tactile, qui n'est
+   pas fiable partout. */
+@media (hover: none), (max-width: 700px) {
+    .galerie-piste.a-defiler .galerie-fleche { display: none; }
+}
+
+/* Barre de défilement dessinée. La native reste en place tant que le script
+   n'a pas pris le relais : sans JavaScript, on ne retire aucune commande. */
+.rail-dessine .galerie { scrollbar-width: none; padding-bottom: 6px; }
+.rail-dessine .galerie::-webkit-scrollbar { height: 0; }
+
+.galerie-rail { display: none; position: relative; height: 5px; margin-top: 14px;
+    background: var(--filet); border-radius: 999px; cursor: pointer; touch-action: none; }
+.galerie-piste.a-defiler .galerie-rail { display: block; }
+.galerie-curseur { position: absolute; top: 0; bottom: 0; left: 0;
+    background: var(--taupe); border-radius: 999px; transition: background-color .18s ease; }
+.galerie-rail:hover .galerie-curseur { background: var(--taupe-texte); }
+
+/* ---------- Réglage optique du lettrage ----------
+   Le centre de l'encre du mot est 6,7 px au-dessus du centre géométrique
+   de l'image (vide sous le mot, puis l'ornement). Centré mathématiquement,
+   le logo se lit donc trop haut. On le redescend de la même proportion,
+   soit 5,5 % de sa hauteur rendue. */
+.entete .lettrage { transform: translateY(5.5%); }
+
+/* ---------- Repère de navigation ----------
+   Un filet ocre sous le lien survolé, et sous la section où l'on se trouve.
+   Il apparaît par étirement depuis la gauche plutôt qu'en fondu : le
+   mouvement dit d'où l'on vient. */
+.entete nav a { position: relative; padding-block: 4px; }
+.entete nav a::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px;
+    background: var(--ocre); border-radius: 2px;
+    transform: scaleX(0); transform-origin: left center;
+    transition: transform .22s cubic-bezier(.22,.61,.36,1);
+}
+.entete nav a:hover::after,
+.entete nav a:focus-visible::after,
+.entete nav a[aria-current="true"]::after { transform: scaleX(1); }
+.entete nav a[aria-current="true"] { color: var(--vert); }
+.entete.entete--flottante nav a[aria-current="true"] { color: #fff; }
+@media (prefers-reduced-motion: reduce) { .entete nav a::after { transition: none; } }
+
+/* ---------- Les trois repères de la section Bienvenue ----------
+   Une colonne par direction : les vignes, la ville, la forêt. Le temps de
+   route est la donnée que le visiteur cherche, il passe donc devant le
+   texte plutôt qu'à la fin. */
+.triangle { list-style: none; margin: clamp(30px, 4vw, 48px) 0 0; padding: 0;
+            display: grid; gap: clamp(22px, 3vw, 40px); }
+@media (min-width: 760px) { .triangle { grid-template-columns: repeat(3, 1fr); } }
+.triangle li { padding-top: 18px; border-top: 2px solid var(--ocre); }
+.triangle b { display: block; font-family: var(--titre); font-weight: 400;
+              font-size: 1.375rem; line-height: 1.2; color: var(--vert); }
+.triangle .triangle-temps { display: block; margin: 6px 0 10px;
+              font-size: .9375rem; font-weight: 600; color: var(--terre);
+              font-variant-numeric: tabular-nums; }
+.triangle li > span:last-child { display: block; font-size: .9375rem;
+              line-height: 1.6; color: var(--encre-doux); }
+
+/* Sous-titre du hero : la ligne qui dit ce qu'est la maison, entre le nom
+   et la phrase d'accueil. Plus posée que le titre, plus affirmée que le
+   texte courant. */
+.hero-sous-titre {
+    font-family: var(--titre); font-size: clamp(1.0625rem, 1.5vw, 1.3125rem);
+    line-height: 1.4; color: rgba(255,255,255,.94);
+    margin: 14px 0 0; max-width: 34ch;
+}
+.hero-sous-titre sup { font-size: .62em; }
+.hero .accroche { margin-top: 14px; }
+
+/* ---------- Grille des saisons ----------
+   Le prix passe avant la période : c'est la donnée que le visiteur cherche.
+   Les montants sont alignés en chiffres tabulaires pour se comparer d'un
+   coup d'œil. */
+.saisons { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--filet); }
+.saisons h4 { font-family: var(--texte); font-size: .875rem; font-weight: 500;
+              color: var(--taupe-texte); margin: 0 0 12px; line-height: 1.4; }
+.saisons dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 0 18px; }
+.saisons dt { padding: 8px 0; font-size: .9375rem; color: var(--encre-doux);
+              border-top: 1px solid var(--filet); }
+.saisons dd { padding: 8px 0; margin: 0; border-top: 1px solid var(--filet);
+              display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.saisons dd b { font-family: var(--titre); font-size: 1.1875rem; font-weight: 400;
+                color: var(--vert); font-variant-numeric: tabular-nums; }
+.saisons dd span { font-size: .875rem; color: var(--taupe-texte); }
+.saisons-note { margin: 12px 0 0; font-size: .8125rem; color: var(--taupe-texte); }
+
+/* Le prix sur la fiche de chambre */
+.chambre-prix .prix-detail { display: block; margin-top: 3px;
+                             font-size: .8125rem; color: var(--taupe-texte); }

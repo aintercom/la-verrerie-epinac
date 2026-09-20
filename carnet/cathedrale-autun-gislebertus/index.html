@@ -3,12 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- NOINDEX · à retirer le 1er octobre 2026, en même temps que le voile.
-     Tant que la fenêtre d'attente est posée, on empêche Google
-     d'enregistrer « Nous préparons quelque chose » comme contenu
-     de la page. Le robots.txt reste permissif : sans cela Google
-     ne pourrait pas charger la page et ne lirait jamais cette consigne. -->
-<meta name="robots" content="noindex, follow">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -170,52 +164,6 @@
 </head>
 <body>
 <div class="progression" aria-hidden="true"><span></span></div>
-<!-- VOILE — à retirer le jour de l'ouverture publique -->
-<div class="voile">
-    <div class="voile-dedans">
-        <p class="marque"><img src="../../assets/logo/mot-blanc.png" alt="Domaine de la Verrerie" width="600" height="174"></p>
-        <p class="quand">Ouverture le 1er octobre 2026</p>
-        <p class="voile-annonce">Nous préparons quelque chose.</p>
-        <p>La maison fait peau neuve avant l'ouverture de ses deux premières chambres d'hôtes, à Épinac, en Bourgogne du Sud.</p>
-        <a class="btn" href="mailto:contact@domainedelaverrerie.fr">Nous écrire</a>
-
-        <form class="voile-acces" autocomplete="off">
-            <label for="voile-code">Code d'accès</label>
-            <div class="voile-champ">
-                <input type="password" id="voile-code" name="code"
-                       autocapitalize="none" autocorrect="off" spellcheck="false">
-                <button type="submit" aria-label="Valider le code">&#8594;</button>
-            </div>
-            <p class="voile-erreur" hidden role="alert">Code incorrect.</p>
-        </form>
-    </div>
-</div>
-<script>
-/* Ouverture de la fenêtre d'attente par code. Ce n'est pas une sécurité :
-   tout se passe dans le navigateur. C'est un accès de courtoisie, pour
-   montrer le site avant l'ouverture. */
-(function () {
-    var f = document.querySelector('.voile-acces');
-    if (!f) { return; }
-    var champ = f.querySelector('#voile-code');
-    var err = f.querySelector('.voile-erreur');
-    f.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var v = (champ.value || '').trim().toLowerCase();
-        if (v === 'maman') {
-            try { localStorage.setItem('vr_acces', '1'); } catch (e2) {}
-            document.documentElement.classList.remove('voile-pose');
-            document.documentElement.classList.add('voile-leve');
-            err.hidden = true;
-        } else {
-            err.hidden = false;
-            champ.value = '';
-            champ.focus();
-        }
-    });
-    champ.addEventListener('input', function () { err.hidden = true; });
-})();
-</script>
 
 <a class="saut" href="#contenu">Aller au contenu</a>
 
@@ -354,5 +302,51 @@ Téléphone : <a href="tel:+33783349554">+33 (0)7 83 34 95 54</a><br>
 <script src="../../assets/js/menu.js" defer></script>
 <script>document.getElementById("annee").textContent=Math.max(2026, new Date().getFullYear());</script>
 <script src="../../assets/js/direct.js" defer></script>
+<!-- VOILE — à retirer le jour de l'ouverture publique -->
+<div class="voile">
+    <div class="voile-dedans">
+        <p class="marque"><img src="../../assets/logo/mot-blanc.png" alt="Domaine de la Verrerie" width="600" height="174"></p>
+        <p class="quand">Ouverture le 1er octobre 2026</p>
+        <p class="voile-annonce">Nous préparons quelque chose.</p>
+        <p>La maison fait peau neuve avant l'ouverture de ses deux premières chambres d'hôtes, à Épinac, en Bourgogne du Sud.</p>
+        <a class="btn" href="mailto:contact@domainedelaverrerie.fr">Nous écrire</a>
+
+        <form class="voile-acces" autocomplete="off">
+            <label for="voile-code">Code d'accès</label>
+            <div class="voile-champ">
+                <input type="password" id="voile-code" name="code"
+                       autocapitalize="none" autocorrect="off" spellcheck="false">
+                <button type="submit" aria-label="Valider le code">&#8594;</button>
+            </div>
+            <p class="voile-erreur" hidden role="alert">Code incorrect.</p>
+        </form>
+    </div>
+</div>
+<script>
+/* Ouverture de la fenêtre d'attente par code. Ce n'est pas une sécurité :
+   tout se passe dans le navigateur. C'est un accès de courtoisie, pour
+   montrer le site avant l'ouverture. */
+(function () {
+    var f = document.querySelector('.voile-acces');
+    if (!f) { return; }
+    var champ = f.querySelector('#voile-code');
+    var err = f.querySelector('.voile-erreur');
+    f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var v = (champ.value || '').trim().toLowerCase();
+        if (v === 'maman') {
+            try { localStorage.setItem('vr_acces', '1'); } catch (e2) {}
+            document.documentElement.classList.remove('voile-pose');
+            document.documentElement.classList.add('voile-leve');
+            err.hidden = true;
+        } else {
+            err.hidden = false;
+            champ.value = '';
+            champ.focus();
+        }
+    });
+    champ.addEventListener('input', function () { err.hidden = true; });
+})();
+</script>
 </body>
 </html>

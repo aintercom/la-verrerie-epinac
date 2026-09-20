@@ -31,9 +31,12 @@
     var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:';
     var passe = new URLSearchParams(location.search).get('preview') === 'verrerie2026';
     if (passe) { try { sessionStorage.setItem('vr_preview','1'); } catch (e) {} }
-    var garde = false;
+    var garde = false, ouvert = false;
     try { garde = sessionStorage.getItem('vr_preview') === '1'; } catch (e) {}
-    document.documentElement.classList.add(local || passe || garde ? 'voile-leve' : 'voile-pose');
+    /* code saisi dans la fenêtre d'attente : retenu durablement, pour que
+       la personne n'ait pas à le retaper à chaque visite */
+    try { ouvert = localStorage.getItem('vr_acces') === '1'; } catch (e) {}
+    document.documentElement.classList.add(local || passe || garde || ouvert ? 'voile-leve' : 'voile-pose');
 })();
 </script>
 <meta property="og:image" content="https://domainedelaverrerie.fr/assets/img/partage.jpg">
@@ -155,8 +158,44 @@
         <p class="voile-annonce">Nous préparons quelque chose.</p>
         <p>La maison fait peau neuve avant l'ouverture de ses deux premières chambres d'hôtes, à Épinac, en Bourgogne du Sud.</p>
         <a class="btn" href="mailto:contact@domainedelaverrerie.fr">Nous écrire</a>
+
+        <form class="voile-acces" autocomplete="off">
+            <label for="voile-code">Vous avez un code d'accès ?</label>
+            <div class="voile-champ">
+                <input type="password" id="voile-code" name="code" placeholder="Votre code"
+                       autocapitalize="none" autocorrect="off" spellcheck="false">
+                <button type="submit">Entrer</button>
+            </div>
+            <p class="voile-erreur" hidden role="alert">Ce code ne correspond pas.</p>
+        </form>
     </div>
 </div>
+<script>
+/* Ouverture de la fenêtre d'attente par code. Ce n'est pas une sécurité :
+   tout se passe dans le navigateur. C'est un accès de courtoisie, pour
+   montrer le site avant l'ouverture. */
+(function () {
+    var f = document.querySelector('.voile-acces');
+    if (!f) { return; }
+    var champ = f.querySelector('#voile-code');
+    var err = f.querySelector('.voile-erreur');
+    f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var v = (champ.value || '').trim().toLowerCase();
+        if (v === 'maman') {
+            try { localStorage.setItem('vr_acces', '1'); } catch (e2) {}
+            document.documentElement.classList.remove('voile-pose');
+            document.documentElement.classList.add('voile-leve');
+            err.hidden = true;
+        } else {
+            err.hidden = false;
+            champ.value = '';
+            champ.focus();
+        }
+    });
+    champ.addEventListener('input', function () { err.hidden = true; });
+})();
+</script>
 
 <a class="saut" href="#contenu">Aller au contenu</a>
 

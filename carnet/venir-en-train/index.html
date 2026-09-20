@@ -180,13 +180,13 @@
         <a class="btn" href="mailto:contact@domainedelaverrerie.fr">Nous écrire</a>
 
         <form class="voile-acces" autocomplete="off">
-            <label for="voile-code">Vous avez un code d'accès ?</label>
+            <label for="voile-code">Code d'accès</label>
             <div class="voile-champ">
-                <input type="password" id="voile-code" name="code" placeholder="Votre code"
+                <input type="password" id="voile-code" name="code"
                        autocapitalize="none" autocorrect="off" spellcheck="false">
-                <button type="submit">Entrer</button>
+                <button type="submit" aria-label="Valider le code">&#8594;</button>
             </div>
-            <p class="voile-erreur" hidden role="alert">Ce code ne correspond pas.</p>
+            <p class="voile-erreur" hidden role="alert">Code incorrect.</p>
         </form>
     </div>
 </div>

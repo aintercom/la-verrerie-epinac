@@ -1036,29 +1036,35 @@ section[id], .hero { scroll-margin-top: 78px; }
                              font-size: .8125rem; color: var(--taupe-texte); }
 
 /* ---------- Code d'accès de la fenêtre d'attente ----------
-   Discret sous l'appel à écrire : il ne doit pas détourner le visiteur
-   ordinaire, seulement servir à qui connaît le code. */
-.voile-acces { margin-top: 34px; padding-top: 26px;
-    border-top: 1px solid rgba(255,255,255,.14); }
-.voile-acces label { display: block; font-size: .875rem;
-    color: rgba(255,255,255,.62); margin-bottom: 12px; }
-.voile-champ { display: flex; gap: 8px; justify-content: center;
-    flex-wrap: wrap; }
+   Un simple filet sous le champ, comme les traits du reste du site.
+   Posé bas et à l'écart : c'est une entrée de service, pas un appel. */
+.voile-acces { margin-top: clamp(56px, 9vh, 96px); }
+.voile-acces label {
+    display: block; font-family: var(--texte); font-size: .8125rem;
+    letter-spacing: .06em; text-transform: uppercase;
+    color: rgba(255,255,255,.45); margin-bottom: 14px;
+}
+.voile-champ {
+    display: inline-flex; align-items: center; gap: 4px;
+    border-bottom: 1px solid rgba(255,255,255,.28);
+    transition: border-color .2s ease;
+}
+.voile-champ:focus-within { border-bottom-color: var(--ocre); }
 .voile-acces input {
-    width: min(200px, 60vw); padding: 11px 16px;
-    font-family: var(--texte); font-size: 1rem; color: #fff;
-    background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,255,255,.22); border-radius: var(--rayon-champ);
+    width: 132px; padding: 7px 2px; margin: 0;
+    font-family: var(--texte); font-size: 1rem; letter-spacing: .14em;
+    line-height: 1.4; color: #fff; background: none; border: none;
+    text-align: center;
 }
-.voile-acces input::placeholder { color: rgba(255,255,255,.4); }
-.voile-acces input:focus { outline: none; border-color: var(--ocre);
-    background: rgba(255,255,255,.12); }
+.voile-acces input:focus { outline: none; }
 .voile-acces button {
-    padding: 11px 22px; font-family: var(--texte); font-size: 1rem; font-weight: 500;
-    color: var(--vert); background: var(--ocre); border: none;
-    border-radius: var(--rayon-btn); cursor: pointer;
-    transition: background-color .18s ease;
+    padding: 7px 0 7px 10px; margin: 0;
+    font-size: 1rem; line-height: 1.4;
+    color: var(--ocre); background: none; border: none; cursor: pointer;
+    transition: transform .18s ease;
 }
-.voile-acces button:hover { background: var(--ocre-fonce); }
-.voile-acces button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-.voile-erreur { margin: 12px 0 0; font-size: .875rem; color: var(--ocre); }
+.voile-acces button:hover { transform: translateX(3px); }
+.voile-acces button:focus-visible { outline: 1px solid var(--ocre); outline-offset: 3px; }
+.voile-erreur {
+    margin: 14px 0 0; font-size: .8125rem; color: var(--ocre);
+}

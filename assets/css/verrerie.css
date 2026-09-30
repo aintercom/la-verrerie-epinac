@@ -455,6 +455,70 @@ html.pret .entete { transition: background-color .28s ease, border-color .28s ea
 .bloc-info dt { padding: 7px 0; color: var(--encre-doux); font-size: .9375rem; border-top: 1px solid var(--filet); }
 .bloc-info dd { padding: 7px 0; margin: 0; border-top: 1px solid var(--filet); font-size: .9375rem; }
 .bloc-info dl > dt:first-of-type, .bloc-info dl > dt:first-of-type + dd { border-top: none; }
+
+/* ---------- Infos pratiques en tuiles ----------
+   Chaque information a sa case : une pastille ocre avec son pictogramme,
+   l'intitulé en petit, la valeur en grand. Les tarifs forment un bandeau
+   vert où les prix ressortent en ocre. */
+.pratique-grille--tuiles { grid-template-columns: 1fr; gap: clamp(34px, 4.5vw, 54px); }
+@media (min-width: 820px) { .pratique-grille--tuiles { grid-template-columns: 1fr; } }
+.pratique-tete { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-bottom: 16px; }
+.pratique-tete h3 { display: flex; align-items: center; gap: 12px; margin: 0; font-size: clamp(1.3rem, 2vw, 1.5rem); }
+.pratique-tete h3::before { content: ''; width: 26px; height: 3px; border-radius: 3px; background: var(--ocre); flex: none; }
+.pratique-badge {
+    display: inline-block; padding: 5px 12px; border-radius: var(--rayon-btn);
+    background: rgba(244, 200, 95, .28); color: var(--vert); font-size: .8125rem; font-weight: 600;
+}
+
+.tuiles { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px;
+    grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 900px) { .tuiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tuile {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: #fff; border: 1px solid var(--filet); border-radius: var(--rayon);
+    padding: 16px 18px;
+}
+.tuile--large { grid-column: span 2; }
+.tuiles--acces .tuile--large:last-child { grid-column: 1 / -1; }
+.tuile-icone {
+    flex: none; width: 42px; height: 42px; border-radius: 50%;
+    display: grid; place-items: center; background: var(--ocre); color: var(--vert);
+}
+.tuile-icone svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.tuile-texte { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.tuile-label { font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--taupe-texte); }
+.tuile-valeur { font-family: var(--titre); font-size: 1.125rem; line-height: 1.35; color: var(--vert); }
+.tuile-detail { margin-top: 4px; font-size: .875rem; line-height: 1.55; color: var(--encre-doux); }
+/* Sur téléphone : deux colonnes, la pastille au-dessus du texte. Les
+   cases longues (train, accessibilité) gardent toute la largeur. */
+@media (max-width: 560px) {
+    .tuiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .tuile { flex-direction: column; gap: 10px; padding: 14px; }
+    .tuile--large { flex-direction: row; gap: 14px; }
+    .tuile-icone { width: 38px; height: 38px; }
+    .tuile-valeur { font-size: 1.0625rem; }
+}
+
+.tarifs { margin-top: 16px; background: var(--vert); color: var(--lin); border-radius: var(--rayon);
+    padding: clamp(20px, 2.6vw, 28px) clamp(20px, 3vw, 34px); }
+.tarifs-titre { margin: 0 0 14px; font-size: .875rem; color: rgba(248, 244, 238, .78); }
+.tarifs-liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.tarifs-liste li { display: flex; flex-direction: column; gap: 2px; padding: 4px 22px; border-left: 1px solid rgba(248, 244, 238, .18); }
+.tarifs-liste li:first-child { padding-left: 0; border-left: none; }
+.tarif-saison { font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: rgba(248, 244, 238, .85); }
+.tarif-prix { font-family: var(--titre); font-weight: 400; font-size: clamp(2rem, 3.4vw, 2.5rem); line-height: 1.1;
+    color: var(--ocre); font-variant-numeric: tabular-nums; }
+.tarif-mois { font-size: .875rem; color: rgba(248, 244, 238, .75); }
+.tarifs-note { margin: 16px 0 0; padding-top: 12px; border-top: 1px solid rgba(248, 244, 238, .16);
+    font-size: .8125rem; color: rgba(248, 244, 238, .7); }
+@media (max-width: 560px) {
+    .tarifs-liste { grid-template-columns: 1fr; }
+    .tarifs-liste li { padding: 10px 0; border-left: none; border-top: 1px solid rgba(248, 244, 238, .16);
+        flex-direction: row; flex-wrap: wrap; align-items: baseline; column-gap: 12px; }
+    .tarifs-liste li:first-child { border-top: none; padding-top: 0; }
+    .tarif-saison { flex-basis: 100%; }
+    .tarif-prix { font-size: 1.875rem; }
+}
 .aconf { color: var(--terre); font-style: italic; }
 
 /* ==========================================================================
@@ -497,19 +561,22 @@ html.pret .entete { transition: background-color .28s ease, border-color .28s ea
 .pied a:hover { color: var(--ocre); }
 /* La colonne de contact est plus large que les autres : l'adresse e-mail
    doit tenir sur une seule ligne, c'est un mot de 29 caractères. */
-.pied-grille { display: grid; grid-template-columns: 1.05fr .8fr .8fr 1.35fr; gap: 30px; }
-@media (max-width: 899px) { .pied-grille { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 560px) { .pied-grille { grid-template-columns: 1fr; gap: 26px; } }
+.pied-grille { display: grid; grid-template-columns: repeat(4, auto); justify-content: start;
+    gap: 28px clamp(44px, 6vw, 92px); align-items: start; }
+@media (max-width: 899px) { .pied-grille { grid-template-columns: repeat(2, auto); } }
+@media (max-width: 560px) { .pied-grille { grid-template-columns: 1fr; gap: 22px; } }
 .pied li a[href^="mailto"] { white-space: nowrap; overflow-wrap: normal; }
 .pied-grille > * { min-width: 0; }
 .pied ul { list-style: none; margin: 0; padding: 0; }
-.pied li { padding-block: 4px; }
+.pied li { padding-block: 1px; line-height: 1.55; }
+.pied li, .pied li a, .pied p { color: #fff; }
 .pied li a { overflow-wrap: anywhere; }
 .pied li { font-size: .9375rem; }
 .pied-bas { margin-top: 34px; padding-top: 18px; border-top: 1px solid rgba(244,242,236,.16);
     display: flex; flex-wrap: wrap; gap: 8px 22px; justify-content: space-between; font-size: .875rem; }
 .pied-bas button { background: none; border: none; padding: 0; cursor: pointer; font: inherit;
-    color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+    color: inherit; text-decoration: none; }
+.pied-bas button:hover { color: var(--ocre); }
 
 /* ---------- Fenêtre légale ---------- */
 
@@ -552,7 +619,7 @@ section[id], .hero { scroll-margin-top: 78px; }
 .page-photo img { width: 100%; height: clamp(220px, 40vh, 420px); object-fit: cover; }
 .pied .titre-pied { font-family: var(--texte); font-weight: 600;
     font-size: .9375rem; letter-spacing: 0; text-transform: none;
-    color: var(--ocre); margin: 0 0 10px; }
+    color: var(--ocre); margin: 0 0 6px; }
 .voile-annonce { font-family: var(--titre); font-size: clamp(2rem, 5.5vw, 3.25rem);
     line-height: 1.15; color: #fff; margin-bottom: 16px; }
 
@@ -773,11 +840,11 @@ section[id], .hero { scroll-margin-top: 78px; }
 @media (max-width: 860px) {
     .lien-fleche { display: inline-block; padding-block: 11px; }
     .pied li { padding-block: 0; }
-    .pied li a { display: inline-block; padding-block: 12px; }
+    .pied li a { display: inline-block; padding-block: 6px; }
     .coordonnees li, .contact-liste li { padding-block: 13px; }
     .coordonnees a, .contact-liste a { display: inline-block; padding-block: 3px; }
     .chambre-prix .lien-fleche { padding-block: 13px; }
-    .pied-bas button { padding-block: 12px; }
+    .pied-bas button { padding-block: 8px; }
     .entete nav a { padding-block: 13px; }
 }
 

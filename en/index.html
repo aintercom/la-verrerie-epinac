@@ -30,8 +30,8 @@
 <link rel="preconnect" href="https://enjoylife.b-cdn.net" crossorigin>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/figtree-400-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/spectral-400-latin.woff2">
-<link rel="stylesheet" href="/assets/css/polices.css?v=20260930j">
-<link rel="stylesheet" href="/assets/css/verrerie.css?v=20260930j">
+<link rel="stylesheet" href="/assets/css/polices.css?v=20260930k">
+<link rel="stylesheet" href="/assets/css/verrerie.css?v=20260930k">
 <link rel="preload" as="image" fetchpriority="high" media="(max-width:860px)" imagesrcset="/assets/img/photos/hero-domaine-mobile.jpg 800w, https://enjoylife.b-cdn.net/Verrerie/domainedelaverrerie-hero.jpg 2024w" imagesizes="100vw">
 <link rel="preload" as="image" fetchpriority="high" media="(min-width:861px)" href="https://enjoylife.b-cdn.net/Verrerie/domainedelaverrerie-hero.jpg">
 
@@ -431,38 +431,37 @@
 
         <p class="pendule" id="pendule" aria-live="polite"></p>
 
-        <div class="pratique-grille">
-            <div class="bloc-info">
-                <h3>Your stay</h3>
-                <dl>
-                    <dt>Opening</dt><dd>1 October 2026</dd>
-                    <dt>Capacity</dt><dd>2 rooms, 2 guests per room</dd>
-                    <dt>Breakfast</dt><dd>Included in the rate</dd>
-                    <dt>Check-in</dt><dd>5 pm to 8 pm</dd>
-                    <dt>Check-out</dt><dd>8 am to 11 am</dd>
-                    <dt>Pets</dt><dd>Welcome on request</dd>
-                    <dt>Wi-Fi</dt><dd>Fibre, in the rooms</dd>
-                </dl>
-                <div class="saisons">
-                    <h4>Rates per night, for two people, breakfast included</h4>
-                    <dl>
-                        <dt>Low season</dt><dd><b>€110</b><span>November to March</span></dd>
-                        <dt>Mid season</dt><dd><b>€120</b><span>April to June, September and October</span></dd>
-                        <dt>High season</dt><dd><b>€130</b><span>July and August</span></dd>
-                    </dl>
-                    <p class="saisons-note">Same rate for both rooms.</p>
+        <div class="pratique-grille pratique-grille--tuiles">
+            <div class="pratique-bloc">
+                <div class="pratique-tete"><h3>Your stay</h3><span class="pratique-badge">Opening on 1 October 2026</span></div>
+                <ul class="tuiles">
+                    <li class="tuile"><span class="tuile-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="m10 17 5-5-5-5"/><path d="M15 12H3"/></svg></span><span class="tuile-texte"><span class="tuile-label">Check-in</span><span class="tuile-valeur">5 pm to 8 pm</span></span></li>
+                    <li class="tuile"><span class="tuile-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg></span><span class="tuile-texte"><span class="tuile-label">Check-out</span><span class="tuile-valeur">8 am to 11 am</span></span></li>
+                    <li class="tuile"><span class="tuile-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><path d="M6 2v2"/><path d="M10 2v2"/><path d="M14 2v2"/></svg></span><span class="tuile-texte"><span class="tuile-label">Breakfast</span><span class="tuile-valeur">Included in the rate</span></span></li>
+                    <li class="tuile"><span class="tuile-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg></span><span class="tuile-texte"><span class="tuile-label">Capacity</span><span class="tuile-valeur">2 rooms, 2 guests per room</span></span></li>
+                    <li class="tuile"><span class="tuile-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></svg></span><span class="tuile-texte"><span class="tuile-label">Pets</span><span class="tuile-valeur">Welcome on request</span></span></li>
+                    <li class="tuile"><span class="tuile-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/></svg></span><span class="tuile-texte"><span class="tuile-label">Wi-Fi</span><span class="tuile-valeur">Fibre, in the rooms</span></span></li>
+                </ul>
+                <div class="tarifs">
+                    <p class="tarifs-titre">Rates per night, for two people, breakfast included</p>
+                    <ul class="tarifs-liste">
+                        <li><span class="tarif-saison">Low season</span><b class="tarif-prix">€110</b><span class="tarif-mois">November to March</span></li>
+                        <li><span class="tarif-saison">Mid season</span><b class="tarif-prix">€120</b><span class="tarif-mois">April to June, September and October</span></li>
+                        <li><span class="tarif-saison">High season</span><b class="tarif-prix">€130</b><span class="tarif-mois">July and August</span></li>
+                    </ul>
+                    <p class="tarifs-note">Same rate for both rooms.</p>
                 </div>
             </div>
-            <div class="bloc-info">
-                <h3>Getting to the estate</h3>
-                <dl>
-                    <dt>By train</dt><dd>Le Creusot TGV station (34 km, 35 min by road)<br>Paris in 1 hr 20, Lyon in 45 min<br>Autun station, TER regional line (20 km, 25 min)</dd>
-                    <dt>By car</dt><dd>A6, Beaune or Chalon-Nord exit</dd>
-                    <dt>Autun</dt><dd>20 minutes, 19 km</dd>
-                    <dt>Beaune</dt><dd>35 minutes, 33 km</dd>
-                    <dt>Parking</dt><dd>Free, on the property</dd>
-                    <dt>Accessibility</dt><dd>The rooms are on the first floor, reached by a staircase. The house is not suited to guests with reduced mobility.</dd>
-                </dl>
+            <div class="pratique-bloc">
+                <div class="pratique-tete"><h3>Getting to the estate</h3></div>
+                <ul class="tuiles tuiles--acces">
+                    <li class="tuile tuile--large"><span class="tuile-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="m8 19-2 3"/><path d="m18 22-2-3"/><path d="M8 15h.01"/><path d="M16 15h.01"/></svg></span><span class="tuile-texte"><span class="tuile-label">By train</span><span class="tuile-valeur">Le Creusot TGV station</span><span class="tuile-detail">34 km, 35 min by road<br>Paris in 1 hr 20, Lyon in 45 min<br>Autun station, TER regional line (20 km, 25 min)</span></span></li>
+                    <li class="tuile"><span class="tuile-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></span><span class="tuile-texte"><span class="tuile-label">By car</span><span class="tuile-valeur">A6, Beaune or Chalon-Nord exit</span></span></li>
+                    <li class="tuile"><span class="tuile-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></span><span class="tuile-texte"><span class="tuile-label">Autun</span><span class="tuile-valeur">20 minutes, 19 km</span></span></li>
+                    <li class="tuile"><span class="tuile-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></span><span class="tuile-texte"><span class="tuile-label">Beaune</span><span class="tuile-valeur">35 minutes, 33 km</span></span></li>
+                    <li class="tuile"><span class="tuile-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg></span><span class="tuile-texte"><span class="tuile-label">Parking</span><span class="tuile-valeur">Free, on the property</span></span></li>
+                    <li class="tuile tuile--large"><span class="tuile-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 20h5v-4h4v-4h4V8h5"/><path d="M3 20h18"/></svg></span><span class="tuile-texte"><span class="tuile-label">Accessibility</span><span class="tuile-valeur">The rooms are on the first floor, reached by a staircase.</span><span class="tuile-detail">The house is not suited to guests with reduced mobility.</span></span></li>
+                </ul>
             </div>
         <div class="carte-lieu">
             <img class="carte-france" src="/assets/img/carte-france.svg"
@@ -647,11 +646,11 @@ Phone: <a href="tel:+33783349554">+33 (0)7 83 34 95 54</a><br>
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !f.hidden) { ferme(); } });
 })();
 </script>
-<script src="/assets/js/reserver.js?v=20260930j" defer></script>
-<script src="/assets/js/entete.js?v=20260930j" defer></script>
-<script src="/assets/js/menu.js?v=20260930j" defer></script>
+<script src="/assets/js/reserver.js?v=20260930k" defer></script>
+<script src="/assets/js/entete.js?v=20260930k" defer></script>
+<script src="/assets/js/menu.js?v=20260930k" defer></script>
 <script>document.getElementById("annee").textContent=Math.max(2026, new Date().getFullYear());</script>
-<script src="/assets/js/direct.js?v=20260930j" defer></script>
+<script src="/assets/js/direct.js?v=20260930k" defer></script>
 <!-- VOILE — à retirer le jour de l'ouverture publique (version anglaise) -->
 <div class="voile">
     <div class="voile-dedans">

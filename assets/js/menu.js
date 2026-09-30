@@ -27,7 +27,6 @@
         [].slice.call(nav.querySelectorAll('a'))
           .map(function (a) { return '<a href="' + a.getAttribute('href') + '">' + a.textContent + '</a>'; })
           .join('') +
-        '<a href="/carnet/">Le carnet</a>' +
         '<a class="btn" href="/#reserver">Demander un séjour</a>' +
         '<a class="appel" href="tel:+33783349554">Ou nous appeler : 07 83 34 95 54</a>';
 

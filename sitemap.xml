@@ -21,11 +21,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://domainedelaverrerie.fr/aux-alentours/le-feu/</loc>
-    <lastmod>2026-09-18</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://domainedelaverrerie.fr/aux-alentours/nature/</loc>
     <lastmod>2026-09-18</lastmod>
     <priority>0.7</priority>
@@ -37,56 +32,6 @@
   </url>
   <url>
     <loc>https://domainedelaverrerie.fr/aux-alentours/villages/</loc>
-    <lastmod>2026-09-18</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://domainedelaverrerie.fr/carnet/</loc>
-    <lastmod>2026-09-18</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://domainedelaverrerie.fr/carnet/cathedrale-autun-gislebertus/</loc>
-    <lastmod>2026-09-18</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://domainedelaverrerie.fr/carnet/chateau-de-la-verrerie-le-creusot/</loc>
-    <lastmod>2026-09-18</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://domainedelaverrerie.fr/carnet/climats-de-bourgogne/</loc>
-    <lastmod>2026-09-18</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://domainedelaverrerie.fr/carnet/marteau-pilon-le-creusot/</loc>
-    <lastmod>2026-09-18</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://domainedelaverrerie.fr/carnet/mines-epinac/</loc>
-    <lastmod>2026-09-18</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://domainedelaverrerie.fr/carnet/morvan-bibracte/</loc>
-    <lastmod>2026-09-18</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://domainedelaverrerie.fr/carnet/puits-hottinguer/</loc>
-    <lastmod>2026-09-18</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://domainedelaverrerie.fr/carnet/theatre-romain-autun/</loc>
-    <lastmod>2026-09-18</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://domainedelaverrerie.fr/carnet/venir-en-train/</loc>
     <lastmod>2026-09-18</lastmod>
     <priority>0.7</priority>
   </url>

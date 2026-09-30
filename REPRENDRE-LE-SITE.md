@@ -91,3 +91,26 @@ résultats de recherche.
   Tous les boutons « Réserver » du site basculent alors vers Booking.
 - **Le médiateur de la consommation**, si vous décidez d'y souscrire. La
   section a été retirée des mentions légales.
+
+## 7. Le carnet et la page Patrimoine industriel, mis de côté
+
+Le 30 septembre 2026, le carnet (ses dix articles) et la page
+« Patrimoine industriel » (`aux-alentours/le-feu/`) ont été retirés du site.
+Rien n'est perdu : tout est sauvegardé sur GitHub, dans la branche
+`sauvegarde-carnet-patrimoine`, qui n'est pas publiée.
+
+Pour les remettre, il faudra :
+
+1. récupérer les deux dossiers depuis la sauvegarde :
+
+       git checkout sauvegarde-carnet-patrimoine -- carnet aux-alentours/le-feu
+
+2. remettre les liens retirés en même temps : la carte « Les éléments
+   fondateurs » et « Cinq thèmes » → « Six thèmes » sur la page Aux
+   alentours, les deux lignes « Patrimoine industriel » et « Le carnet » du
+   pied de page de chaque page, le lien « Le carnet » du menu mobile
+   (`assets/js/menu.js`), la phrase « Nous tenons un carnet » de la FAQ de
+   l'accueil, et les adresses dans `sitemap.xml`.
+
+Le plus simple : demander à Claude de « remettre le carnet et la page
+Patrimoine industriel depuis la branche de sauvegarde ».

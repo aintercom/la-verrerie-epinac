@@ -123,6 +123,18 @@ h3 { font-size: clamp(1.25rem, 2.2vw, 1.625rem); }
 .lien-fleche:hover { color: var(--vert); border-bottom-color: var(--vert); }
 .section--fonce .lien-fleche { color: var(--ocre); border-bottom-color: var(--ocre); }
 
+/* Texte secondaire replié sous une flèche, dans le style des liens fléchés */
+.deplier { margin-top: 22px; max-width: 62ch; }
+.deplier summary {
+    cursor: pointer; list-style: none; display: inline-flex; align-items: baseline; gap: 8px;
+    font-weight: 500; color: var(--terre); border-bottom: 1px solid var(--terre); padding-bottom: 2px;
+}
+.deplier summary::-webkit-details-marker { display: none; }
+.deplier summary::after { content: '↓'; transition: transform .2s ease; }
+.deplier[open] summary::after { transform: rotate(180deg); }
+.deplier summary:hover { color: var(--vert); border-bottom-color: var(--vert); }
+.deplier p { margin-top: 14px; color: var(--encre-doux); }
+
 /* ==========================================================================
    EN-TÊTE
    ========================================================================== */

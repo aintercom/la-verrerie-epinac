@@ -280,18 +280,15 @@ html.pret .entete { transition: background-color .28s ease, border-color .28s ea
     color: rgba(255,255,255,.9); max-width: 46ch; margin-top: 18px; }
 .hero-actions { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }
 
-/* L'accroche du hero, repliée : sur la photo, le bouton est en verre clair
-   cerclé d'ocre (pour ne pas faire concurrence au jaune de « Demander une
-   nuitée »), avec le même chevron que les autres dépliants. */
-.deplier--hero { margin-top: 22px; max-width: 46ch; }
+/* L'accroche du hero, repliée : pas de pastille ici, deux boutons suivent
+   déjà. Juste le texte et le chevron ocre, qui descend au survol. */
+.deplier--hero { margin-top: 18px; max-width: 46ch; }
 .deplier--hero summary {
-    background: rgba(255, 255, 255, .08); color: #fff;
-    box-shadow: inset 0 0 0 1px var(--ocre);
-    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
-    padding: 9px 18px 9px 20px;
+    background: none; color: #fff; box-shadow: none; border-radius: 0;
+    padding: 4px 0; font-weight: 500; font-size: 1rem;
 }
-.deplier--hero summary::after { background: var(--ocre); }
-.deplier--hero summary:hover { background: rgba(244, 200, 95, .18); box-shadow: inset 0 0 0 1px var(--ocre); }
+.deplier--hero summary::after { background: var(--ocre); margin-left: 8px; }
+.deplier--hero summary:hover { background: none; box-shadow: none; transform: none; color: var(--ocre); }
 .deplier--hero p.accroche { margin-top: 14px; color: rgba(255, 255, 255, .92); border-left-color: var(--ocre); }
 .hero-actions .btn--ligne { color: #fff; border-color: rgba(255,255,255,.65); }
 .hero-actions .btn--ligne:hover { background: #fff; color: var(--bouteille); border-color: #fff; }

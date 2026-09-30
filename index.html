@@ -29,8 +29,8 @@
 <link rel="preconnect" href="https://enjoylife.b-cdn.net" crossorigin>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/figtree-400-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/spectral-400-latin.woff2">
-<link rel="stylesheet" href="assets/css/polices.css?v=20260930g">
-<link rel="stylesheet" href="assets/css/verrerie.css?v=20260930g">
+<link rel="stylesheet" href="assets/css/polices.css?v=20260930h">
+<link rel="stylesheet" href="assets/css/verrerie.css?v=20260930h">
 <link rel="preload" as="image" fetchpriority="high" media="(max-width:860px)" imagesrcset="assets/img/photos/hero-domaine-mobile.jpg 800w, https://enjoylife.b-cdn.net/Verrerie/domainedelaverrerie-hero.jpg 2024w" imagesizes="100vw">
 <link rel="preload" as="image" fetchpriority="high" media="(min-width:861px)" href="https://enjoylife.b-cdn.net/Verrerie/domainedelaverrerie-hero.jpg">
 
@@ -200,7 +200,10 @@
         <p class="lieu">Épinac · Bourgogne du Sud</p>
         <h1>Bienvenue au Domaine de la Verrerie</h1>
         <p class="hero-sous-titre">Demeure de caractère du XVIII<sup>e</sup> siècle &amp; chambres d'hôtes en Bourgogne</p>
-        <p class="accroche">Niché dans un parc arboré préservé, le Domaine de la Verrerie vous ouvre ses portes pour une escale hors du temps.</p>
+        <details class="deplier deplier--hero">
+            <summary>Découvrir le domaine</summary>
+            <p class="accroche">Niché dans un parc arboré préservé, le Domaine de la Verrerie vous ouvre ses portes pour une escale hors du temps.</p>
+        </details>
         <div class="hero-actions">
             <a class="btn" href="#reserver">Demander une nuitée</a>
             <a class="btn btn--ligne" href="#chambres">Voir les chambres</a>
@@ -214,7 +217,7 @@
         <li><b>2 chambres</b><span>pour 2 personnes</span></li>
         <li><b>Petit-déjeuner</b><span>compris dans le tarif</span></li>
         <li><b>9 000 m²</b><span>de parc clos et arboré</span></li>
-        <li><b>1 h 20 de Paris</b><span>en TGV via Le Creusot · 2 h de Lyon par l'A6</span></li>
+        <li><b>1 h 20 de Paris</b><span>en TGV via Le Creusot</span></li>
     </ul>
 </div>
 </div>
@@ -641,11 +644,11 @@ Téléphone : <a href="tel:+33783349554">+33 (0)7 83 34 95 54</a><br>
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !f.hidden) { ferme(); } });
 })();
 </script>
-<script src="assets/js/reserver.js?v=20260930g" defer></script>
-<script src="assets/js/entete.js?v=20260930g" defer></script>
-<script src="assets/js/menu.js?v=20260930g" defer></script>
+<script src="assets/js/reserver.js?v=20260930h" defer></script>
+<script src="assets/js/entete.js?v=20260930h" defer></script>
+<script src="assets/js/menu.js?v=20260930h" defer></script>
 <script>document.getElementById("annee").textContent=Math.max(2026, new Date().getFullYear());</script>
-<script src="assets/js/direct.js?v=20260930g" defer></script>
+<script src="assets/js/direct.js?v=20260930h" defer></script>
 <!-- VOILE — à retirer le jour de l'ouverture publique -->
 <div class="voile">
     <div class="voile-dedans">

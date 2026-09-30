@@ -646,6 +646,18 @@ section[id], .hero { scroll-margin-top: 78px; }
 .tiroir .erreur[hidden] { display: none; }
 .tiroir .obligatoire { color: var(--taupe-texte); font-weight: 400; }
 
+/* champs obligatoires : astérisque, puis rouge tant qu'ils manquent à l'envoi */
+.tiroir .requis { color: #B3321F; font-weight: 600; margin-left: 1px; }
+.tiroir .mention-requis { margin: 0 0 16px; font-size: .8125rem; color: var(--taupe-texte); }
+.champ .aide-erreur { display: none; margin: 6px 0 0; font-size: .8125rem; color: #8C2F20; }
+.champ.invalide label { color: #8C2F20; }
+.champ.invalide input {
+    border-color: #C0392B; background: #FDF1EF; box-shadow: 0 0 0 3px rgba(192, 57, 43, .12);
+}
+.champ.invalide .aide-erreur { display: block; }
+
+.tiroir-merci #r-nouvelle { margin-top: 26px; }
+
 /* ==========================================================================
    LOGO
    L'aquarelle de la maison accompagne le lettrage dans l'en-tête ; le

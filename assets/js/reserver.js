@@ -79,6 +79,7 @@
 
     '<form class="tiroir-corps" novalidate>',
     '  <p class="erreur" hidden role="alert"></p>',
+    '  <p class="mention-requis"><span class="requis" aria-hidden="true">*</span> Champs obligatoires</p>',
 
     '  <div class="champ">',
     '    <label for="r-objet">Votre demande</label>',
@@ -86,6 +87,7 @@
     '      <option>Une ou plusieurs nuitées</option>',
     '      <option>Un mariage ou une réception</option>',
     '      <option>Un tournage ou une séance photo</option>',
+    '      <option>Un séminaire ou une réunion</option>',
     '      <option>Autre chose</option>',
     '    </select>',
     '  </div>',
@@ -114,12 +116,15 @@
     '      <input id="r-enfants" name="Enfants" type="number" min="0" value="0" inputmode="numeric"></div>',
     '  </div>',
 
-    '  <div class="champ"><label for="r-nom">Nom</label>',
-    '    <input id="r-nom" name="Nom" type="text" autocomplete="family-name" required></div>',
-    '  <div class="champ"><label for="r-email">Email</label>',
-    '    <input id="r-email" name="Email" type="email" autocomplete="email" required></div>',
-    '  <div class="champ"><label for="r-tel">Téléphone</label>',
-    '    <input id="r-tel" name="Téléphone" type="tel" autocomplete="tel" required></div>',
+    '  <div class="champ"><label for="r-nom">Nom <span class="requis" aria-hidden="true">*</span></label>',
+    '    <input id="r-nom" name="Nom" type="text" autocomplete="family-name" required aria-describedby="r-nom-aide">',
+    '    <p class="aide-erreur" id="r-nom-aide">Indiquez votre nom.</p></div>',
+    '  <div class="champ"><label for="r-email">Email <span class="requis" aria-hidden="true">*</span></label>',
+    '    <input id="r-email" name="Email" type="email" autocomplete="email" required aria-describedby="r-email-aide">',
+    '    <p class="aide-erreur" id="r-email-aide">Indiquez un email valide, pour que nous puissions vous répondre.</p></div>',
+    '  <div class="champ"><label for="r-tel">Téléphone <span class="requis" aria-hidden="true">*</span></label>',
+    '    <input id="r-tel" name="Téléphone" type="tel" autocomplete="tel" required aria-describedby="r-tel-aide">',
+    '    <p class="aide-erreur" id="r-tel-aide">Indiquez votre numéro de téléphone (au moins dix chiffres).</p></div>',
     '  <div class="champ"><label for="r-message">Votre message <span class="obligatoire">(facultatif)</span></label>',
     '    <textarea id="r-message" name="Message" rows="3" placeholder="Une occasion particulière, une question…"></textarea></div>',
     '</form>',
@@ -133,6 +138,7 @@
     '  <div class="coche" aria-hidden="true">&#10003;</div>',
     '  <h3>Votre demande est partie</h3>',
     '  <p>Nous revenons vers vous personnellement. Si c\'est urgent, appelez-nous au <a href="tel:' + TEL + '">07 83 34 95 54</a>.</p>',
+    '  <button class="btn btn--ligne" type="button" id="r-nouvelle">Faire une nouvelle demande</button>',
     '</div>'
     ].join('\n');
 
@@ -173,8 +179,59 @@
         });
     }
 
+    /* Préremplissage.
+       · « Demander cette chambre » porte data-chambre : la chambre est choisie.
+       · Sur les pages mariages, tournages et séminaires, le type de demande
+         est celui de la page.
+       · Nom, email et téléphone d'une demande déjà envoyée depuis ce
+         navigateur sont repris (gardés sur l'appareil du visiteur seulement). */
+    var OBJET_PAGE = {
+        '/mariages/':   'Un mariage ou une réception',
+        '/tournages/':  'Un tournage ou une séance photo',
+        '/seminaires/': 'Un séminaire ou une réunion'
+    };
+    var MEMOIRE = 'verrerie-coordonnees';
+
+    function choisit(select, valeur) {
+        [].slice.call(select.options).forEach(function (o) { o.selected = o.text === valeur; });
+    }
+
+    function preremplit(depuis) {
+        var chambre = depuis && depuis.getAttribute && depuis.getAttribute('data-chambre');
+        var type = chambre ? 'Une ou plusieurs nuitées' : OBJET_PAGE[location.pathname];
+        if (type) { choisit(objet, type); }
+        if (chambre) { choisit(form.querySelector('#r-chambre'), chambre); }
+        blocCh.hidden = objet.value !== 'Une ou plusieurs nuitées';
+        try {
+            var m = JSON.parse(localStorage.getItem(MEMOIRE) || 'null');
+            if (m) {
+                if (!nom.value) { nom.value = m.nom || ''; }
+                if (!email.value) { email.value = m.email || ''; }
+                if (!tel.value) { tel.value = m.tel || ''; }
+            }
+        } catch (e) { /* stockage indisponible : on laisse vide */ }
+    }
+
+    /* après un envoi : formulaire vierge, coordonnées gardées */
+    function nouvelle() {
+        [arrivee, depart, form.querySelector('#r-message')].forEach(function (c) { c.value = ''; });
+        form.querySelector('#r-adultes').value = '2';
+        form.querySelector('#r-enfants').value = '0';
+        objet.selectedIndex = 0;
+        form.querySelector('#r-chambre').selectedIndex = 0;
+        blocCh.hidden = false;
+        erreur.hidden = true;
+        [nom, email, tel].forEach(function (c) { marque(c, true); });
+        envoi.disabled = false;
+        envoi.textContent = 'Envoyer ma demande';
+        tiroir.classList.remove('envoye');
+        form.scrollTop = 0;
+    }
+
     function ouvre(depuis) {
         rendu = depuis || document.activeElement;
+        if (tiroir.classList.contains('envoye')) { nouvelle(); }
+        preremplit(depuis);
         fond.classList.add('ouvert');
         tiroir.classList.add('ouvert');
         tiroir.setAttribute('aria-hidden', 'false');
@@ -222,14 +279,12 @@
     envoi.addEventListener('click', function () {
         erreur.hidden = true;
 
-        if (!nom.value.trim()) { montreErreur('Merci d\'indiquer votre nom.', nom); return; }
-        var mail = email.value.trim();
-        if (!mail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) {
-            montreErreur('Merci d\'indiquer un email valide, pour qu\'on puisse vous répondre.', email); return;
-        }
-        /* au moins dix chiffres : un numéro français, ou étranger avec son indicatif */
-        if (tel.value.replace(/\D/g, '').length < 10) {
-            montreErreur('Merci d\'indiquer votre numéro de téléphone.', tel); return;
+        var fautifs = [nom, email, tel].filter(function (c) { return !marque(c, valide(c)); });
+        if (fautifs.length) {
+            montreErreur(fautifs.length > 1
+                ? 'Merci de compléter les champs en rouge.'
+                : 'Merci de compléter le champ en rouge.', fautifs[0]);
+            return;
         }
 
         var donnees = { access_key: CLE, subject: 'Demande de séjour · Domaine de la Verrerie', from_name: 'Site du Domaine' };
@@ -246,7 +301,14 @@
             body: JSON.stringify(donnees)
         }).then(function (r) { return r.json(); })
           .then(function (d) {
-              if (d && d.success) { tiroir.classList.add('envoye'); tiroir.querySelector('.tiroir-merci h3').focus(); }
+              if (d && d.success) {
+                  try {
+                      localStorage.setItem(MEMOIRE, JSON.stringify({
+                          nom: nom.value.trim(), email: email.value.trim(), tel: tel.value.trim() }));
+                  } catch (e) { /* stockage indisponible : tant pis */ }
+                  tiroir.classList.add('envoye');
+                  tiroir.querySelector('.tiroir-merci h3').focus();
+              }
               else { throw new Error('refus'); }
           })
           .catch(function () {
@@ -254,6 +316,36 @@
               envoi.textContent = 'Envoyer ma demande';
               montreErreur('L\'envoi n\'a pas abouti. Écrivez-nous directement à ' + EMAIL + '.');
           });
+    });
+
+    /* au moins dix chiffres pour le téléphone : un numéro français, ou étranger avec son indicatif */
+    function valide(c) {
+        var v = c.value.trim();
+        if (c === email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+        if (c === tel) { return v.replace(/\D/g, '').length >= 10; }
+        return v.length > 0;
+    }
+
+    function marque(c, ok) {
+        c.closest('.champ').classList.toggle('invalide', !ok);
+        if (ok) { c.removeAttribute('aria-invalid'); } else { c.setAttribute('aria-invalid', 'true'); }
+        return ok;
+    }
+
+    /* le rouge s'en va dès que le champ est correct */
+    [nom, email, tel].forEach(function (c) {
+        c.addEventListener('input', function () {
+            if (c.closest('.champ').classList.contains('invalide') && valide(c)) {
+                marque(c, true);
+                if (!tiroir.querySelector('.champ.invalide')) { erreur.hidden = true; }
+            }
+        });
+    });
+
+    tiroir.querySelector('#r-nouvelle').addEventListener('click', function () {
+        nouvelle();
+        preremplit(null);
+        nom.focus();
     });
 
     function montreErreur(txt, champ) {

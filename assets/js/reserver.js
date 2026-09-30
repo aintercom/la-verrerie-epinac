@@ -114,12 +114,12 @@
     '      <input id="r-enfants" name="Enfants" type="number" min="0" value="0" inputmode="numeric"></div>',
     '  </div>',
 
-    '  <div class="champ"><label for="r-nom">Nom et prénom</label>',
-    '    <input id="r-nom" name="Nom" type="text" autocomplete="name" required></div>',
+    '  <div class="champ"><label for="r-nom">Nom</label>',
+    '    <input id="r-nom" name="Nom" type="text" autocomplete="family-name" required></div>',
     '  <div class="champ"><label for="r-email">Email</label>',
     '    <input id="r-email" name="Email" type="email" autocomplete="email" required></div>',
-    '  <div class="champ"><label for="r-tel">Téléphone <span class="obligatoire">(facultatif)</span></label>',
-    '    <input id="r-tel" name="Téléphone" type="tel" autocomplete="tel"></div>',
+    '  <div class="champ"><label for="r-tel">Téléphone</label>',
+    '    <input id="r-tel" name="Téléphone" type="tel" autocomplete="tel" required></div>',
     '  <div class="champ"><label for="r-message">Votre message <span class="obligatoire">(facultatif)</span></label>',
     '    <textarea id="r-message" name="Message" rows="3" placeholder="Une occasion particulière, une question…"></textarea></div>',
     '</form>',
@@ -149,6 +149,7 @@
     var depart  = tiroir.querySelector('#r-depart');
     var nom     = tiroir.querySelector('#r-nom');
     var email   = tiroir.querySelector('#r-email');
+    var tel     = tiroir.querySelector('#r-tel');
     var rendu   = null;
 
     /* pas de date passée */
@@ -225,6 +226,10 @@
         var mail = email.value.trim();
         if (!mail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) {
             montreErreur('Merci d\'indiquer un email valide, pour qu\'on puisse vous répondre.', email); return;
+        }
+        /* au moins dix chiffres : un numéro français, ou étranger avec son indicatif */
+        if (tel.value.replace(/\D/g, '').length < 10) {
+            montreErreur('Merci d\'indiquer votre numéro de téléphone.', tel); return;
         }
 
         var donnees = { access_key: CLE, subject: 'Demande de séjour · Domaine de la Verrerie', from_name: 'Site du Domaine' };

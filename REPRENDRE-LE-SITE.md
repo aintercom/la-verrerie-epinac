@@ -68,7 +68,7 @@ Le site en ligne se met à jour **une à deux minutes plus tard**.
 > 💡 Après une modification d'un fichier `.css` ou `.js` (dans `assets/`),
 > les navigateurs peuvent garder l'ancienne version en mémoire. Pour les
 > forcer à recharger, chercher `?v=` dans tout le projet (**Cmd+Maj+F**)
-> et remplacer partout la valeur qui suit (aujourd'hui `20260930f`) par la
+> et remplacer partout la valeur qui suit (aujourd'hui `20260930g`) par la
 > date du jour, par exemple `?v=20261015`.
 
 > ⚠️ Il n'y a pas de version de test : ce qui est publié est en ligne
@@ -145,7 +145,7 @@ anglaise correspondante**, sinon les deux versions ne disent plus la même
 chose. Le plus simple : demander à Claude de « reporter la modification
 dans la version anglaise ».
 
-Le choix FR · EN est en haut de chaque page, à côté du bouton Réserver, et
+Le choix de langue (drapeau français, drapeau britannique) est en haut de chaque page, à côté du bouton Réserver, et
 en bas du menu sur téléphone. Il mène directement à la même page dans
 l'autre langue.
 

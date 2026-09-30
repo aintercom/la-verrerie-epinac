@@ -222,19 +222,35 @@ html.pret .entete { transition: background-color .28s ease, border-color .28s ea
 @media (max-width: 860px) { .entete nav { display: none; } }
 @media (max-width: 420px) { .entete .btn { padding: 12px 17px; font-size: .9375rem; } }
 
-/* Choix de la langue : FR · EN, à gauche du bouton Réserver.
-   La langue en cours est soulignée d'ocre ; l'autre est un lien. */
+/* Choix de la langue : deux petits drapeaux à gauche du bouton Réserver.
+   Dessinés ici plutôt qu'en émoji, que Windows affiche en simples lettres.
+   Le drapeau de la langue en cours est plein et souligné d'ocre ; l'autre
+   est estompé et s'éclaire au survol. */
 .entete-actions { display: flex; align-items: center; gap: 16px; }
-.langues { display: flex; align-items: center; gap: 2px; font-size: .8125rem; font-weight: 600; letter-spacing: .06em; }
-.langues a { text-decoration: none; color: var(--taupe-texte); padding: 6px 6px 5px; line-height: 1; }
-.langues a:hover { color: var(--vert); }
-.langues a[aria-current] { color: var(--vert); box-shadow: inset 0 -2px 0 var(--ocre); }
-.langues .sep { color: var(--taupe); font-weight: 400; }
-.entete--flottante .langues a { color: rgba(255, 255, 255, .72); }
-.entete--flottante .langues a:hover { color: var(--ocre); }
-.entete--flottante .langues a[aria-current] { color: #fff; }
-.entete--flottante .langues .sep { color: rgba(255, 255, 255, .5); }
-@media (max-width: 420px) { .entete-actions { gap: 8px; } .langues a { padding-inline: 4px; } }
+.langues { display: flex; align-items: center; gap: 10px; }
+.langues .drapeau {
+    display: block; width: 24px; height: 16px; border-radius: 2px;
+    background: center / cover no-repeat;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .12);
+    opacity: .5; transition: opacity .18s ease, transform .18s ease;
+    position: relative;
+}
+.langues .drapeau--fr { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Cpath fill='%23002654' d='M0 0h1v2H0z'/%3E%3Cpath fill='%23fff' d='M1 0h1v2H1z'/%3E%3Cpath fill='%23CE1126' d='M2 0h1v2H2z'/%3E%3C/svg%3E"); }
+.langues .drapeau--en { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'%3E%3CclipPath id='a'%3E%3Cpath d='M0 0v30h60V0z'/%3E%3C/clipPath%3E%3CclipPath id='b'%3E%3Cpath d='M30 15h30v15zv15H0zH0V0zV0h30z'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23a)'%3E%3Cpath fill='%23012169' d='M0 0v30h60V0z'/%3E%3Cpath stroke='%23fff' stroke-width='6' d='M0 0l60 30m0-30L0 30'/%3E%3Cpath stroke='%23C8102E' stroke-width='4' d='M0 0l60 30m0-30L0 30' clip-path='url(%23b)'/%3E%3Cpath stroke='%23fff' stroke-width='10' d='M30 0v30M0 15h60'/%3E%3Cpath stroke='%23C8102E' stroke-width='6' d='M30 0v30M0 15h60'/%3E%3C/g%3E%3C/svg%3E"); }
+.langues .drapeau:hover { opacity: 1; transform: translateY(-1px); }
+.langues .drapeau[aria-current] { opacity: 1; }
+.langues .drapeau[aria-current]::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px;
+    background: var(--ocre); border-radius: 2px;
+}
+.langues .drapeau:focus-visible { outline: 2px solid var(--ocre); outline-offset: 3px; }
+.entete--flottante .langues .drapeau { box-shadow: 0 0 0 1px rgba(255, 255, 255, .35); }
+.entete--flottante .langues .drapeau:not([aria-current]) { opacity: .6; }
+.cache {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+@media (max-width: 420px) { .entete-actions { gap: 10px; } .langues { gap: 8px; } .langues .drapeau { width: 22px; height: 15px; } }
 
 /* ==========================================================================
    HERO — on dit tout de suite ce que c'est et où c'est
@@ -809,12 +825,8 @@ section[id], .hero { scroll-margin-top: 78px; }
 
 /* le choix de langue, repris en bas du menu : les liens du menu sont en
    grand, ceux-ci restent petits et côte à côte */
-.menu-mobile .langues--menu { justify-content: center; gap: 6px; margin-top: 10px; font-size: .9375rem; }
-.menu-mobile .langues--menu a {
-    display: inline-block; font-family: var(--texte); font-size: .9375rem; color: var(--taupe-texte);
-    padding: 10px 12px; border-bottom: none;
-}
-.menu-mobile .langues--menu a[aria-current] { color: var(--vert); box-shadow: inset 0 -2px 0 var(--ocre); }
+.menu-mobile .langues--menu { justify-content: center; gap: 22px; margin-top: 18px; }
+.menu-mobile .langues--menu a.drapeau { display: block; width: 33px; height: 22px; padding: 0; border-bottom: none; }
 
 @media (max-width: 860px) { .burger { display: flex; } }
 @media (min-width: 861px) { .menu-mobile { display: none; } }

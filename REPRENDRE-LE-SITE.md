@@ -86,8 +86,6 @@ résultats de recherche.
 
 ## 6. Ce qui reste à faire
 
-- **Les photos des deux chambres.** Elles affichent aujourd'hui un aplat de
-  couleur avec la mention « Photographies à venir ».
 - **Le lien Booking.** Une fois la fiche créée, coller son adresse dans
   `assets/js/reserver.js`, ligne 29, entre les guillemets de `var BOOKING = ''`.
   Tous les boutons « Réserver » du site basculent alors vers Booking.

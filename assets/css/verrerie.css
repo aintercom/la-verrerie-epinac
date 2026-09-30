@@ -299,7 +299,7 @@ html.pret .entete { transition: background-color .28s ease, border-color .28s ea
            display: flex; flex-direction: column; }
 .section--doux .chambre { background: #fff; }
 .chambre-image { aspect-ratio: 3 / 2; background: var(--bouteille); position: relative; }
-.chambre-image img { width: 100%; height: 100%; object-fit: cover; }
+.chambre-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 /* a defaut de photo : un aplat de la matiere dont la chambre porte le nom */
 .chambre-image--verre  { background: var(--bouteille); }
 .chambre-image--silice { background: #D7D2C4; }

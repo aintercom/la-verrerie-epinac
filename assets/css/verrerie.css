@@ -390,29 +390,36 @@ html.pret .entete { transition: background-color .28s ease, border-color .28s ea
 
 @media (prefers-reduced-motion: reduce) { .galerie { scroll-behavior: auto; } }
 
-/* Photo d'ouverture : pleine largeur, comme la face d'une carte postale. */
-.galerie-une { margin: clamp(30px, 4vw, 52px) 0 clamp(14px, 1.8vw, 26px);
-    background: #fff; padding: clamp(9px, 1vw, 14px);
-    border: 1px solid var(--filet); border-radius: 4px;
-    box-shadow: 0 1px 2px rgba(60,50,35,.05), 0 6px 18px rgba(60,50,35,.06); }
-.galerie-une img { display: block; width: 100%; height: auto;
-    max-height: 62svh; object-fit: cover; object-position: 50% 58%; border-radius: 2px; }
-.galerie-une figcaption { font-family: var(--titre); font-size: 1rem; font-style: italic;
-    color: var(--taupe-texte); margin-top: clamp(9px, 1vw, 13px); padding-inline: 2px; }
-.galerie { margin-top: 0; }
-
-.galerie figure {
-    margin: 0;
-    background: #fff; padding: clamp(9px, 1vw, 14px);
-    border: 1px solid var(--filet); border-radius: 4px;
-    box-shadow: 0 1px 2px rgba(60, 50, 35, .05), 0 6px 18px rgba(60, 50, 35, .06);
+/* Les photos du parc, sans cadre : l'image nue aux coins arrondis, la
+   légende posée dessus en bas, en blanc sur un dégradé sombre qui ne mord
+   que le pied de la photo. Au survol, un zoom très lent. */
+.galerie-une { margin: clamp(30px, 4vw, 52px) 0 clamp(14px, 1.8vw, 26px); }
+.galerie-une, .galerie figure {
+    position: relative; margin-inline: 0; overflow: hidden;
+    border-radius: var(--rayon); background: var(--vert);
 }
-.section--doux .galerie figure { background: #fff; }
-.galerie img { display: block; border-radius: 2px; }
-.galerie figcaption {
-    font-family: var(--titre); font-size: .9375rem; font-style: italic;
-    color: var(--taupe-texte); margin-top: clamp(9px, 1vw, 13px);
-    padding-inline: 2px;
+.galerie-une img { display: block; width: 100%; height: auto;
+    max-height: 62svh; object-fit: cover; object-position: 50% 58%; }
+.galerie { margin-top: 0; }
+.galerie figure { margin-block: 0; }
+.galerie img { display: block; }
+.galerie-une img, .galerie img { transition: transform 1.2s cubic-bezier(.22, 1, .36, 1); }
+.galerie-une:hover img, .galerie figure:hover img { transform: scale(1.035); }
+
+.galerie-une figcaption, .galerie figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 48px 18px 14px;
+    background: linear-gradient(to top, rgba(14, 22, 16, .66) 0%, rgba(14, 22, 16, .28) 55%, rgba(14, 22, 16, 0) 100%);
+    font-family: var(--texte); font-style: normal; font-weight: 500;
+    font-size: .875rem; letter-spacing: .02em; line-height: 1.35;
+    color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+    pointer-events: none;
+}
+.galerie-une figcaption { padding: 70px clamp(18px, 2.4vw, 28px) clamp(14px, 2vw, 22px); font-size: .9375rem; }
+
+@media (prefers-reduced-motion: reduce) {
+    .galerie-une img, .galerie img { transition: none; }
+    .galerie-une:hover img, .galerie figure:hover img { transform: none; }
 }
 
 /* ==========================================================================

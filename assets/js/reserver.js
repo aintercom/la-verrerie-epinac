@@ -95,7 +95,7 @@
     '    <select id="r-chambre" name="Chambre">',
     '      <option>Peu importe</option>',
     '      <option>Cul de Bouteille</option>',
-    '      <option>Pierre de Silice</option>',
+    '      <option>Bleu et Silice</option>',
     '      <option>Les deux chambres</option>',
     '    </select>',
     '  </div>',
@@ -147,6 +147,8 @@
     var blocCh  = tiroir.querySelector('#r-bloc-chambre');
     var arrivee = tiroir.querySelector('#r-arrivee');
     var depart  = tiroir.querySelector('#r-depart');
+    var nom     = tiroir.querySelector('#r-nom');
+    var email   = tiroir.querySelector('#r-email');
     var rendu   = null;
 
     /* pas de date passée */
@@ -219,10 +221,10 @@
     envoi.addEventListener('click', function () {
         erreur.hidden = true;
 
-        if (!form.nom.value.trim()) { montreErreur('Merci d\'indiquer votre nom.', form.nom); return; }
-        var mail = form.email.value.trim();
+        if (!nom.value.trim()) { montreErreur('Merci d\'indiquer votre nom.', nom); return; }
+        var mail = email.value.trim();
         if (!mail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) {
-            montreErreur('Merci d\'indiquer un email valide, pour qu\'on puisse vous répondre.', form.email); return;
+            montreErreur('Merci d\'indiquer un email valide, pour qu\'on puisse vous répondre.', email); return;
         }
 
         var donnees = { access_key: CLE, subject: 'Demande de séjour · Domaine de la Verrerie', from_name: 'Site du Domaine' };

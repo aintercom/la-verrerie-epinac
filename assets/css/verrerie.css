@@ -222,6 +222,20 @@ html.pret .entete { transition: background-color .28s ease, border-color .28s ea
 @media (max-width: 860px) { .entete nav { display: none; } }
 @media (max-width: 420px) { .entete .btn { padding: 12px 17px; font-size: .9375rem; } }
 
+/* Choix de la langue : FR · EN, à gauche du bouton Réserver.
+   La langue en cours est soulignée d'ocre ; l'autre est un lien. */
+.entete-actions { display: flex; align-items: center; gap: 16px; }
+.langues { display: flex; align-items: center; gap: 2px; font-size: .8125rem; font-weight: 600; letter-spacing: .06em; }
+.langues a { text-decoration: none; color: var(--taupe-texte); padding: 6px 6px 5px; line-height: 1; }
+.langues a:hover { color: var(--vert); }
+.langues a[aria-current] { color: var(--vert); box-shadow: inset 0 -2px 0 var(--ocre); }
+.langues .sep { color: var(--taupe); font-weight: 400; }
+.entete--flottante .langues a { color: rgba(255, 255, 255, .72); }
+.entete--flottante .langues a:hover { color: var(--ocre); }
+.entete--flottante .langues a[aria-current] { color: #fff; }
+.entete--flottante .langues .sep { color: rgba(255, 255, 255, .5); }
+@media (max-width: 420px) { .entete-actions { gap: 8px; } .langues a { padding-inline: 4px; } }
+
 /* ==========================================================================
    HERO — on dit tout de suite ce que c'est et où c'est
    ========================================================================== */
@@ -792,6 +806,15 @@ section[id], .hero { scroll-margin-top: 78px; }
     display: block; margin-top: 18px; text-align: center;
     font-size: 1rem; color: var(--taupe-texte); text-decoration: none; padding: 12px 0;
 }
+
+/* le choix de langue, repris en bas du menu : les liens du menu sont en
+   grand, ceux-ci restent petits et côte à côte */
+.menu-mobile .langues--menu { justify-content: center; gap: 6px; margin-top: 10px; font-size: .9375rem; }
+.menu-mobile .langues--menu a {
+    display: inline-block; font-family: var(--texte); font-size: .9375rem; color: var(--taupe-texte);
+    padding: 10px 12px; border-bottom: none;
+}
+.menu-mobile .langues--menu a[aria-current] { color: var(--vert); box-shadow: inset 0 -2px 0 var(--ocre); }
 
 @media (max-width: 860px) { .burger { display: flex; } }
 @media (min-width: 861px) { .menu-mobile { display: none; } }

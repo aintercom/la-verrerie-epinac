@@ -24,8 +24,8 @@
 <link rel="preconnect" href="https://enjoylife.b-cdn.net" crossorigin>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/figtree-400-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/spectral-400-latin.woff2">
-<link rel="stylesheet" href="/assets/css/polices.css?v=20260930e">
-<link rel="stylesheet" href="/assets/css/verrerie.css?v=20260930e">
+<link rel="stylesheet" href="/assets/css/polices.css?v=20260930f">
+<link rel="stylesheet" href="/assets/css/verrerie.css?v=20260930f">
 <script>
 (function () {
     var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:';
@@ -55,7 +55,10 @@
             <a href="/#autour">La région</a>
             <a href="/#infos">Infos pratiques</a>
         </nav>
-        <a class="btn" href="/#reserver">Réserver</a>
+        <div class="entete-actions">
+            <div class="langues" role="group" aria-label="Langue"><a href="/" hreflang="fr" lang="fr" aria-current="true">FR</a><span class="sep" aria-hidden="true">·</span><a href="/en/" hreflang="en" lang="en">EN</a></div>
+            <a class="btn" href="/#reserver">Réserver</a>
+        </div>
     </div>
 </header>
 
@@ -66,6 +69,7 @@
         <h1>Cette page n'existe pas</h1>
         <p class="chapo">Le lien est peut-être ancien, ou la page a été déplacée pendant la refonte du site.</p>
         <a class="btn" href="/">Revenir à l'accueil</a>
+        <p lang="en" style="margin-top:22px">This page does not exist. <a href="/en/">Go to the English home page</a>.</p>
     </div>
 </section>
 
@@ -153,11 +157,11 @@ Téléphone : <a href="tel:+33783349554">+33 (0)7 83 34 95 54</a><br>
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !f.hidden) { ferme(); } });
 })();
 </script>
-<script src="/assets/js/reserver.js?v=20260930e" defer></script>
-<script src="/assets/js/entete.js?v=20260930e" defer></script>
-<script src="/assets/js/menu.js?v=20260930e" defer></script>
+<script src="/assets/js/reserver.js?v=20260930f" defer></script>
+<script src="/assets/js/entete.js?v=20260930f" defer></script>
+<script src="/assets/js/menu.js?v=20260930f" defer></script>
 <script>document.getElementById("annee").textContent=Math.max(2026, new Date().getFullYear());</script>
-<script src="/assets/js/direct.js?v=20260930e" defer></script>
+<script src="/assets/js/direct.js?v=20260930f" defer></script>
 <!-- VOILE — à retirer le jour de l'ouverture publique -->
 <div class="voile">
     <div class="voile-dedans">

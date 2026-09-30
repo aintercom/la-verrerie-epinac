@@ -68,77 +68,117 @@
     tiroir.setAttribute('aria-labelledby', 'tiroir-titre');
     tiroir.setAttribute('aria-hidden', 'true');
 
+    /* Textes du tiroir, en français ou en anglais selon la langue de la page.
+       Les valeurs envoyées (type de demande, chambre, noms des champs)
+       restent en français : c'est ce qui arrive dans la boîte du domaine. */
+    var EN = /^en\b/i.test(document.documentElement.lang);
+    var T = EN ? {
+        titre: 'Request a stay', sous: 'Tell us your dates and we will get back to you.', fermer: 'Close the request',
+        requis: 'Required fields', objet: 'Your request',
+        objets: ['One or more nights', 'A wedding or a reception', 'A film or photo shoot', 'A seminar or a meeting', 'Something else'],
+        chambre: 'Preferred room', chambres: ['No preference', 'Cul de Bouteille', 'Bleu et Silice', 'Both rooms'],
+        arrivee: 'Arrival', depart: 'Departure', adultes: 'Adults', enfants: 'Children',
+        nom: 'Name', nomAide: 'Please enter your name.',
+        email: 'Email', emailAide: 'Please enter a valid email so that we can reply.',
+        tel: 'Phone', telAide: 'Please enter your phone number, with the country code (at least ten digits).',
+        message: 'Your message', facultatif: '(optional)', messageExemple: 'A special occasion, a question…',
+        envoyer: 'Send my request', envoi: 'Sending…', secours: 'Or write to us:',
+        merci: 'Your request has been sent',
+        merciTexte: 'We will get back to you personally. If it is urgent, call us on',
+        nouvelle: 'Make another request',
+        manquants: 'Please fill in the fields in red.', manquant: 'Please fill in the field in red.',
+        echec: 'Your request could not be sent. Please write to us directly at '
+    } : {
+        titre: 'Demander un séjour', sous: 'Dites-nous vos dates, nous revenons vers vous.', fermer: 'Fermer la demande',
+        requis: 'Champs obligatoires', objet: 'Votre demande',
+        objets: ['Une ou plusieurs nuitées', 'Un mariage ou une réception', 'Un tournage ou une séance photo', 'Un séminaire ou une réunion', 'Autre chose'],
+        chambre: 'Chambre souhaitée', chambres: ['Peu importe', 'Cul de Bouteille', 'Bleu et Silice', 'Les deux chambres'],
+        arrivee: 'Arrivée', depart: 'Départ', adultes: 'Adultes', enfants: 'Enfants',
+        nom: 'Nom', nomAide: 'Indiquez votre nom.',
+        email: 'Email', emailAide: 'Indiquez un email valide, pour que nous puissions vous répondre.',
+        tel: 'Téléphone', telAide: 'Indiquez votre numéro de téléphone (au moins dix chiffres).',
+        message: 'Votre message', facultatif: '(facultatif)', messageExemple: 'Une occasion particulière, une question…',
+        envoyer: 'Envoyer ma demande', envoi: 'Envoi…', secours: 'Ou écrivez-nous&nbsp;:',
+        merci: 'Votre demande est partie',
+        merciTexte: 'Nous revenons vers vous personnellement. Si c\'est urgent, appelez-nous au',
+        nouvelle: 'Faire une nouvelle demande',
+        manquants: 'Merci de compléter les champs en rouge.', manquant: 'Merci de compléter le champ en rouge.',
+        echec: 'L\'envoi n\'a pas abouti. Écrivez-nous directement à '
+    };
+    var OBJETS = ['Une ou plusieurs nuitées', 'Un mariage ou une réception', 'Un tournage ou une séance photo', 'Un séminaire ou une réunion', 'Autre chose'];
+    var CHAMBRES = ['Peu importe', 'Cul de Bouteille', 'Bleu et Silice', 'Les deux chambres'];
+    var NUITEES = OBJETS[0];
+    function options(valeurs, libelles) {
+        return valeurs.map(function (v, i) {
+            return '      <option value="' + v + '">' + libelles[i] + '</option>';
+        }).join('\n');
+    }
+    var REQUIS = ' <span class="requis" aria-hidden="true">*</span>';
+
     tiroir.innerHTML = [
     '<div class="tiroir-tete">',
     '  <div>',
-    '    <h2 id="tiroir-titre">Demander un séjour</h2>',
-    '    <p>Dites-nous vos dates, nous revenons vers vous.</p>',
+    '    <h2 id="tiroir-titre">' + T.titre + '</h2>',
+    '    <p>' + T.sous + '</p>',
     '  </div>',
-    '  <button class="tiroir-fermer" type="button" aria-label="Fermer la demande">&times;</button>',
+    '  <button class="tiroir-fermer" type="button" aria-label="' + T.fermer + '">&times;</button>',
     '</div>',
 
     '<form class="tiroir-corps" novalidate>',
     '  <p class="erreur" hidden role="alert"></p>',
-    '  <p class="mention-requis"><span class="requis" aria-hidden="true">*</span> Champs obligatoires</p>',
+    '  <p class="mention-requis"><span class="requis" aria-hidden="true">*</span> ' + T.requis + '</p>',
 
     '  <div class="champ">',
-    '    <label for="r-objet">Votre demande</label>',
+    '    <label for="r-objet">' + T.objet + '</label>',
     '    <select id="r-objet" name="Type de demande">',
-    '      <option>Une ou plusieurs nuitées</option>',
-    '      <option>Un mariage ou une réception</option>',
-    '      <option>Un tournage ou une séance photo</option>',
-    '      <option>Un séminaire ou une réunion</option>',
-    '      <option>Autre chose</option>',
+    options(OBJETS, T.objets),
     '    </select>',
     '  </div>',
 
     '  <div class="champ" id="r-bloc-chambre">',
-    '    <label for="r-chambre">Chambre souhaitée</label>',
+    '    <label for="r-chambre">' + T.chambre + '</label>',
     '    <select id="r-chambre" name="Chambre">',
-    '      <option>Peu importe</option>',
-    '      <option>Cul de Bouteille</option>',
-    '      <option>Bleu et Silice</option>',
-    '      <option>Les deux chambres</option>',
+    options(CHAMBRES, T.chambres),
     '    </select>',
     '  </div>',
 
     '  <div class="duo-champ">',
-    '    <div class="champ"><label for="r-arrivee">Arrivée</label>',
+    '    <div class="champ"><label for="r-arrivee">' + T.arrivee + '</label>',
     '      <input id="r-arrivee" name="Arrivée" type="date"></div>',
-    '    <div class="champ"><label for="r-depart">Départ</label>',
+    '    <div class="champ"><label for="r-depart">' + T.depart + '</label>',
     '      <input id="r-depart" name="Départ" type="date"></div>',
     '  </div>',
 
     '  <div class="duo-champ">',
-    '    <div class="champ"><label for="r-adultes">Adultes</label>',
+    '    <div class="champ"><label for="r-adultes">' + T.adultes + '</label>',
     '      <input id="r-adultes" name="Adultes" type="number" min="1" value="2" inputmode="numeric"></div>',
-    '    <div class="champ"><label for="r-enfants">Enfants</label>',
+    '    <div class="champ"><label for="r-enfants">' + T.enfants + '</label>',
     '      <input id="r-enfants" name="Enfants" type="number" min="0" value="0" inputmode="numeric"></div>',
     '  </div>',
 
-    '  <div class="champ"><label for="r-nom">Nom <span class="requis" aria-hidden="true">*</span></label>',
+    '  <div class="champ"><label for="r-nom">' + T.nom + REQUIS + '</label>',
     '    <input id="r-nom" name="Nom" type="text" autocomplete="family-name" required aria-describedby="r-nom-aide">',
-    '    <p class="aide-erreur" id="r-nom-aide">Indiquez votre nom.</p></div>',
-    '  <div class="champ"><label for="r-email">Email <span class="requis" aria-hidden="true">*</span></label>',
+    '    <p class="aide-erreur" id="r-nom-aide">' + T.nomAide + '</p></div>',
+    '  <div class="champ"><label for="r-email">' + T.email + REQUIS + '</label>',
     '    <input id="r-email" name="Email" type="email" autocomplete="email" required aria-describedby="r-email-aide">',
-    '    <p class="aide-erreur" id="r-email-aide">Indiquez un email valide, pour que nous puissions vous répondre.</p></div>',
-    '  <div class="champ"><label for="r-tel">Téléphone <span class="requis" aria-hidden="true">*</span></label>',
+    '    <p class="aide-erreur" id="r-email-aide">' + T.emailAide + '</p></div>',
+    '  <div class="champ"><label for="r-tel">' + T.tel + REQUIS + '</label>',
     '    <input id="r-tel" name="Téléphone" type="tel" autocomplete="tel" required aria-describedby="r-tel-aide">',
-    '    <p class="aide-erreur" id="r-tel-aide">Indiquez votre numéro de téléphone (au moins dix chiffres).</p></div>',
-    '  <div class="champ"><label for="r-message">Votre message <span class="obligatoire">(facultatif)</span></label>',
-    '    <textarea id="r-message" name="Message" rows="3" placeholder="Une occasion particulière, une question…"></textarea></div>',
+    '    <p class="aide-erreur" id="r-tel-aide">' + T.telAide + '</p></div>',
+    '  <div class="champ"><label for="r-message">' + T.message + ' <span class="obligatoire">' + T.facultatif + '</span></label>',
+    '    <textarea id="r-message" name="Message" rows="3" placeholder="' + T.messageExemple + '"></textarea></div>',
     '</form>',
 
     '<div class="tiroir-pied">',
-    '  <button class="btn" type="submit" form="" id="r-envoi">Envoyer ma demande</button>',
-    '  <p class="secours">Ou écrivez-nous&nbsp;: <a href="mailto:' + EMAIL + '">' + EMAIL + '</a></p>',
+    '  <button class="btn" type="submit" form="" id="r-envoi">' + T.envoyer + '</button>',
+    '  <p class="secours">' + T.secours + ' <a href="mailto:' + EMAIL + '">' + EMAIL + '</a></p>',
     '</div>',
 
     '<div class="tiroir-merci">',
     '  <div class="coche" aria-hidden="true">&#10003;</div>',
-    '  <h3>Votre demande est partie</h3>',
-    '  <p>Nous revenons vers vous personnellement. Si c\'est urgent, appelez-nous au <a href="tel:' + TEL + '">07 83 34 95 54</a>.</p>',
-    '  <button class="btn btn--ligne" type="button" id="r-nouvelle">Faire une nouvelle demande</button>',
+    '  <h3>' + T.merci + '</h3>',
+    '  <p>' + T.merciTexte + ' <a href="tel:' + TEL + '">' + (EN ? '+33 7 83 34 95 54' : '07 83 34 95 54') + '</a>.</p>',
+    '  <button class="btn btn--ligne" type="button" id="r-nouvelle">' + T.nouvelle + '</button>',
     '</div>'
     ].join('\n');
 
@@ -168,7 +208,7 @@
 
     /* la chambre ne concerne qu'un séjour */
     objet.addEventListener('change', function () {
-        blocCh.hidden = objet.value !== 'Une ou plusieurs nuitées';
+        blocCh.hidden = objet.value !== NUITEES;
     });
 
     /* ---- ouverture et fermeture ---- */
@@ -186,22 +226,25 @@
        · Nom, email et téléphone d'une demande déjà envoyée depuis ce
          navigateur sont repris (gardés sur l'appareil du visiteur seulement). */
     var OBJET_PAGE = {
-        '/mariages/':   'Un mariage ou une réception',
-        '/tournages/':  'Un tournage ou une séance photo',
-        '/seminaires/': 'Un séminaire ou une réunion'
+        '/mariages/':      'Un mariage ou une réception',
+        '/tournages/':     'Un tournage ou une séance photo',
+        '/seminaires/':    'Un séminaire ou une réunion',
+        '/en/weddings/':   'Un mariage ou une réception',
+        '/en/film-shoots/': 'Un tournage ou une séance photo',
+        '/en/seminars/':   'Un séminaire ou une réunion'
     };
     var MEMOIRE = 'verrerie-coordonnees';
 
     function choisit(select, valeur) {
-        [].slice.call(select.options).forEach(function (o) { o.selected = o.text === valeur; });
+        [].slice.call(select.options).forEach(function (o) { o.selected = o.value === valeur; });
     }
 
     function preremplit(depuis) {
         var chambre = depuis && depuis.getAttribute && depuis.getAttribute('data-chambre');
-        var type = chambre ? 'Une ou plusieurs nuitées' : OBJET_PAGE[location.pathname];
+        var type = chambre ? NUITEES : OBJET_PAGE[location.pathname];
         if (type) { choisit(objet, type); }
         if (chambre) { choisit(form.querySelector('#r-chambre'), chambre); }
-        blocCh.hidden = objet.value !== 'Une ou plusieurs nuitées';
+        blocCh.hidden = objet.value !== NUITEES;
         try {
             var m = JSON.parse(localStorage.getItem(MEMOIRE) || 'null');
             if (m) {
@@ -223,7 +266,7 @@
         erreur.hidden = true;
         [nom, email, tel].forEach(function (c) { marque(c, true); });
         envoi.disabled = false;
-        envoi.textContent = 'Envoyer ma demande';
+        envoi.textContent = T.envoyer;
         tiroir.classList.remove('envoye');
         form.scrollTop = 0;
     }
@@ -281,19 +324,22 @@
 
         var fautifs = [nom, email, tel].filter(function (c) { return !marque(c, valide(c)); });
         if (fautifs.length) {
-            montreErreur(fautifs.length > 1
-                ? 'Merci de compléter les champs en rouge.'
-                : 'Merci de compléter le champ en rouge.', fautifs[0]);
+            montreErreur(fautifs.length > 1 ? T.manquants : T.manquant, fautifs[0]);
             return;
         }
 
-        var donnees = { access_key: CLE, subject: 'Demande de séjour · Domaine de la Verrerie', from_name: 'Site du Domaine' };
+        var donnees = {
+            access_key: CLE, from_name: 'Site du Domaine',
+            subject: (EN ? 'Demande de séjour (en anglais)' : 'Demande de séjour') + ' · Domaine de la Verrerie'
+        };
+        /* une demande venue du site anglais : on le signale pour répondre en anglais */
+        if (EN) { donnees['Langue'] = 'Anglais (répondre en anglais)'; }
         [].slice.call(form.querySelectorAll('input, select, textarea')).forEach(function (c) {
             if (c.name && !(c.id === 'r-chambre' && blocCh.hidden)) { donnees[c.name] = c.value; }
         });
 
         envoi.disabled = true;
-        envoi.textContent = 'Envoi…';
+        envoi.textContent = T.envoi;
 
         fetch('https://api.web3forms.com/submit', {
             method: 'POST',
@@ -313,8 +359,8 @@
           })
           .catch(function () {
               envoi.disabled = false;
-              envoi.textContent = 'Envoyer ma demande';
-              montreErreur('L\'envoi n\'a pas abouti. Écrivez-nous directement à ' + EMAIL + '.');
+              envoi.textContent = T.envoyer;
+              montreErreur(T.echec + EMAIL + '.');
           });
     });
 

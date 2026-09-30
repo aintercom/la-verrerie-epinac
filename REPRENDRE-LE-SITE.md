@@ -68,7 +68,7 @@ Le site en ligne se met à jour **une à deux minutes plus tard**.
 > 💡 Après une modification d'un fichier `.css` ou `.js` (dans `assets/`),
 > les navigateurs peuvent garder l'ancienne version en mémoire. Pour les
 > forcer à recharger, chercher `?v=` dans tout le projet (**Cmd+Maj+F**)
-> et remplacer partout la valeur qui suit (aujourd'hui `20260930e`) par la
+> et remplacer partout la valeur qui suit (aujourd'hui `20260930f`) par la
 > date du jour, par exemple `?v=20261015`.
 
 > ⚠️ Il n'y a pas de version de test : ce qui est publié est en ligne
@@ -120,3 +120,38 @@ Pour les remettre, il faudra :
 
 Le plus simple : demander à Claude de « remettre le carnet et la page
 Patrimoine industriel depuis la branche de sauvegarde ».
+
+## 8. La version anglaise
+
+Le site existe en français et en anglais. Chaque page a son double anglais
+dans le dossier `en/` :
+
+| Page française | Page anglaise |
+|---|---|
+| `index.html` (accueil) | `en/index.html` |
+| `sejour/` | `en/stay/` |
+| `mariages/` | `en/weddings/` |
+| `seminaires/` | `en/seminars/` |
+| `tournages/` | `en/film-shoots/` |
+| `aux-alentours/` | `en/surroundings/` |
+| `aux-alentours/activites/` | `en/surroundings/activities/` |
+| `aux-alentours/chateaux/` | `en/surroundings/chateaux/` |
+| `aux-alentours/nature/` | `en/surroundings/nature/` |
+| `aux-alentours/tables-et-marches/` | `en/surroundings/food-and-markets/` |
+| `aux-alentours/villages/` | `en/surroundings/villages/` |
+
+**Quand on modifie un texte en français, il faut aussi modifier la page
+anglaise correspondante**, sinon les deux versions ne disent plus la même
+chose. Le plus simple : demander à Claude de « reporter la modification
+dans la version anglaise ».
+
+Le choix FR · EN est en haut de chaque page, à côté du bouton Réserver, et
+en bas du menu sur téléphone. Il mène directement à la même page dans
+l'autre langue.
+
+Les demandes envoyées depuis le site anglais arrivent comme les autres,
+avec la mention « Demande de séjour (en anglais) » dans l'objet et une
+ligne « Langue : Anglais (répondre en anglais) ».
+
+Le jour de l'ouverture, la fenêtre d'attente est aussi à retirer des pages
+anglaises : la recherche `VOILE` les trouve avec les autres.

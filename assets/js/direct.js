@@ -27,18 +27,21 @@
     if (!pendule) { return; }
 
     var OUVERTURE = new Date('2026-10-01T15:00:00+02:00');
+    var EN = /^en\b/i.test(document.documentElement.lang);
+    var LOCALE = EN ? 'en-GB' : 'fr-FR';
 
     function heure() {
         try {
-            return new Intl.DateTimeFormat('fr-FR', {
+            var h = new Intl.DateTimeFormat(LOCALE, {
                 timeZone: 'Europe/Paris', hour: '2-digit', minute: '2-digit', hour12: false
-            }).format(new Date()).replace(':', ' h ');
+            }).format(new Date());
+            return EN ? h : h.replace(':', ' h ');
         } catch (e) { return null; }
     }
 
     function jour() {
         try {
-            return new Intl.DateTimeFormat('fr-FR', {
+            return new Intl.DateTimeFormat(LOCALE, {
                 timeZone: 'Europe/Paris', weekday: 'long', day: 'numeric', month: 'long'
             }).format(new Date());
         } catch (e) { return null; }
@@ -46,6 +49,12 @@
 
     function etat() {
         var reste = Math.ceil((OUVERTURE - new Date()) / 86400000);
+        if (EN) {
+            if (reste > 1) { return 'Opening in ' + reste + ' days'; }
+            if (reste === 1) { return 'Opening tomorrow'; }
+            if (reste === 0) { return 'Opening today'; }
+            return 'Write to us to book';
+        }
         if (reste > 1) { return 'Ouverture dans ' + reste + ' jours'; }
         if (reste === 1) { return 'Ouverture demain'; }
         if (reste === 0) { return 'Ouverture aujourd’hui'; }
@@ -59,7 +68,8 @@
             '<span class="point" aria-hidden="true"></span>' +
             '<span>' + j.charAt(0).toUpperCase() + j.slice(1) + '</span>' +
             '<span class="sep" aria-hidden="true">·</span>' +
-            '<span>il est <b>' + h + '</b> à Épinac</span>' +
+            (EN ? '<span>it is <b>' + h + '</b> in Épinac</span>'
+                : '<span>il est <b>' + h + '</b> à Épinac</span>') +
             '<span class="sep" aria-hidden="true">·</span>' +
             '<span class="etat">' + etat() + '</span>';
     }
@@ -93,6 +103,9 @@
     var reste = caches.length;
 
     function libelle(ouvert) {
+        if (/^en\b/i.test(document.documentElement.lang)) {
+            return ouvert ? 'Show fewer questions' : 'See the other ' + reste + ' questions';
+        }
         return ouvert ? 'Replier les questions'
                       : 'Voir les ' + reste + ' autres questions';
     }

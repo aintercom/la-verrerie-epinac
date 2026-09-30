@@ -346,16 +346,25 @@ html.pret .entete { transition: background-color .28s ease, border-color .28s ea
     font-size: .875rem; color: rgba(255,255,255,.88); }
 /* 4,24:1 auparavant, sous le seuil de 4,5 exigé à cette taille */
 .chambre-image--silice p { color: #4A443B; }
-.chambre-corps { padding: clamp(20px, 2.6vw, 30px); display: flex; flex-direction: column; flex: 1; }
+.chambre-corps { --pad: clamp(20px, 2.6vw, 30px); padding: var(--pad); display: flex; flex-direction: column; flex: 1; }
 .chambre-corps h3 { margin-bottom: 10px; }
 .chambre-corps p { color: var(--encre-doux); }
 .equip { list-style: none; margin: 16px 0 0; padding: 16px 0 0; border-top: 1px solid var(--filet);
          display: flex; flex-wrap: wrap; gap: 8px 10px; }
-.equip li { font-size: .9375rem; background: var(--papier-2); border-radius: var(--rayon-btn); padding: 6px 14px; }
-.section--doux .equip li { background: var(--papier-2); }
-.chambre-prix { margin-top: auto; padding-top: 18px; display: flex; align-items: baseline;
-                justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-.chambre-prix strong { font-family: var(--titre); font-size: 1.25rem; font-weight: 400; }
+.equip li { font-size: .9375rem; background: rgba(244, 200, 95, .24); color: var(--vert); border-radius: var(--rayon-btn); padding: 6px 14px; }
+.section--doux .equip li { background: rgba(244, 200, 95, .24); }
+.equip { margin-bottom: 24px; }
+
+/* Le pied de la carte : un bandeau vert qui déborde jusqu'aux bords, le prix
+   en ocre et la demande en bouton jaune, comme le bandeau des tarifs. */
+.chambre-prix {
+    margin: auto calc(var(--pad) * -1) calc(var(--pad) * -1);
+    padding: 18px var(--pad); background: var(--vert); color: var(--lin);
+    display: flex; align-items: center; justify-content: space-between; gap: 14px 18px; flex-wrap: wrap;
+}
+.chambre-prix strong { font-family: var(--titre); font-size: clamp(1.5rem, 2.2vw, 1.75rem); font-weight: 400;
+    line-height: 1.15; color: var(--ocre); font-variant-numeric: tabular-nums; }
+.chambre-prix .btn { flex: none; }
 
 /* ==========================================================================
    GALERIE
@@ -1205,7 +1214,7 @@ section[id], .hero { scroll-margin-top: 78px; }
 
 /* Le prix sur la fiche de chambre */
 .chambre-prix .prix-detail { display: block; margin-top: 3px;
-                             font-size: .8125rem; color: var(--taupe-texte); }
+                             font-size: .8125rem; color: rgba(248, 244, 238, .78); }
 
 /* ---------- Code d'accès de la fenêtre d'attente ----------
    Un simple filet sous le champ, comme les traits du reste du site.

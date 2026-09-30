@@ -80,7 +80,7 @@ Le site en ligne se met à jour **une à deux minutes plus tard**.
 Deux choses à retirer. Dans VS Code, **Cmd+Maj+F** (ou **Ctrl+Maj+F**) ouvre
 la recherche dans tous les fichiers du projet.
 
-**a) La fenêtre d'attente.** Chercher `VOILE`. Dans chaque page, supprimer le
+**a) La fenêtre d'attente.** Elle se lève toute seule le 1er octobre 2026 à 0 h (heure de Paris) : rien à faire ce soir-là. Pour alléger le code ensuite, on peut la retirer pour de bon : chercher `VOILE`. Dans chaque page, supprimer le
 bloc qui commence par `<!-- VOILE` et va jusqu'à la fin du `<div class="voile">`.
 
 **b) Le blocage Google.** Chercher `NOINDEX`. Dans chaque page, supprimer le

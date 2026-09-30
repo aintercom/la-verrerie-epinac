@@ -45,7 +45,9 @@
     /* code saisi dans la fenêtre d'attente : retenu durablement, pour que
        la personne n'ait pas à le retaper à chaque visite */
     try { ouvert = localStorage.getItem('vr_acces') === '1'; } catch (e) {}
-    document.documentElement.classList.add(local || passe || garde || ouvert ? 'voile-leve' : 'voile-pose');
+    /* ouverture au public : le 1er octobre 2026 à 0 h, heure de Paris (22 h UTC la veille) */
+    var public_ = Date.now() >= Date.UTC(2026, 8, 30, 22, 0, 0);
+    document.documentElement.classList.add(public_ || local || passe || garde || ouvert ? 'voile-leve' : 'voile-pose');
 })();
 </script>
 <script type="application/ld+json">

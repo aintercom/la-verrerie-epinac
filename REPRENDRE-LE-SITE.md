@@ -65,6 +65,12 @@ Dans VS Code, icône **Contrôle de code source** dans la barre de gauche
 
 Le site en ligne se met à jour **une à deux minutes plus tard**.
 
+> 💡 Après une modification d'un fichier `.css` ou `.js` (dans `assets/`),
+> les navigateurs peuvent garder l'ancienne version en mémoire. Pour les
+> forcer à recharger, chercher `?v=20260930` dans tout le projet
+> (**Cmd+Maj+F**) et le remplacer partout par la date du jour, par exemple
+> `?v=20261015`.
+
 > ⚠️ Il n'y a pas de version de test : ce qui est publié est en ligne
 > immédiatement. La fenêtre d'attente protège jusqu'au 1er octobre, mais
 > après cette date, une erreur sera visible tout de suite.

@@ -123,41 +123,44 @@ h3 { font-size: clamp(1.25rem, 2.2vw, 1.625rem); }
 .lien-fleche:hover { color: var(--vert); border-bottom-color: var(--vert); }
 .section--fonce .lien-fleche { color: var(--ocre); border-bottom-color: var(--ocre); }
 
-/* Texte secondaire replié sous un bouton ocre à flèche.
-   Le bouton reprend le jaune des « Réserver » ; la flèche, dans sa pastille
-   verte, rebondit au survol et se retourne à l'ouverture. Le texte glisse
-   en place derrière un filet ocre, paragraphe après paragraphe. */
+/* Texte secondaire replié sous un bouton ocre.
+   Le bouton reprend le jaune des « Réserver », avec un chevron fin au trait
+   vert qui descend d'un cran au survol et se retourne à l'ouverture. Le
+   texte glisse en place derrière un filet ocre, paragraphe après paragraphe.
+   Pas de flex sur le summary : Safari l'a longtemps ignoré. */
 .deplier { margin-top: 24px; max-width: 62ch; }
 .deplier summary {
-    cursor: pointer; list-style: none; user-select: none;
-    display: inline-flex; align-items: center; gap: 12px;
-    padding: 7px 7px 7px 20px; border-radius: var(--rayon-btn);
-    background: var(--ocre); color: var(--vert); font-weight: 600;
-    box-shadow: 0 2px 0 rgba(69, 82, 57, .14);
+    cursor: pointer; list-style: none; user-select: none; -webkit-user-select: none;
+    display: inline-block; padding: 11px 22px 11px 24px; border-radius: var(--rayon-btn);
+    background: var(--ocre); color: var(--vert);
+    font-weight: 600; font-size: .9375rem; letter-spacing: .01em; line-height: 1.2;
+    box-shadow: 0 1px 0 rgba(69, 82, 57, .12);
     transition: background-color .18s ease, transform .18s ease, box-shadow .18s ease;
 }
 .deplier summary::-webkit-details-marker { display: none; }
+.deplier summary::marker { content: ''; }
 .deplier summary::after {
-    content: '↓'; flex: none;
-    display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%;
-    background: var(--vert); color: var(--ocre); font-size: .95rem; line-height: 1;
+    content: ''; display: inline-block; vertical-align: middle;
+    width: 14px; height: 14px; margin: -2px 0 0 12px;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 6l5 5 5-5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 6l5 5 5-5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
     transition: transform .45s cubic-bezier(.34, 1.56, .64, 1);
 }
-.deplier summary:hover { background: var(--ocre-fonce); transform: translateY(-1px); box-shadow: 0 4px 10px rgba(69, 82, 57, .18); }
-.deplier summary:hover::after { animation: deplier-rebond .7s ease-in-out infinite; }
+.deplier summary:hover { background: var(--ocre-fonce); transform: translateY(-1px); box-shadow: 0 6px 14px rgba(69, 82, 57, .16); }
+.deplier summary:hover::after { transform: translateY(2px); }
 .deplier summary:focus-visible { outline: 2px solid var(--vert); outline-offset: 3px; }
-.deplier[open] summary::after { transform: rotate(180deg); animation: none; }
-.deplier[open] summary:hover::after { animation: none; }
+.deplier[open] summary::after,
+.deplier[open] summary:hover::after { transform: rotate(180deg); }
 
 .deplier p {
-    margin-top: 16px; padding-left: 18px; border-left: 3px solid var(--ocre);
+    margin: 16px 0 0; padding-left: 18px; border-left: 3px solid var(--ocre);
     color: var(--encre-doux);
 }
 .deplier p + p { margin-top: 0; padding-top: .8em; }   /* un seul filet continu */
 .deplier[open] p { animation: deplier-entree .5s cubic-bezier(.22, 1, .36, 1) both; }
 .deplier[open] p + p { animation-delay: .12s; }
 
-@keyframes deplier-rebond { 50% { transform: translateY(3px); } }
 @keyframes deplier-entree { from { opacity: 0; transform: translateY(-10px); } }
 
 /* Là où le navigateur sait animer la hauteur, le bloc s'ouvre en douceur */
@@ -172,7 +175,7 @@ h3 { font-size: clamp(1.25rem, 2.2vw, 1.625rem); }
 
 @media (prefers-reduced-motion: reduce) {
     .deplier summary, .deplier summary::after, .deplier::details-content { transition: none; }
-    .deplier summary:hover::after, .deplier[open] p { animation: none; }
+    .deplier[open] p { animation: none; }
 }
 
 /* ==========================================================================
@@ -464,16 +467,6 @@ html.pret .entete { transition: background-color .28s ease, border-color .28s ea
     display: flex; flex-wrap: wrap; gap: 8px 22px; justify-content: space-between; font-size: .875rem; }
 .pied-bas button { background: none; border: none; padding: 0; cursor: pointer; font: inherit;
     color: inherit; text-decoration: underline; text-underline-offset: 3px; }
-
-/* ---------- Barre de réservation mobile ---------- */
-
-.barre { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; display: none;
-    align-items: center; justify-content: space-between; gap: 12px;
-    background: #fff; border-top: 1px solid var(--filet);
-    padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); }
-.barre b { font-family: var(--titre); font-size: 1.0625rem; font-weight: 400; }
-.barre span { display: block; font-size: .8125rem; color: var(--encre-doux); }
-@media (max-width: 860px) { .barre { display: flex; } body { padding-bottom: 70px; } }
 
 /* ---------- Fenêtre légale ---------- */
 

@@ -826,6 +826,18 @@ section[id], .hero { scroll-margin-top: 78px; }
     .entete .marque .embleme { height: 28px; max-width: 64px; }
     .entete .lettrage img { height: 24px; }
 }
+/* Sur téléphone, la place manque pour l'aquarelle, le lettrage, les drapeaux
+   et le bouton : l'en-tête ne garde que le lettrage, qui ne doit jamais être
+   comprimé. Sous 360 px, les drapeaux ne restent que dans le menu. */
+@media (max-width: 600px) {
+    .entete .marque .embleme,
+    .entete.entete--flottante .marque .embleme { display: none; }
+    .entete .marque, .entete .lettrage, .entete .lettrage img { flex: none; }
+    .entete .lettrage img { width: auto; max-width: none; }
+}
+@media (max-width: 359px) {
+    .entete .entete-actions .langues { display: none; }
+}
 
 /* pied de page : le lettrage seul, en blanc */
 .pied .marque img { height: 58px; }

@@ -26,7 +26,6 @@
     var pendule = document.getElementById('pendule');
     if (!pendule) { return; }
 
-    var OUVERTURE = new Date('2026-10-01T15:00:00+02:00');
     var EN = /^en\b/i.test(document.documentElement.lang);
     var LOCALE = EN ? 'en-GB' : 'fr-FR';
 
@@ -47,19 +46,8 @@
         } catch (e) { return null; }
     }
 
-    function etat() {
-        var reste = Math.ceil((OUVERTURE - new Date()) / 86400000);
-        if (EN) {
-            if (reste > 1) { return 'Opening in ' + reste + ' days'; }
-            if (reste === 1) { return 'Opening tomorrow'; }
-            if (reste === 0) { return 'Opening today'; }
-            return 'Write to us to book';
-        }
-        if (reste > 1) { return 'Ouverture dans ' + reste + ' jours'; }
-        if (reste === 1) { return 'Ouverture demain'; }
-        if (reste === 0) { return 'Ouverture aujourd’hui'; }
-        return 'Nous écrire pour réserver';
-    }
+    /* le domaine est ouvert depuis le 1er octobre 2026 */
+    function etat() { return EN ? 'Now taking bookings' : 'Réservations ouvertes'; }
 
     function maj() {
         var h = heure(), j = jour();

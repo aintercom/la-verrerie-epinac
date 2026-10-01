@@ -68,3 +68,56 @@
         if (window.innerWidth > 860 && burger.getAttribute('aria-expanded') === 'true') { bascule(false); }
     });
 })();
+
+/* ==========================================================================
+   CHOIX DE LANGUE REPLIÉ (téléphone)
+   Sur petit écran, l'en-tête ne montre que le drapeau de la langue en cours,
+   suivi d'une flèche ; un appui déroule l'autre langue en dessous. Sur grand
+   écran, ces deux éléments restent cachés et les drapeaux s'affichent côte à
+   côte comme avant.
+   ========================================================================== */
+(function () {
+    'use strict';
+    var bloc = document.querySelector('.entete .langues');
+    if (!bloc || bloc.querySelector('.langues-bascule')) { return; }
+    var EN = /^en\b/i.test(document.documentElement.lang);
+    var courant = bloc.querySelector('a.drapeau[aria-current]');
+    var autres = [].slice.call(bloc.querySelectorAll('a.drapeau:not([aria-current])'));
+    if (!courant || !autres.length) { return; }
+    var NOMS = { fr: 'Français', en: 'English' };
+    function code(a) { return a.classList.contains('drapeau--en') ? 'en' : 'fr'; }
+
+    var bouton = document.createElement('button');
+    bouton.type = 'button';
+    bouton.className = 'langues-bascule';
+    bouton.setAttribute('aria-expanded', 'false');
+    bouton.setAttribute('aria-label', EN ? 'Choose the language' : 'Choisir la langue');
+    bouton.innerHTML = '<span class="drapeau drapeau--' + code(courant) + '" aria-hidden="true"></span>' +
+                       '<span class="langues-chevron" aria-hidden="true"></span>';
+
+    var liste = document.createElement('div');
+    liste.className = 'langues-liste';
+    liste.innerHTML = autres.map(function (a) {
+        var c = code(a);
+        return '<a class="langues-choix" href="' + a.getAttribute('href') + '" hreflang="' + c + '" lang="' + c + '">' +
+               '<span class="drapeau drapeau--' + c + '" aria-hidden="true"></span>' + NOMS[c] + '</a>';
+    }).join('');
+
+    bloc.appendChild(bouton);
+    bloc.appendChild(liste);
+
+    function bascule(ouvrir) {
+        bloc.classList.toggle('ouvert', ouvrir);
+        bouton.setAttribute('aria-expanded', String(ouvrir));
+    }
+    bouton.addEventListener('click', function (e) {
+        e.stopPropagation();
+        bascule(!bloc.classList.contains('ouvert'));
+    });
+    document.addEventListener('click', function (e) {
+        if (!bloc.contains(e.target)) { bascule(false); }
+    });
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && bloc.classList.contains('ouvert')) { bascule(false); bouton.focus(); }
+    });
+})();

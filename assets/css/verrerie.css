@@ -826,17 +826,58 @@ section[id], .hero { scroll-margin-top: 78px; }
     .entete .marque .embleme { height: 28px; max-width: 64px; }
     .entete .lettrage img { height: 24px; }
 }
-/* Sur téléphone, la place manque pour l'aquarelle, le lettrage, les drapeaux
-   et le bouton : l'en-tête ne garde que le lettrage, qui ne doit jamais être
-   comprimé. Sous 360 px, les drapeaux ne restent que dans le menu. */
+/* Sur téléphone, le lettrage et l'aquarelle ne doivent jamais être comprimés.
+   Le choix de langue se replie : seul le drapeau de la langue en cours reste
+   visible, avec une petite flèche qui déroule l'autre langue à la verticale
+   (le bouton et la liste sont construits par menu.js). */
+.langues-bascule, .langues-liste { display: none; }
 @media (max-width: 600px) {
-    .entete .marque .embleme,
-    .entete.entete--flottante .marque .embleme { display: none; }
-    .entete .marque, .entete .lettrage, .entete .lettrage img { flex: none; }
+    .entete .marque, .entete .lettrage, .entete .lettrage img, .entete .marque .embleme { flex: none; }
     .entete .lettrage img { width: auto; max-width: none; }
+
+    .entete .langues { position: relative; gap: 0; }
+    .entete .langues > a.drapeau { display: none; }
+    .langues-bascule {
+        display: flex; align-items: center; gap: 5px; padding: 10px 4px; margin: 0;
+        background: none; border: 0; cursor: pointer; color: var(--vert);
+    }
+    .entete--flottante .langues-bascule { color: #fff; }
+    .entete .langues .langues-bascule .drapeau,
+    .entete .langues .langues-choix .drapeau { opacity: 1; transform: none; width: 22px; height: 15px; }
+    .langues-chevron { width: 11px; height: 11px; background: currentColor;
+        -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 6l5 5 5-5' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 6l5 5 5-5' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; transition: transform .2s ease; }
+    .langues.ouvert .langues-chevron { transform: rotate(180deg); }
+    .langues-bascule:focus-visible { outline: 2px solid var(--ocre); outline-offset: 2px; border-radius: 4px; }
+
+    .langues-liste {
+        position: absolute; top: calc(100% + 4px); left: 50%; transform: translateX(-50%); z-index: 70;
+        flex-direction: column; min-width: 132px; padding: 6px;
+        background: #fff; border-radius: var(--rayon); box-shadow: 0 10px 28px rgba(30, 40, 30, .2);
+    }
+    .langues.ouvert .langues-liste { display: flex; }
+    .langues-choix {
+        display: flex; align-items: center; gap: 10px; padding: 10px 10px; border-radius: 6px;
+        text-decoration: none; color: var(--vert); font-size: .9375rem; font-weight: 500; letter-spacing: 0;
+    }
+    .langues-choix:hover { background: var(--papier-2); }
 }
-@media (max-width: 359px) {
-    .entete .entete-actions .langues { display: none; }
+/* Petits téléphones : l'aquarelle, le lettrage, le drapeau, le bouton et le
+   menu doivent tenir sur une ligne. On réduit un peu chaque pièce plutôt que
+   d'en cacher une. */
+@media (max-width: 400px) {
+    .entete-inner { gap: 6px; }
+    .marque { gap: 8px; }
+    .entete .marque .embleme { height: 22px; max-width: 48px; }
+    .entete.entete--flottante .marque .embleme { margin-right: -8px; }
+    .entete .lettrage img { height: 23px; }
+    .entete .btn { padding: 10px 14px; font-size: .875rem; }
+    .langues-bascule { padding-inline: 2px; gap: 4px; }
+}
+@media (max-width: 340px) {
+    .entete .marque .embleme { height: 19px; max-width: 41px; }
+    .entete .lettrage img { height: 21px; }
+    .entete .btn { padding: 9px 12px; font-size: .8125rem; }
+    .entete .langues .langues-bascule .drapeau { width: 20px; height: 14px; }
 }
 
 /* pied de page : le lettrage seul, en blanc */

@@ -155,3 +155,35 @@ ligne « Langue : Anglais (répondre en anglais) ».
 
 Le jour de l'ouverture, la fenêtre d'attente est aussi à retirer des pages
 anglaises : la recherche `VOILE` les trouve avec les autres.
+
+## 9. Les anciennes adresses du site
+
+Google a gardé en mémoire des pages de l'ancienne version du site (six
+chambres, XIXᵉ siècle, carnet, « Le Feu »…). Depuis le 1er octobre 2026 :
+
+- **Les adresses disparues renvoient vers la page actuelle la plus proche**
+  au lieu de la page « introuvable » : les articles du carnet, « Le Feu »
+  (`aux-alentours/le-feu/`) et les pages de l'ancienne archive
+  (`v1-archive/`). Ce sont de petits fichiers de renvoi, à ne pas modifier.
+- **L'ancienne archive du site n'est plus publiée.** Elle reste sur
+  l'ordinateur, dans le dossier `archives-locales/`, qui n'est jamais
+  envoyé en ligne.
+
+Remettre le carnet (section 7) remplace automatiquement ses renvois par
+les vrais articles.
+
+**Pour que Google mette à jour ses résultats plus vite**, dans Google
+Search Console (search.google.com/search-console, propriété
+domainedelaverrerie.fr) :
+
+1. menu **Sitemaps** : envoyer `sitemap.xml` ;
+2. menu **Inspection de l'URL** : coller l'adresse d'une page dont le
+   résultat Google est ancien (par exemple `https://domainedelaverrerie.fr/sejour/`),
+   puis cliquer sur **Demander une indexation**. À refaire pour chaque
+   page concernée (accueil, séjour, mariages, séminaires, et leurs
+   versions anglaises) ;
+3. pour faire disparaître tout de suite une ancienne adresse des
+   résultats : menu **Suppressions** → **Nouvelle demande**.
+
+Sans rien faire, Google corrige de lui-même en quelques jours à quelques
+semaines, au fil de ses passages.

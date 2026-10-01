@@ -68,7 +68,7 @@ Le site en ligne se met à jour **une à deux minutes plus tard**.
 > 💡 Après une modification d'un fichier `.css` ou `.js` (dans `assets/`),
 > les navigateurs peuvent garder l'ancienne version en mémoire. Pour les
 > forcer à recharger, chercher `?v=` dans tout le projet (**Cmd+Maj+F**)
-> et remplacer partout la valeur qui suit (aujourd'hui `20261001a`) par la
+> et remplacer partout la valeur qui suit (aujourd'hui `20261001b`) par la
 > date du jour, par exemple `?v=20261015`.
 
 > ⚠️ Il n'y a pas de version de test : ce qui est publié est en ligne

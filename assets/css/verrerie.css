@@ -348,6 +348,14 @@ html.pret .entete { transition: background-color .28s ease, border-color .28s ea
 .chambre-image--silice p { color: #4A443B; }
 .chambre-corps { --pad: clamp(20px, 2.6vw, 30px); padding: var(--pad); display: flex; flex-direction: column; flex: 1; }
 .chambre-corps h3 { margin-bottom: 10px; }
+/* Le nom de la chambre sur un bandeau vert, juste sous la photo : c'est
+   lui qu'on lit d'abord. Le prix, en dessous, reste en vert sur blanc. */
+.chambre-corps > h3:first-child {
+    margin: calc(var(--pad) * -1) calc(var(--pad) * -1) 0;
+    padding: 16px var(--pad); background: var(--vert); color: #fff;
+    font-size: clamp(1.375rem, 2.2vw, 1.625rem);
+}
+.chambre-corps > h3:first-child + .equip { border-top: none; margin-top: 18px; padding-top: 0; }
 .chambre-corps p { color: var(--encre-doux); }
 .equip { list-style: none; margin: 16px 0 0; padding: 16px 0 0; border-top: 1px solid var(--filet);
          display: flex; flex-wrap: wrap; gap: 8px 10px; }
@@ -355,15 +363,13 @@ html.pret .entete { transition: background-color .28s ease, border-color .28s ea
 .section--doux .equip li { background: rgba(244, 200, 95, .24); }
 .equip { margin-bottom: 24px; }
 
-/* Le pied de la carte : un bandeau vert qui déborde jusqu'aux bords, le prix
-   en ocre et la demande en bouton jaune, comme le bandeau des tarifs. */
+/* Le pied de la carte : le prix en vert, la demande en bouton jaune. */
 .chambre-prix {
-    margin: auto calc(var(--pad) * -1) calc(var(--pad) * -1);
-    padding: 18px var(--pad); background: var(--vert); color: var(--lin);
+    margin-top: auto; padding-top: 18px; border-top: 1px solid var(--filet);
     display: flex; align-items: center; justify-content: space-between; gap: 14px 18px; flex-wrap: wrap;
 }
-.chambre-prix strong { font-family: var(--titre); font-size: clamp(1.5rem, 2.2vw, 1.75rem); font-weight: 400;
-    line-height: 1.15; color: var(--ocre); font-variant-numeric: tabular-nums; }
+.chambre-prix strong { font-family: var(--titre); font-size: clamp(1.375rem, 2vw, 1.5rem); font-weight: 400;
+    line-height: 1.15; color: var(--vert); font-variant-numeric: tabular-nums; }
 .chambre-prix .btn { flex: none; }
 
 /* ==========================================================================
@@ -483,20 +489,20 @@ html.pret .entete { transition: background-color .28s ease, border-color .28s ea
     grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 900px) { .tuiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .tuile {
-    display: flex; align-items: flex-start; gap: 14px;
+    display: flex; align-items: flex-start; gap: 12px;
     background: #fff; border: 1px solid var(--filet); border-radius: var(--rayon);
-    padding: 16px 18px;
+    padding: 14px 16px;
 }
 .tuile--large { grid-column: span 2; }
 .tuiles--acces .tuile--large:last-child { grid-column: 1 / -1; }
 .tuile-icone {
-    flex: none; width: 42px; height: 42px; border-radius: 50%;
-    display: grid; place-items: center; background: var(--ocre); color: var(--vert);
+    flex: none; width: 32px; height: 32px; margin-top: 2px; border-radius: 50%;
+    display: grid; place-items: center; background: rgba(244, 200, 95, .3); color: var(--vert);
 }
-.tuile-icone svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.tuile-icone svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .tuile-texte { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .tuile-label { font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--taupe-texte); }
-.tuile-valeur { font-family: var(--titre); font-size: 1.125rem; line-height: 1.35; color: var(--vert); }
+.tuile-valeur { font-family: var(--titre); font-size: 1.0625rem; line-height: 1.35; color: var(--vert); }
 .tuile-detail { margin-top: 4px; font-size: .875rem; line-height: 1.55; color: var(--encre-doux); }
 /* Sur téléphone : deux colonnes, la pastille au-dessus du texte. Les
    cases longues (train, accessibilité) gardent toute la largeur. */
@@ -504,8 +510,8 @@ html.pret .entete { transition: background-color .28s ease, border-color .28s ea
     .tuiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
     .tuile { flex-direction: column; gap: 10px; padding: 14px; }
     .tuile--large { flex-direction: row; gap: 14px; }
-    .tuile-icone { width: 38px; height: 38px; }
-    .tuile-valeur { font-size: 1.0625rem; }
+    .tuile-icone { width: 30px; height: 30px; }
+    .tuile-valeur { font-size: 1rem; }
 }
 
 .tarifs { margin-top: 16px; background: var(--vert); color: var(--lin); border-radius: var(--rayon);
@@ -1214,7 +1220,7 @@ section[id], .hero { scroll-margin-top: 78px; }
 
 /* Le prix sur la fiche de chambre */
 .chambre-prix .prix-detail { display: block; margin-top: 3px;
-                             font-size: .8125rem; color: rgba(248, 244, 238, .78); }
+                             font-size: .8125rem; color: var(--taupe-texte); }
 
 /* ---------- Code d'accès de la fenêtre d'attente ----------
    Un simple filet sous le champ, comme les traits du reste du site.

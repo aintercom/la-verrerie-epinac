@@ -336,7 +336,7 @@ html.pret .entete { transition: background-color .28s ease, border-color .28s ea
 
 .chambre { background: var(--papier); border: 1px solid var(--filet); border-radius: var(--rayon); overflow: hidden;
            display: flex; flex-direction: column; }
-.section--doux .chambre { background: #fff; }
+.section--doux .chambre, #chambres .chambre { background: #fff; }
 .chambre-image { aspect-ratio: 3 / 2; background: var(--bouteille); position: relative; }
 .chambre-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 /* a defaut de photo : un aplat de la matiere dont la chambre porte le nom */

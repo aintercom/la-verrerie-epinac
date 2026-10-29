@@ -226,7 +226,7 @@ n'est plus affichée. Pour la remettre devant tout le site, remplacer
 
 Le numéro de téléphone (personnel) a été retiré du site le 29 octobre
 2026 : pied de page, FAQ, menu mobile, formulaire et données lues par
-Google. Il ne reste que dans les mentions légales, où la loi impose un
-numéro pour un entrepreneur individuel.
+Google. Les mentions légales, où la loi impose un numéro pour un entrepreneur
+individuel, affichent désormais le 07 44 98 00 15.
 
 Version des fichiers : `?v=20261029c`.

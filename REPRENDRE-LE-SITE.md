@@ -188,3 +188,20 @@ domainedelaverrerie.fr) :
 
 Sans rien faire, Google corrige de lui-même en quelques jours à quelques
 semaines, au fil de ses passages.
+
+## 10. Site en pause (depuis le 29 octobre 2026)
+
+Le site est mis en pause : tous les visiteurs voient la fenêtre
+« Le domaine fait une pause » (en anglais sur les pages anglaises). **Rien
+n'est supprimé** : toutes les pages, les photos, le formulaire et la
+version anglaise sont intacts derrière la fenêtre, et Google continue de
+connaître le site.
+
+- **Voir le site complet** malgré la pause : saisir le code `maman` dans
+  la fenêtre (le navigateur s'en souvient), ou ouvrir
+  `https://domainedelaverrerie.fr/?preview=verrerie2026`.
+- **Rouvrir le site au public** : dans VS Code, **Cmd+Maj+F**, chercher
+  `var public_ = false;` et remplacer partout par `var public_ = true;`
+  (24 pages), puis valider et synchroniser. Penser aussi à revoir le
+  texte de la fenêtre (chercher `Momentanément fermé`), ou simplement
+  demander à Claude de « rouvrir le site ».

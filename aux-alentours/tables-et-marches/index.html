@@ -38,8 +38,10 @@
     /* code saisi dans la fenêtre d'attente : retenu durablement, pour que
        la personne n'ait pas à le retaper à chaque visite */
     try { ouvert = localStorage.getItem('vr_acces') === '1'; } catch (e) {}
-    /* ouverture au public : le 1er octobre 2026 à 0 h, heure de Paris (22 h UTC la veille) */
-    var public_ = Date.now() >= Date.UTC(2026, 8, 30, 22, 0, 0);
+    /* SITE EN PAUSE depuis le 29 octobre 2026 : la fenêtre d'attente est de nouveau
+       affichée à tous les visiteurs. Pour rouvrir le site au public, remplacer
+       false par true sur la ligne ci-dessous, dans chaque page (chercher PAUSE). */
+    var public_ = false;
     document.documentElement.classList.add(public_ || local || passe || garde || ouvert ? 'voile-leve' : 'voile-pose');
 })();
 </script>
@@ -334,9 +336,9 @@ Téléphone : <a href="tel:+33783349554">+33 (0)7 83 34 95 54</a><br>
 <div class="voile">
     <div class="voile-dedans">
         <p class="marque"><img src="../../assets/logo/mot-blanc.png" alt="Domaine de la Verrerie" width="600" height="174"></p>
-        <p class="quand">Ouverture le 1er octobre 2026</p>
-        <p class="voile-annonce">Nous préparons quelque chose.</p>
-        <p>La maison fait peau neuve avant l'ouverture de ses deux premières chambres d'hôtes, à Épinac, en Bourgogne du Sud.</p>
+        <p class="quand">Momentanément fermé</p>
+        <p class="voile-annonce">Le domaine fait une pause.</p>
+        <p>Nous suspendons l'accueil de nos hôtes pour quelque temps. Merci de votre compréhension : nous espérons vous recevoir bientôt au Domaine de la Verrerie, à Épinac.</p>
         <a class="btn" href="mailto:contact@domainedelaverrerie.fr">Nous écrire</a>
 
         <form class="voile-acces" autocomplete="off">

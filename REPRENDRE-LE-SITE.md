@@ -68,7 +68,7 @@ Le site en ligne se met à jour **une à deux minutes plus tard**.
 > 💡 Après une modification d'un fichier `.css` ou `.js` (dans `assets/`),
 > les navigateurs peuvent garder l'ancienne version en mémoire. Pour les
 > forcer à recharger, chercher `?v=` dans tout le projet (**Cmd+Maj+F**)
-> et remplacer partout la valeur qui suit (aujourd'hui `20261029a`) par la
+> et remplacer partout la valeur qui suit (aujourd'hui `20261029b`) par la
 > date du jour, par exemple `?v=20261015`.
 
 > ⚠️ Il n'y a pas de version de test : ce qui est publié est en ligne
@@ -203,6 +203,15 @@ découverte), mais il est en mode « pause » :
 - les mentions « ouvert depuis le 1er octobre » sont remplacées par
   « projet à venir » (infos pratiques, FAQ, mariages, séminaires).
 
+- **les prix des chambres sont masqués** (cartes des chambres, bandeau des
+  tarifs, question « Combien coûte une nuit ? » de la FAQ). Pour mémoire,
+  les tarifs gardés dans le site sont : 110 € en basse saison (novembre à
+  mars), 120 € en moyenne saison (avril à juin, septembre et octobre),
+  130 € en haute saison (juillet et août), pour deux personnes,
+  petit-déjeuner compris, même tarif pour les deux chambres. La
+  description Google de la page Séjour, qui finissait par « De 110 à
+  130 € la nuit », a été réécrite sans prix.
+
 **Rien n'est supprimé** : tous ces éléments sont seulement cachés.
 
 **Pour rouvrir les réservations** : dans VS Code, **Cmd+Maj+F**, chercher
@@ -215,4 +224,4 @@ La fenêtre d'attente (« Le domaine fait une pause ») existe toujours mais
 n'est plus affichée. Pour la remettre devant tout le site, remplacer
 `var public_ = true;` par `var public_ = false;` dans chaque page.
 
-Version des fichiers : `?v=20261029a`.
+Version des fichiers : `?v=20261029b`.

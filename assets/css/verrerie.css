@@ -1322,7 +1322,8 @@ html.pause .si-ouvert { display: none !important; }
 html.pause span.si-pause { display: inline-block !important; }
 html.pause p.si-pause, html.pause dt.si-pause, html.pause dd.si-pause { display: block !important; }
 html.pause a[href$="#reserver"], html.pause [data-reserver], html.pause #reserver,
-html.pause .menu-mobile .appel { display: none !important; }
+html.pause .menu-mobile .appel,
+html.pause .chambre-prix, html.pause .tarifs { display: none !important; }   /* les prix sont gardés, seulement cachés */
 
 .pause-note { margin: 10px 0 0; font-family: var(--titre); font-style: italic; font-size: 1.125rem; color: var(--terre); }
 .chambre-badge {

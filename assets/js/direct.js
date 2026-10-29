@@ -83,7 +83,10 @@
     var faq = document.querySelector('.faq');
     if (!faq) { return; }
 
-    var items = [].slice.call(faq.querySelectorAll(':scope > details'));
+    /* les questions masquées par la pause ne comptent pas */
+    var items = [].slice.call(faq.querySelectorAll(':scope > details')).filter(function (d) {
+        return getComputedStyle(d).display !== 'none';
+    });
     if (items.length <= VISIBLES + 1) { return; }
 
     var caches = items.slice(VISIBLES);

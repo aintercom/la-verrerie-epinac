@@ -27,8 +27,8 @@
 <link rel="preconnect" href="https://enjoylife.b-cdn.net" crossorigin>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/figtree-400-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/spectral-400-latin.woff2">
-<link rel="stylesheet" href="/assets/css/polices.css?v=20261003a">
-<link rel="stylesheet" href="/assets/css/verrerie.css?v=20261003a">
+<link rel="stylesheet" href="/assets/css/polices.css?v=20261029a">
+<link rel="stylesheet" href="/assets/css/verrerie.css?v=20261029a">
 <script>
 (function () {
     var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:';
@@ -39,10 +39,12 @@
     /* code saisi dans la fenêtre d'attente : retenu durablement, pour que
        la personne n'ait pas à le retaper à chaque visite */
     try { ouvert = localStorage.getItem('vr_acces') === '1'; } catch (e) {}
-    /* SITE EN PAUSE depuis le 29 octobre 2026 : la fenêtre d'attente est de nouveau
-       affichée à tous les visiteurs. Pour rouvrir le site au public, remplacer
-       false par true sur la ligne ci-dessous, dans chaque page (chercher PAUSE). */
-    var public_ = false;
+    /* PAUSE depuis le 29 octobre 2026 : le site reste visible, mais les chambres
+       sont présentées comme un projet à venir et tout ce qui sert à réserver est
+       masqué (classe « pause »). Pour rouvrir les réservations, supprimer la
+       ligne marquée PAUSE dans chaque page. */
+    document.documentElement.classList.add('pause'); // PAUSE
+    var public_ = true;
     document.documentElement.classList.add(public_ || local || passe || garde || ouvert ? 'voile-leve' : 'voile-pose');
 })();
 </script>
@@ -189,11 +191,13 @@
 <section class="section">
     <div class="cadre">
         <h2>The rooms</h2>
+        <p class="pause-note si-pause">A project in the making: the rooms are getting ready to welcome their first guests.</p>
         <p class="chapo">They take their names from the glass once blown here. Both have a private bathroom, a view over the park and fibre Wi-Fi. Breakfast is included.</p>
 
         <div class="chambres">
             <article class="chambre">
                 <div class="chambre-image chambre-image--verre">
+                    <span class="chambre-badge si-pause">In the making</span>
                     <img src="https://enjoylife.b-cdn.net/Verrerie/chambre-culdebouteille-domainedelaverrerie-epinac.jpg"
                          srcset="/assets/img/photos/chambre-culdebouteille-mobile.jpg 800w, https://enjoylife.b-cdn.net/Verrerie/chambre-culdebouteille-domainedelaverrerie-epinac.jpg 2086w"
                          sizes="(min-width: 820px) 50vw, 100vw"
@@ -214,6 +218,7 @@
 
             <article class="chambre">
                 <div class="chambre-image chambre-image--silice">
+                    <span class="chambre-badge si-pause">In the making</span>
                     <img src="https://enjoylife.b-cdn.net/Verrerie/chambre-bleuetsilice-domainedelaverrerie-epinac.jpg"
                          srcset="/assets/img/photos/chambre-bleuetsilice-mobile.jpg 800w, https://enjoylife.b-cdn.net/Verrerie/chambre-bleuetsilice-domainedelaverrerie-epinac.jpg 2092w"
                          sizes="(min-width: 820px) 50vw, 100vw"
@@ -324,11 +329,11 @@ Phone: <a href="tel:+33783349554">+33 (0)7 83 34 95 54</a><br>
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !f.hidden) { ferme(); } });
 })();
 </script>
-<script src="/assets/js/reserver.js?v=20261003a" defer></script>
-<script src="/assets/js/entete.js?v=20261003a" defer></script>
-<script src="/assets/js/menu.js?v=20261003a" defer></script>
+<script src="/assets/js/reserver.js?v=20261029a" defer></script>
+<script src="/assets/js/entete.js?v=20261029a" defer></script>
+<script src="/assets/js/menu.js?v=20261029a" defer></script>
 <script>document.getElementById("annee").textContent=Math.max(2026, new Date().getFullYear());</script>
-<script src="/assets/js/direct.js?v=20261003a" defer></script>
+<script src="/assets/js/direct.js?v=20261029a" defer></script>
 <!-- VOILE — à retirer le jour de l'ouverture publique (version anglaise) -->
 <div class="voile">
     <div class="voile-dedans">

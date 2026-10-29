@@ -68,7 +68,7 @@ Le site en ligne se met à jour **une à deux minutes plus tard**.
 > 💡 Après une modification d'un fichier `.css` ou `.js` (dans `assets/`),
 > les navigateurs peuvent garder l'ancienne version en mémoire. Pour les
 > forcer à recharger, chercher `?v=` dans tout le projet (**Cmd+Maj+F**)
-> et remplacer partout la valeur qui suit (aujourd'hui `20261003a`) par la
+> et remplacer partout la valeur qui suit (aujourd'hui `20261029a`) par la
 > date du jour, par exemple `?v=20261015`.
 
 > ⚠️ Il n'y a pas de version de test : ce qui est publié est en ligne
@@ -191,17 +191,28 @@ semaines, au fil de ses passages.
 
 ## 10. Site en pause (depuis le 29 octobre 2026)
 
-Le site est mis en pause : tous les visiteurs voient la fenêtre
-« Le domaine fait une pause » (en anglais sur les pages anglaises). **Rien
-n'est supprimé** : toutes les pages, les photos, le formulaire et la
-version anglaise sont intacts derrière la fenêtre, et Google continue de
-connaître le site.
+Le site reste **visible par tous** (bon pour Google et pour la
+découverte), mais il est en mode « pause » :
 
-- **Voir le site complet** malgré la pause : saisir le code `maman` dans
-  la fenêtre (le navigateur s'en souvient), ou ouvrir
-  `https://domainedelaverrerie.fr/?preview=verrerie2026`.
-- **Rouvrir le site au public** : dans VS Code, **Cmd+Maj+F**, chercher
-  `var public_ = false;` et remplacer partout par `var public_ = true;`
-  (24 pages), puis valider et synchroniser. Penser aussi à revoir le
-  texte de la fenêtre (chercher `Momentanément fermé`), ou simplement
-  demander à Claude de « rouvrir le site ».
+- les chambres sont présentées comme **un projet à venir** (étiquette
+  « Projet à venir » sur les photos, phrase sous le titre), sans aucune date ;
+- **tout ce qui sert à réserver est masqué** : boutons « Réserver »,
+  « Demander une nuitée », « Demander cette chambre », formulaire, section
+  Réserver, « Ou nous appeler » du menu mobile. Personne ne peut envoyer de
+  demande par le site ;
+- les mentions « ouvert depuis le 1er octobre » sont remplacées par
+  « projet à venir » (infos pratiques, FAQ, mariages, séminaires).
+
+**Rien n'est supprimé** : tous ces éléments sont seulement cachés.
+
+**Pour rouvrir les réservations** : dans VS Code, **Cmd+Maj+F**, chercher
+`// PAUSE` et supprimer cette ligne dans chaque page (24 pages), puis
+valider et synchroniser. Tout réapparaît d'un coup ; penser seulement à
+revoir les textes d'ouverture. Le plus simple : demander à Claude de
+« sortir le site de la pause ».
+
+La fenêtre d'attente (« Le domaine fait une pause ») existe toujours mais
+n'est plus affichée. Pour la remettre devant tout le site, remplacer
+`var public_ = true;` par `var public_ = false;` dans chaque page.
+
+Version des fichiers : `?v=20261029a`.

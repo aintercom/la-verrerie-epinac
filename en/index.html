@@ -30,8 +30,8 @@
 <link rel="preconnect" href="https://enjoylife.b-cdn.net" crossorigin>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/figtree-400-latin.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/spectral-400-latin.woff2">
-<link rel="stylesheet" href="/assets/css/polices.css?v=20261003a">
-<link rel="stylesheet" href="/assets/css/verrerie.css?v=20261003a">
+<link rel="stylesheet" href="/assets/css/polices.css?v=20261029a">
+<link rel="stylesheet" href="/assets/css/verrerie.css?v=20261029a">
 <link rel="preload" as="image" fetchpriority="high" media="(max-width:860px)" imagesrcset="/assets/img/photos/hero-domaine-mobile.jpg 800w, https://enjoylife.b-cdn.net/Verrerie/domainedelaverrerie-hero.jpg 2024w" imagesizes="100vw">
 <link rel="preload" as="image" fetchpriority="high" media="(min-width:861px)" href="https://enjoylife.b-cdn.net/Verrerie/domainedelaverrerie-hero.jpg">
 
@@ -46,10 +46,12 @@
     /* code saisi dans la fenêtre d'attente : retenu durablement, pour que
        la personne n'ait pas à le retaper à chaque visite */
     try { ouvert = localStorage.getItem('vr_acces') === '1'; } catch (e) {}
-    /* SITE EN PAUSE depuis le 29 octobre 2026 : la fenêtre d'attente est de nouveau
-       affichée à tous les visiteurs. Pour rouvrir le site au public, remplacer
-       false par true sur la ligne ci-dessous, dans chaque page (chercher PAUSE). */
-    var public_ = false;
+    /* PAUSE depuis le 29 octobre 2026 : le site reste visible, mais les chambres
+       sont présentées comme un projet à venir et tout ce qui sert à réserver est
+       masqué (classe « pause »). Pour rouvrir les réservations, supprimer la
+       ligne marquée PAUSE dans chaque page. */
+    document.documentElement.classList.add('pause'); // PAUSE
+    var public_ = true;
     document.documentElement.classList.add(public_ || local || passe || garde || ouvert ? 'voile-leve' : 'voile-pose');
 })();
 </script>
@@ -232,11 +234,13 @@
     <div class="cadre">
         <p class="surtitre">The rooms</p>
         <h2>Our two rooms</h2>
+        <p class="pause-note si-pause">A project in the making: the rooms are getting ready to welcome their first guests.</p>
         <p class="chapo">On the first floor of the house, the rooms have been designed in the spirit of the place, the Épinac glassworks (1755-1931). Each enjoys a restful view over the park and has a private bathroom with toilet, as well as Wi-Fi (fibre). Depending on the season, breakfast is served in the heart of the house or on the terrace, looking out over the park.</p>
 
         <div class="chambres">
             <article class="chambre">
                 <div class="chambre-image chambre-image--verre">
+                    <span class="chambre-badge si-pause">In the making</span>
                     <img src="https://enjoylife.b-cdn.net/Verrerie/chambre-culdebouteille-domainedelaverrerie-epinac.jpg"
                          srcset="/assets/img/photos/chambre-culdebouteille-mobile.jpg 800w, https://enjoylife.b-cdn.net/Verrerie/chambre-culdebouteille-domainedelaverrerie-epinac.jpg 2086w"
                          sizes="(min-width: 820px) 50vw, 100vw"
@@ -257,6 +261,7 @@
 
             <article class="chambre">
                 <div class="chambre-image chambre-image--silice">
+                    <span class="chambre-badge si-pause">In the making</span>
                     <img src="https://enjoylife.b-cdn.net/Verrerie/chambre-bleuetsilice-domainedelaverrerie-epinac.jpg"
                          srcset="/assets/img/photos/chambre-bleuetsilice-mobile.jpg 800w, https://enjoylife.b-cdn.net/Verrerie/chambre-bleuetsilice-domainedelaverrerie-epinac.jpg 2092w"
                          sizes="(min-width: 820px) 50vw, 100vw"
@@ -435,7 +440,7 @@
 
         <div class="pratique-grille pratique-grille--tuiles">
             <div class="pratique-bloc">
-                <div class="pratique-tete"><h3>Your stay</h3><span class="pratique-badge">Open since 1 October 2026</span></div>
+                <div class="pratique-tete"><h3>Your stay</h3><span class="pratique-badge si-ouvert">Open since 1 October 2026</span><span class="pratique-badge si-pause">In the making</span></div>
                 <ul class="tuiles">
                     <li class="tuile"><span class="tuile-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="m10 17 5-5-5-5"/><path d="M15 12H3"/></svg></span><span class="tuile-texte"><span class="tuile-label">Check-in</span><span class="tuile-valeur">5 pm to 8 pm</span></span></li>
                     <li class="tuile"><span class="tuile-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg></span><span class="tuile-texte"><span class="tuile-label">Check-out</span><span class="tuile-valeur">8 am to 11 am</span></span></li>
@@ -502,7 +507,7 @@
             </details>
             <details>
                 <summary>How do I book?</summary>
-                <div><p>On Booking.com, through our contact form, or by phone on <a href="tel:+33783349554">+33 7 83 34 95 54</a>. Just let us know your dates and the number of guests.</p></div>
+                <div><p class="si-ouvert">On Booking.com, through our contact form, or by phone on <a href="tel:+33783349554">+33 7 83 34 95 54</a>. Just let us know your dates and the number of guests.</p><p class="si-pause">The guest rooms are a project in the making: bookings are not open yet.</p></div>
             </details>
             <details>
                 <summary>Is there Wi-Fi?</summary>
@@ -648,11 +653,11 @@ Phone: <a href="tel:+33783349554">+33 (0)7 83 34 95 54</a><br>
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !f.hidden) { ferme(); } });
 })();
 </script>
-<script src="/assets/js/reserver.js?v=20261003a" defer></script>
-<script src="/assets/js/entete.js?v=20261003a" defer></script>
-<script src="/assets/js/menu.js?v=20261003a" defer></script>
+<script src="/assets/js/reserver.js?v=20261029a" defer></script>
+<script src="/assets/js/entete.js?v=20261029a" defer></script>
+<script src="/assets/js/menu.js?v=20261029a" defer></script>
 <script>document.getElementById("annee").textContent=Math.max(2026, new Date().getFullYear());</script>
-<script src="/assets/js/direct.js?v=20261003a" defer></script>
+<script src="/assets/js/direct.js?v=20261029a" defer></script>
 <!-- VOILE — à retirer le jour de l'ouverture publique (version anglaise) -->
 <div class="voile">
     <div class="voile-dedans">

@@ -47,7 +47,12 @@
     }
 
     /* le domaine est ouvert depuis le 1er octobre 2026 */
-    function etat() { return EN ? 'Now taking bookings' : 'Réservations ouvertes'; }
+    function etat() {
+        if (document.documentElement.classList.contains('pause')) {
+            return EN ? 'Guest rooms in the making' : 'Chambres d’hôtes à venir';
+        }
+        return EN ? 'Now taking bookings' : 'Réservations ouvertes';
+    }
 
     function maj() {
         var h = heure(), j = jour();

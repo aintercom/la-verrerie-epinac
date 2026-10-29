@@ -1308,3 +1308,26 @@ section[id], .hero { scroll-margin-top: 78px; }
 .voile-erreur {
     margin: 14px 0 0; font-size: .8125rem; color: var(--ocre);
 }
+
+/* ==========================================================================
+   PAUSE
+   La classe « pause » est posée sur <html> par le script du <head> de chaque
+   page. Le site reste visible, mais tout ce qui sert à réserver disparaît et
+   les chambres sont présentées comme un projet à venir. Les textes propres à
+   chaque état portent .si-ouvert ou .si-pause. Retirer la classe rétablit
+   le site ouvert tel quel.
+   ========================================================================== */
+.si-pause { display: none !important; }
+html.pause .si-ouvert { display: none !important; }
+html.pause span.si-pause { display: inline-block !important; }
+html.pause p.si-pause, html.pause dt.si-pause, html.pause dd.si-pause { display: block !important; }
+html.pause a[href$="#reserver"], html.pause [data-reserver], html.pause #reserver,
+html.pause .menu-mobile .appel { display: none !important; }
+
+.pause-note { margin: 10px 0 0; font-family: var(--titre); font-style: italic; font-size: 1.125rem; color: var(--terre); }
+.chambre-badge {
+    position: absolute; top: 14px; left: 14px; z-index: 1;
+    padding: 6px 13px; border-radius: var(--rayon-btn);
+    background: var(--ocre); color: var(--vert); font-size: .8125rem; font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+}

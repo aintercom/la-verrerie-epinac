@@ -30,7 +30,6 @@
 
     var CLE = 'f3e9d88f-3181-45d0-afd5-3c005e7b9db5';
     var EMAIL = 'contact@domainedelaverrerie.fr';
-    var TEL = '+33783349554';
 
     /* Booking renseigné : on n'installe pas le tiroir, on redirige. */
     if (BOOKING) {
@@ -84,7 +83,7 @@
         message: 'Your message', facultatif: '(optional)', messageExemple: 'A special occasion, a question…',
         envoyer: 'Send my request', envoi: 'Sending…', secours: 'Or write to us:',
         merci: 'Your request has been sent',
-        merciTexte: 'We will get back to you personally. If it is urgent, call us on',
+        merciTexte: 'We will get back to you personally. If it is urgent, write to us at',
         nouvelle: 'Make another request',
         manquants: 'Please fill in the fields in red.', manquant: 'Please fill in the field in red.',
         echec: 'Your request could not be sent. Please write to us directly at '
@@ -100,7 +99,7 @@
         message: 'Votre message', facultatif: '(facultatif)', messageExemple: 'Une occasion particulière, une question…',
         envoyer: 'Envoyer ma demande', envoi: 'Envoi…', secours: 'Ou écrivez-nous&nbsp;:',
         merci: 'Votre demande est partie',
-        merciTexte: 'Nous revenons vers vous personnellement. Si c\'est urgent, appelez-nous au',
+        merciTexte: 'Nous revenons vers vous personnellement. Si c\'est urgent, écrivez-nous à',
         nouvelle: 'Faire une nouvelle demande',
         manquants: 'Merci de compléter les champs en rouge.', manquant: 'Merci de compléter le champ en rouge.',
         echec: 'L\'envoi n\'a pas abouti. Écrivez-nous directement à '
@@ -177,7 +176,7 @@
     '<div class="tiroir-merci">',
     '  <div class="coche" aria-hidden="true">&#10003;</div>',
     '  <h3>' + T.merci + '</h3>',
-    '  <p>' + T.merciTexte + ' <a href="tel:' + TEL + '">' + (EN ? '+33 7 83 34 95 54' : '07 83 34 95 54') + '</a>.</p>',
+    '  <p>' + T.merciTexte + ' <a href="mailto:' + EMAIL + '">' + EMAIL + '</a>.</p>',
     '  <button class="btn btn--ligne" type="button" id="r-nouvelle">' + T.nouvelle + '</button>',
     '</div>'
     ].join('\n');
